@@ -1,4 +1,4 @@
-import { ManejadorObtenerProducto } from "./../../../aplicacion/producto/consulta/obtener-producto.manejador";
+import { ManejadorObtenerProducto } from 'src/aplicacion/producto/consulta/obtener-producto.manejador';
 import { Module } from '@nestjs/common';
 import { ServicioRegistrarProducto } from 'src/dominio/producto/servicio/servicio-registrar-producto';
 import { RepositorioProducto } from 'src/dominio/producto/puerto/repositorio/repositorio-producto';
