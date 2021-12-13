@@ -9,6 +9,7 @@ import { ServicioRegistrarProducto } from 'src/dominio/producto/servicio/servici
 import { servicioRegistrarProductoProveedor } from 'src/infraestructura/producto/proveedor/servicio/servicio-registrar-producto.proveedor';
 import { ManejadorRegistrarProducto } from 'src/aplicacion/producto/comando/registar-producto.manejador';
 import { ManejadorListarProducto } from 'src/aplicacion/producto/consulta/listar-productos.manejador';
+import { ManejadorObtenerProducto } from 'src/aplicacion/producto/consulta/obtener-producto.manejador';
 import { ComandoRegistrarProducto } from 'src/aplicacion/producto/comando/registrar-producto.comando';
 import { AppLogger } from 'src/infraestructura/configuracion/ceiba-logger.service';
 import { createSandbox, SinonStubbedInstance } from 'sinon';
@@ -44,6 +45,7 @@ describe('Pruebas al controlador de productos', () => {
         { provide: DaoProducto, useValue: daoProducto },
         ManejadorRegistrarProducto,
         ManejadorListarProducto,
+        ManejadorObtenerProducto,
       ],
     }).compile();
 

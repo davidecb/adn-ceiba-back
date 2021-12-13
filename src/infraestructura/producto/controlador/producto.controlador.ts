@@ -24,8 +24,8 @@ export class ProductoControlador {
     return this._manejadorListarProducto.ejecutar();
   }
 
-/*   @Get(':id')
+  @Get(':id')
   async obtenerProducto(@Param('id') id: string): Promise<ProductoDto> {
     return this._manejadorObtenerProducto.ejecutar(id);
-  } */
+  }
 }
