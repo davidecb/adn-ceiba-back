@@ -1,4 +1,4 @@
-import { ErrorImagenInvalida } from "./../../../../src/dominio/errores/error-imagen-invalida";
+import { ErrorImagenInvalida } from './../../../../src/dominio/errores/error-imagen-invalida';
 import { Producto } from 'src/dominio/producto/modelo/producto';
 
 describe('Producto', () => {

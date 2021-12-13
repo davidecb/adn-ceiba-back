@@ -1,4 +1,4 @@
-import { ProductoEntidad } from "./../../../infraestructura/producto/entidad/producto.entidad";
+import { ProductoEntidad } from './../../../infraestructura/producto/entidad/producto.entidad';
 export class Pedido {
   readonly #numeroPedido: string;
   readonly #producto: ProductoEntidad;

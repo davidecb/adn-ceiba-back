@@ -1,4 +1,4 @@
-import { ErrorImagenInvalida } from "./../../errores/error-imagen-invalida";
+import { ErrorImagenInvalida } from './../../errores/error-imagen-invalida';
 export class Producto {
   readonly #nombre: string;
   readonly #costo: number;

@@ -1,17 +1,17 @@
-import { ProductoEntidad } from "./../../../../infraestructura/producto/entidad/producto.entidad";
+import { ProductoEntidad } from './../../../../infraestructura/producto/entidad/producto.entidad';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PedidoDto {
-  @ApiProperty({ example: "1234" })
+  @ApiProperty({ example: '1234' })
   numero_pedido: string;
 
   @ApiProperty()
   producto: ProductoEntidad;
 
-  @ApiProperty({ example: "ABS" })
+  @ApiProperty({ example: 'ABS' })
   material: string;
 
-  @ApiProperty({ example: "negro" })
+  @ApiProperty({ example: 'negro' })
   color: string;
 
   @ApiProperty({ example: 2 })

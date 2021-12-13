@@ -1,5 +1,5 @@
 import { ProductoEntidad } from '../../producto/entidad/producto.entidad';
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'pedido' })
 export class PedidoEntidad {
@@ -17,10 +17,10 @@ export class PedidoEntidad {
   @JoinColumn({ name: 'producto' })
   producto: ProductoEntidad;
 
-  @Column({ type: 'varchar', default: "PLA" })
+  @Column({ type: 'varchar', default: 'PLA' })
   material: string;
 
-  @Column({ type: 'varchar', default: "blanco" })
+  @Column({ type: 'varchar', default: 'blanco' })
   color: string;
 
   @Column({ type: 'integer', default: 1 })

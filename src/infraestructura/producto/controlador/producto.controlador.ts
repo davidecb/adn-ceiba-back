@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ComandoRegistrarProducto } from 'src/aplicacion/producto/comando/registrar-producto.comando';
 import { ManejadorRegistrarProducto } from 'src/aplicacion/producto/comando/registar-producto.manejador';
 import { ManejadorListarProducto } from 'src/aplicacion/producto/consulta/listar-productos.manejador';

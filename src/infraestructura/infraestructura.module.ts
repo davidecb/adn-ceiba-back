@@ -1,8 +1,8 @@
-import { PedidoModule } from "./pedido/pedido.module";
+import { PedidoModule } from './pedido/pedido.module';
 import * as Joi from '@hapi/joi';
 import { Module } from '@nestjs/common';
 import { UsuarioModule } from './usuario/usuario.module';
-import { ProductoModule } from "./producto/producto.module";
+import { ProductoModule } from './producto/producto.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppLogger } from './configuracion/ceiba-logger.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';

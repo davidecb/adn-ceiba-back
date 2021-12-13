@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ServicioRegistrarProducto } from 'src/dominio/producto/servicio/servicio-registrar-producto';
-import { ComandoRegistrarProducto } from "./registrar-producto.comando";
+import { ComandoRegistrarProducto } from './registrar-producto.comando';
 import { Producto } from 'src/dominio/producto/modelo/producto';
 
 @Injectable()
