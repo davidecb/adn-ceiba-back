@@ -32,25 +32,12 @@ pipeline{
 				}
 			}
 
-			stage('test coverage'){
+			stage('test'){
 				steps {
 					sh 'npm run test:cov'					
 				}
 			}
 
-			stage('Unit Test') {
-				steps {
-					echo "------------>Testing<------------"
-					sh 'npm run test:unit'
-				}
-			}
-
-			stage('Test end-to-end') {
-				steps{
-					echo "------------>Testing Protractor<------------"
-					sh 'npm run test:e2e'
-				}
-			}
 
 			
 			stage('Sonar Analysis'){
