@@ -1,11 +1,9 @@
 @Library('ceiba-jenkins-library') _
 
-pipeline{
-	
+pipeline{	
 		agent {
 		label 'Slave_Induccion'
-		}
-	
+		}	
         
 		triggers {
         pollSCM('@hourly')
@@ -16,8 +14,7 @@ pipeline{
 			disableConcurrentBuilds()
 		}
 		
-		stages{
-		
+		stages{		
 			stage('Checkout') {
 				steps {
 					echo '------------>Checkout desde Git Microservicio<------------'
@@ -37,21 +34,25 @@ pipeline{
 					sh 'npm run test:cov'					
 				}
 			}
-
-
 			
 			stage('Sonar Analysis'){
 				steps{
 					echo '------------>Analisis de código estático<------------'
 					withSonarQubeEnv('Sonar') {
-						sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba.adn:ADN-productos3D.david.cortes.master -Dsonar.projectName=co.com.ceiba.adn:ADN-productos3D.david.cortes.master -Dproject.settings=./sonar-project.properties"
+						sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba.adn:ADN-productos3D.david.cortes.master -Dsonar.projectName=ADN-Productos3D(david.cortes) -Dproject.settings=./sonar-project.properties"
 					}
 				}
 			}
-		
-		
 
+			stage('Static Code Analysis') {
+				steps{
+							sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:ADN-productos3D.david.cortes', 
+						sonarName:'ADN-Productos3D(david.cortes)', 
+						sonarPathProperties:'./sonar-project.properties')
+				}
+			}
 		}
+
 		post {
 			failure {
 				mail(to: 'david.cortes@ceiba.com.co',
@@ -62,6 +63,5 @@ pipeline{
 			success {
 				junit 'build/test-results/test/*.xml'
 			}
-		}	
-			
+		}			
 }
