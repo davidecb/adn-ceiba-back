@@ -6,7 +6,7 @@ import { ProductoDto } from 'src/aplicacion/producto/consulta/dto/producto.dto';
 export class ManejadorObtenerProducto {
   constructor(private _daoProducto: DaoProducto) {}
 
-  async ejecutar(id: string): Promise<ProductoDto> {
+ /*  async ejecutar(id: string): Promise<ProductoDto> {
     return this._daoProducto.obtener(id);
-  }
+  } */
 }

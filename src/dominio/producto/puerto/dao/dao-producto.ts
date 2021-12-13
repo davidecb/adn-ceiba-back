@@ -2,5 +2,5 @@ import { ProductoDto } from 'src/aplicacion/producto/consulta/dto/producto.dto';
 
 export abstract class DaoProducto {
   abstract async listar(): Promise<ProductoDto[]>;
-  abstract async obtener(id): Promise<ProductoDto>;
+  //abstract async obtener(id): Promise<ProductoDto>;
 }
