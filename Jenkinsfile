@@ -39,7 +39,7 @@ pipeline{
 				steps{
 					echo '------------>Analisis de código estático<------------'
 					withSonarQubeEnv('Sonar') {
-						sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba.adn:ADN-productos3D.david.cortes.master -Dsonar.projectName=ADN-Productos3D(david.cortes) -Dproject.settings=./sonar-project.properties"
+						sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba.adn:ADN-productos3D.david.cortes -Dsonar.projectName=ADN-Productos3D.david.cortes -Dproject.settings=./sonar-project.properties"
 					}
 				}
 			}
@@ -47,7 +47,7 @@ pipeline{
 			stage('Static Code Analysis') {
 				steps{
 							sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:ADN-productos3D.david.cortes', 
-						sonarName:'ADN-Productos3D(david.cortes)', 
+						sonarName:'ADN-Productos3D.david.cortes', 
 						sonarPathProperties:'./sonar-project.properties')
 				}
 			}
