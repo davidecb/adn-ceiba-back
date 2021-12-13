@@ -21,7 +21,7 @@ pipeline{
 			stage('Checkout') {
 				steps {
 					echo '------------>Checkout desde Git Microservicio<------------'
-					checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], gitTool: 'Default' , submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitHub_boterojuanpa', url: 'https://github.com/boterojuanpa/node-jest-arquitectura-hexagonal']]])
+					checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], gitTool: 'Default' , submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'GitHub_davidecb', url: 'https://github.com/davidecb/adn-ceiba-back.git']]])
 				}
 			}		
 		
@@ -44,7 +44,7 @@ pipeline{
 				steps{
 					echo '------------>Analisis de código estático<------------'
 					withSonarQubeEnv('Sonar') {
-						sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba.adn:ADN-productos3D.david.cortes -Dsonar.projectName=co.com.ceiba.adn:ADN-productos3D.david.cortes -Dproject.settings=./sonar-project.properties"
+						sh "${tool name: 'SonarScanner', type: 'hudson.plugins.sonar.SonarRunnerInstallation'}/bin/sonar-scanner -Dsonar.projectKey=co.com.ceiba.adn:ADN-productos3D.david.cortes.master -Dsonar.projectName=co.com.ceiba.adn:ADN-productos3D.david.cortes.master -Dproject.settings=./sonar-project.properties"
 					}
 				}
 			}
