@@ -1,3 +1,4 @@
+import { ManejadorObtenerProducto } from "./../../../aplicacion/producto/consulta/obtener-producto.manejador";
 import { Module } from '@nestjs/common';
 import { ServicioRegistrarProducto } from 'src/dominio/producto/servicio/servicio-registrar-producto';
 import { RepositorioProducto } from 'src/dominio/producto/puerto/repositorio/repositorio-producto';
@@ -18,11 +19,13 @@ import { ProductoEntidad } from '../entidad/producto.entidad';
     daoProductoProvider,
     ManejadorRegistrarProducto,
     ManejadorListarProducto,
+    ManejadorObtenerProducto,
   ],
   exports: [
     ServicioRegistrarProducto,
     ManejadorRegistrarProducto,
     ManejadorListarProducto,
+    ManejadorObtenerProducto,
     RepositorioProducto,
     DaoProducto,
   ],

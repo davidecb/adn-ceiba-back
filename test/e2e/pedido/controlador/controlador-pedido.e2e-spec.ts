@@ -82,4 +82,30 @@ describe('Pruebas al controlador de pedidos', () => {
       .expect(HttpStatus.OK)
       .expect(pedidos);
   });
+
+  it('Al registar un pedido ya existente deberia crearlo correctamente', async () => {
+    const pedido: ComandoRegistrarPedido = { 
+      numeroPedido: '1234abcd321',
+      producto: {
+        id: 1,
+        nombre: 'Lorem ipsum',
+        costo: 10000,
+        tiempo: 30,
+        imagen: 'loremIpsum.jpg',
+        createdAt: new Date(),
+        updatedAt: new Date()
+      },
+      material: 'PLA',
+      color: 'blanco',
+      cantidad: 1,
+      pulido: false,
+      pintado: false,
+      barnizado: false,
+      urgente: false,
+    };
+    
+    await request(app.getHttpServer())
+      .post('/pedidos').send(pedido)
+      .expect(HttpStatus.CREATED);
+  });
 });

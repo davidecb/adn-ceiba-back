@@ -1,4 +1,3 @@
-import { ErrorImagenInvalida } from "./../../../../src/dominio/errores/error-imagen-invalida";
 import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 
 describe('Pedido', () => {

@@ -16,24 +16,29 @@ describe('ServicioRegistrarPedido', () => {
     servicioRegistrarPedido = new ServicioRegistrarPedido(repositorioPedidoStub);
   });
 
-/*   it('si el nombre de pedido ya existe no se puede crear y deberia retonar error', async () => {
-
-    repositorioPedidoStub.existeNombrePedido.returns(Promise.resolve(true));
-
-    await expect(
-      servicioRegistrarPedido.ejecutar(
-        new Pedido('llavero marvel', 12000, 40, "llaveroMarvel.jpg"),
-      ),
-    ).rejects.toThrow('El nombre de pedido llavero marvel ya existe');
-  });
-
   it('si el nombre no existe guarda el pedido en el repositorio', async () => {
-    const pedido = new Pedido('llavero marvel', 12000, 40, "llaveroMarvel.jpg");
-    repositorioPedidoStub.existeNombrePedido.returns(Promise.resolve(false));
+    const pedido = new Pedido(
+      '1234abcd321', {
+      id: 1,
+      nombre: 'Lorem ipsum',
+      costo: 10000,
+      tiempo: 30,
+      imagen: 'loremIpsum.jpg',
+      createdAt: new Date(),
+      updatedAt: new Date()
+    },
+    'ABS',
+    'negro',
+    1,
+    true,
+    false,
+    true,
+    false
+    );
 
     await servicioRegistrarPedido.ejecutar(pedido);
 
     expect(repositorioPedidoStub.guardar.getCalls().length).toBe(1);
     expect(repositorioPedidoStub.guardar.calledWith(pedido)).toBeTruthy();
-  }); */
+  }); 
 });

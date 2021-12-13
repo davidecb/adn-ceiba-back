@@ -16,4 +16,9 @@ export class DaoProductoPostgres implements DaoProducto {
       'SELECT * FROM PRODUCTO u',
     );
   }
+  
+  async obtener(id: string): Promise<ProductoDto> {
+    console.log(id);
+    return this.entityManager.findOne(id);
+  }
 }
