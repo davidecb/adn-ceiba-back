@@ -1,3 +1,4 @@
+import { ProductoEntidad } from './../../entidad/producto.entidad';
 import { EntityManager } from 'typeorm';
 import { InjectEntityManager } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
@@ -17,8 +18,7 @@ export class DaoProductoPostgres implements DaoProducto {
     );
   }
   
-  async obtener(id: string): Promise<ProductoDto> {
-    console.log(id);
-    return this.entityManager.findOne(id);
+  async obtenerPorId(id: number): Promise<ProductoDto> {
+    return this.entityManager.findOne<ProductoEntidad>(ProductoEntidad, {id});
   }
 }

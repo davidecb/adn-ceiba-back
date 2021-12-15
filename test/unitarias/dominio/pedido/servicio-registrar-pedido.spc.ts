@@ -14,31 +14,5 @@ describe('ServicioRegistrarPedido', () => {
 
     repositorioPedidoStub = createStubObj<RepositorioPedido>(['guardar']);
     servicioRegistrarPedido = new ServicioRegistrarPedido(repositorioPedidoStub);
-  });
-
-  it('si el nombre no existe guarda el pedido en el repositorio', async () => {
-    const pedido = new Pedido(
-      '1234abcd321', {
-      id: 1,
-      nombre: 'Lorem ipsum',
-      costo: 10000,
-      tiempo: 30,
-      imagen: 'loremIpsum.jpg',
-      createdAt: new Date(),
-      updatedAt: new Date()
-    },
-    'ABS',
-    'negro',
-    1,
-    true,
-    false,
-    true,
-    false
-    );
-
-    await servicioRegistrarPedido.ejecutar(pedido);
-
-    expect(repositorioPedidoStub.guardar.getCalls().length).toBe(1);
-    expect(repositorioPedidoStub.guardar.calledWith(pedido)).toBeTruthy();
   }); 
 });

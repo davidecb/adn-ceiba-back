@@ -1,5 +1,5 @@
-import { ProductoEntidad } from '../../producto/entidad/producto.entidad';
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToOne, JoinColumn } from 'typeorm';
+import { ProductosPorPedidoEntidad } from "./../../productos-por-pedido/entidad/productos-por-pedido.entidad";
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, ManyToOne, JoinTable } from 'typeorm';
 
 @Entity({ name: 'pedido' })
 export class PedidoEntidad {
@@ -9,34 +9,21 @@ export class PedidoEntidad {
   @Column({ type: 'varchar', length: 20, nullable: false })
   numeroPedido: string;
 
-  @OneToOne((type) => ProductoEntidad, {
-    cascade: true,
-    nullable: false,
-    eager: true,
-  })
-  @JoinColumn({ name: 'producto' })
-  producto: ProductoEntidad;
+  @ManyToOne(() => ProductosPorPedidoEntidad, productoPorPedido => productoPorPedido.pedido, { eager: true })
+  @JoinTable({ name: 'producto' })
+  productosSolicitados: ProductosPorPedidoEntidad[];
 
-  @Column({ type: 'varchar', default: 'PLA' })
-  material: string;
+  @Column({ type: 'varchar', nullable: false })
+  direccion: string;
 
-  @Column({ type: 'varchar', default: 'blanco' })
-  color: string;
+  @Column({ type: 'varchar', nullable: false })
+  cliente: string;
 
-  @Column({ type: 'integer', default: 1 })
-  cantidad: number;
+  @Column({ type: 'real', nullable: false })
+  costo: number;
 
-  @Column({ type: 'boolean', default: false })
-  pulido: boolean;
-
-  @Column({ type: 'boolean', default: false })
-  pintado: boolean;
-
-  @Column({ type: 'boolean', default: false })
-  barnizado: boolean;
-
-  @Column({ type: 'boolean', default: false })
-  urgente: boolean;
+  @Column({ type: 'integer', nullable: false })
+  tiempo: number;
 
   @CreateDateColumn({ type: 'timestamp', name: 'created_at' })
   createdAt: Date;

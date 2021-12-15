@@ -1,40 +1,40 @@
+import { ProductoSolicitado } from "src/dominio/producto-solicitado/modelo/producto-solicitado";
 import { Pedido } from 'src/dominio/pedido/modelo/pedido';
+import { Producto } from 'src/dominio/producto/modelo/producto';
 
 describe('Pedido', () => {
 
   const _Pedido = Pedido as any;
-
-  /* it('pedido con imagen invalida(int) debe retornar error', () => {
-    return expect(async () => new _Pedido('pedido testing', 10000, 45, 123))
-      .rejects
-      .toStrictEqual(new ErrorImagenInvalida('La imagen debe estar en formato jpg, jpeg o png'));
-  });  */ 
+  const producto = new Producto('producto-solicitado testing', 10000, 45, 'imagenTest.jpg');
+  const productoSolicitado = new ProductoSolicitado(
+    producto,
+    'PLA',
+    'negro',
+    {
+      pulido: true,
+      pintado: false,
+      barnizado: true
+    },
+    false,
+    15000,
+    45
+    );
 
   it('pedido con todos los valores debe crearse correctamente', () => {
-    const pedido = new _Pedido('1234abcd321', 1, 'ABS', 'negro', 1, true, false, true, false);
+    const pedido = new _Pedido(
+      '1234abcd321',
+      [productoSolicitado],
+      'Cra 43 16 - 64',
+      'david cortes',
+      12000,
+      40
+    );
 
     expect(pedido.numeroPedido).toEqual('1234abcd321');
-    expect(pedido.producto).toEqual(1);
-    expect(pedido.material).toEqual('ABS');
-    expect(pedido.color).toEqual('negro');
-    expect(pedido.cantidad).toEqual(1);
-    expect(pedido.pulido).toEqual(true);
-    expect(pedido.pintado).toEqual(false);
-    expect(pedido.barnizado).toEqual(true);
-    expect(pedido.urgente).toEqual(false);
-  }); 
-
-  it('pedido puede crearse correctamente con numero de pedido y producto', () => {
-    const pedido = new _Pedido('1234abcd321', 1);
-
-    expect(pedido.numeroPedido).toEqual('1234abcd321');
-    expect(pedido.producto).toEqual(1);
-    expect(pedido.material).toEqual('PLA');
-    expect(pedido.color).toEqual('blanco');
-    expect(pedido.cantidad).toEqual(1);
-    expect(pedido.pulido).toEqual(false);
-    expect(pedido.pintado).toEqual(false);
-    expect(pedido.barnizado).toEqual(false);
-    expect(pedido.urgente).toEqual(false);
+    expect(pedido.productosSolicitados).toEqual([productoSolicitado]);
+    expect(pedido.direccion).toEqual('Cra 43 16 - 64');
+    expect(pedido.cliente).toEqual('david cortes');
+    expect(pedido.costo).toEqual(12000);
+    expect(pedido.tiempo).toEqual(40);
   }); 
 });

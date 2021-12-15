@@ -10,15 +10,15 @@ export class ManejadorRegistrarPedido {
   async ejecutar(comandoRegistrarPedido: ComandoRegistrarPedido) {
     await this._servicioRegistrarPedido.ejecutar(
       new Pedido(
+        comandoRegistrarPedido.id,
         comandoRegistrarPedido.numeroPedido,
-        comandoRegistrarPedido.producto,
-        comandoRegistrarPedido.material,
-        comandoRegistrarPedido.color,
-        comandoRegistrarPedido.cantidad,
-        comandoRegistrarPedido.pulido,
-        comandoRegistrarPedido.pintado,
-        comandoRegistrarPedido.barnizado,
-        comandoRegistrarPedido.urgente,
+        comandoRegistrarPedido.productosSolicitados,
+        comandoRegistrarPedido.direccion,
+        comandoRegistrarPedido.cliente,
+        comandoRegistrarPedido.costo,
+        comandoRegistrarPedido.tiempo,
+        comandoRegistrarPedido.createdAt,
+        comandoRegistrarPedido.updatedAt,
       ),
     );
   }

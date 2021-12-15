@@ -32,13 +32,15 @@ describe('Producto', () => {
     expect(producto.imagen).toEqual('imagenTest.jpg');
   });
 
-  it('producto sin imagen debe tener undefined pero no marcar error', () => {
+  it('producto sin imagen debe tener imagen por defecto sin marcar error', () => {
     const producto = new _Producto('producto testing', 10000, 45);
 
     expect(producto.nombre).toEqual('producto testing');
     expect(producto.costo).toEqual(10000);
     expect(producto.tiempo).toEqual(45);
-    expect(producto.imagen).toEqual('noImage.jpg');
-  }); 
+    expect(producto.imagen).toEqual('defaultImagen.jpg');
+  });
+  
+  //validar costo y tiempo no sea cero?? no sea otro tipo de dato(str, bool, etc)
  
 });

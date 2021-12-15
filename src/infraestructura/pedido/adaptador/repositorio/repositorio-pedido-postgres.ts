@@ -15,14 +15,11 @@ export class RepositorioPedidoPostgres implements RepositorioPedido {
   async guardar(pedido: Pedido) {
     const entidad = new PedidoEntidad();
     entidad.numeroPedido = pedido.numeroPedido;
-    entidad.producto = pedido.producto;
-    entidad.material = pedido.material;
-    entidad.color = pedido.color;
-    entidad.cantidad = pedido.cantidad;
-    entidad.pulido = pedido.pulido;
-    entidad.pintado = pedido.pintado;
-    entidad.barnizado = pedido.barnizado;
-    entidad.urgente = pedido.urgente;
+    entidad.productosSolicitados = pedido.productosSolicitados;
+    entidad.direccion = pedido.direccion;
+    entidad.cliente = pedido.cliente;
+    entidad.costo = pedido.costo;
+    entidad.tiempo = pedido.tiempo;
     await this.repositorio.save(entidad);
   }
 }

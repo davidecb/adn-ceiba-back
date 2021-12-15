@@ -16,6 +16,17 @@ export class RepositorioProductoPostgres implements RepositorioProducto {
     return (await this.repositorio.count({ nombre })) > 0;
   }
 
+  async existeIdProducto(id: number): Promise<boolean> {
+    return (await this.repositorio.count({ id })) > 0;      
+  }
+
+  async existenPropiedadesProducto(valoresAModificar: object): Promise<boolean> {
+    const propiedadesProducto = ['nombre', 'costo', 'tiempo', 'imagen'];
+    return Object.keys(valoresAModificar).every(valor => {
+      propiedadesProducto.includes(valor);
+    });
+  }
+
   async guardar(producto: Producto) {
     const entidad = new ProductoEntidad();
     entidad.costo = producto.costo;
@@ -23,5 +34,13 @@ export class RepositorioProductoPostgres implements RepositorioProducto {
     entidad.nombre = producto.nombre;
     entidad.imagen = producto.imagen;
     await this.repositorio.save(entidad);
+  }
+
+  async modificar(id: number, valoresAModificar: object) {
+      await this.repositorio.update(id, valoresAModificar);
+  }
+
+  async eliminar(id: number) {
+      await this.repositorio.delete(id);
   }
 }

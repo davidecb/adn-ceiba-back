@@ -1,70 +1,70 @@
-import { ProductoEntidad } from './../../../infraestructura/producto/entidad/producto.entidad';
+import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
 export class Pedido {
+  readonly #id: number;
   readonly #numeroPedido: string;
-  readonly #producto: ProductoEntidad;
-  readonly #material: string;
-  readonly #color: string;
-  readonly #cantidad: number;
-  readonly #pulido: boolean;
-  readonly #pintado: boolean;
-  readonly #barnizado: boolean;
-  readonly #urgente: boolean;
+  readonly #productosSolicitados: ProductosPorPedido[];
+  readonly #direccion: string;
+  readonly #cliente: string;
+  readonly #costo: number;
+  readonly #tiempo: number;
+  readonly #createdAt: Date;
+  readonly #updatedAt: Date;  
 
   constructor(
+    id: number,
     numeroPedido: string,
-    producto: ProductoEntidad,
-    material: string,
-    color: string,
-    cantidad: number,
-    pulido: boolean,
-    pintado: boolean,
-    barnizado: boolean,
-    urgente: boolean
+    productosSolicitados: ProductosPorPedido[],
+    direccion: string,
+    cliente: string,
+    costo: number,
+    tiempo: number,
+    createdAt: Date,
+    updatedAt: Date
   ) {
+    this.#id = id;
     this.#numeroPedido = numeroPedido;
-    this.#producto = producto;
-    this.#material = material || 'PLA';
-    this.#color = color || 'blanco';
-    this.#cantidad = cantidad || 1;
-    this.#pulido = pulido || false;
-    this.#pintado = pintado || false;
-    this.#barnizado = barnizado || false;
-    this.#urgente = urgente || false;
+    this.#productosSolicitados = productosSolicitados;
+    this.#direccion = direccion;
+    this.#cliente = cliente;
+    this.#costo = costo;
+    this.#tiempo = tiempo;
+    this.#createdAt = createdAt;
+    this.#updatedAt = updatedAt;   
+  }
+  
+  get id(): number {
+    return this.#id;
   }
 
   get numeroPedido(): string {
     return this.#numeroPedido;
   }
 
-  get producto(): ProductoEntidad {
-    return this.#producto;
+  get productosSolicitados(): ProductosPorPedido[] {
+    return this.#productosSolicitados;
   }
 
-  get material(): string {
-    return this.#material;
+  get direccion(): string {
+    return this.#direccion;
   }
 
-  get color(): string {
-    return this.#color;
+  get cliente(): string {
+    return this.#cliente;
   }
 
-  get cantidad(): number {
-    return this.#cantidad;
+  get costo(): number {
+    return this.#costo;
   }
 
-  get pulido(): boolean {
-    return this.#pulido;
+  get tiempo(): number {
+    return this.#tiempo;
   }
 
-  get pintado(): boolean {
-    return this.#pintado;
+  get createdAt(): Date {
+    return this.#createdAt;
   }
 
-  get barnizado(): boolean {
-    return this.#barnizado;
-  }
-
-  get urgente(): boolean {
-    return this.#urgente;
+  get updatedAt(): Date {
+    return this.#updatedAt;
   }
 }
