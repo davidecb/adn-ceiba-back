@@ -1,4 +1,4 @@
-import { Pedido } from "src/dominio/pedido/modelo/pedido";
+import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { RepositorioProductosPorPedido } from 'src/dominio/productos-por-pedido/puerto/repositorio/repositorio-productos-por-pedido';
@@ -15,14 +15,14 @@ import { AppLogger } from 'src/infraestructura/configuracion/ceiba-logger.servic
 import { createSandbox, SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
 import { Producto } from 'src/dominio/producto/modelo/producto';
-import { ProductoSolicitado } from "src/dominio/producto-solicitado/modelo/producto-solicitado";
-import { ServicioEliminarProductosPorPedido } from "src/dominio/productos-por-pedido/servicio/servicio-eliminar-productos-por-pedido";
-import { servicioEliminarProductosPorPedidoProveedor } from "src/infraestructura/productos-por-pedido/proveedor/servicio/servicio-eliminar-productos-por-pedido.proveedor";
-import { ServicioModificarProductosPorPedido } from "src/dominio/productos-por-pedido/servicio/servicio-modificar-productos-por-pedido";
-import { servicioModificarProductosPorPedidoProveedor } from "src/infraestructura/productos-por-pedido/proveedor/servicio/servicio-modificar-productos-por-pedido.proveedor";
-import { ManejadorEliminarProductosPorPedido } from "src/aplicacion/productos-por-pedido/comando/eliminar-productos-por-pedido.manejador";
-import { ManejadorModificarProductosPorPedido } from "src/aplicacion/productos-por-pedido/comando/modificar-productos-por-pedido.manejador";
-import { ManejadorObtenerProductosPorPedido } from "src/aplicacion/productos-por-pedido/consulta/obtener-producto-por-pedido.manejador";
+import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
+import { ServicioEliminarProductosPorPedido } from 'src/dominio/productos-por-pedido/servicio/servicio-eliminar-productos-por-pedido';
+import { servicioEliminarProductosPorPedidoProveedor } from 'src/infraestructura/productos-por-pedido/proveedor/servicio/servicio-eliminar-productos-por-pedido.proveedor';
+import { ServicioModificarProductosPorPedido } from 'src/dominio/productos-por-pedido/servicio/servicio-modificar-productos-por-pedido';
+import { servicioModificarProductosPorPedidoProveedor } from 'src/infraestructura/productos-por-pedido/proveedor/servicio/servicio-modificar-productos-por-pedido.proveedor';
+import { ManejadorEliminarProductosPorPedido } from 'src/aplicacion/productos-por-pedido/comando/eliminar-productos-por-pedido.manejador';
+import { ManejadorModificarProductosPorPedido } from 'src/aplicacion/productos-por-pedido/comando/modificar-productos-por-pedido.manejador';
+import { ManejadorObtenerProductosPorPedido } from 'src/aplicacion/productos-por-pedido/consulta/obtener-producto-por-pedido.manejador';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
@@ -150,7 +150,7 @@ describe('Pruebas al controlador de productos por pedido', () => {
 
   it('debería fallar al eliminar un productos Por Pedido no existente', async () => {
     
-    const mensaje = `El id: "${productosPorPedido.id}", no existe en la base de productos por pedido`;
+    const mensaje = `El id: '${productosPorPedido.id}', no existe en la base de productos por pedido`;
     repositorioProductosPorPedido.existeIdProductosPorPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
@@ -162,7 +162,7 @@ describe('Pruebas al controlador de productos por pedido', () => {
 
   it('debería fallar al modificar un productos Por Pedido no existente', async () => {
     
-    const mensaje = `El id: "${productosPorPedido.id}", no existe en la base de productos por pedido`;
+    const mensaje = `El id: '${productosPorPedido.id}', no existe en la base de productos por pedido`;
     repositorioProductosPorPedido.existeIdProductosPorPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())

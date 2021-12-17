@@ -1,5 +1,5 @@
-import { ServicioModificarProducto } from "src/dominio/producto/servicio/servicio-modificar-producto";
-import { ServicioEliminarProducto } from "src/dominio/producto/servicio/servicio-eliminar-producto";
+import { ServicioModificarProducto } from 'src/dominio/producto/servicio/servicio-modificar-producto';
+import { ServicioEliminarProducto } from 'src/dominio/producto/servicio/servicio-eliminar-producto';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { RepositorioProducto } from 'src/dominio/producto/puerto/repositorio/repositorio-producto';
@@ -18,8 +18,8 @@ import { createSandbox, SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
 import { ManejadorModificarProducto } from 'src/aplicacion/producto/comando/modificar-producto.manejador';
 import { ManejadorEliminarProducto } from 'src/aplicacion/producto/comando/eliminar-producto.manejador';
-import { servicioEliminarProductoProveedor } from "src/infraestructura/producto/proveedor/servicio/servicio-eliminar-producto.proveedor";
-import { servicioModificarProductoProveedor } from "src/infraestructura/producto/proveedor/servicio/servicio-modificar-producto.proveedor";
+import { servicioEliminarProductoProveedor } from 'src/infraestructura/producto/proveedor/servicio/servicio-eliminar-producto.proveedor';
+import { servicioModificarProductoProveedor } from 'src/infraestructura/producto/proveedor/servicio/servicio-modificar-producto.proveedor';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
@@ -130,7 +130,7 @@ describe('Pruebas al controlador de productos', () => {
 
   it('debería fallar al eliminar un producto no existente', async () => {
     
-    const mensaje = `El id: "${producto.id}", no existe en la base de productos`;
+    const mensaje = `El id: '${producto.id}', no existe en la base de productos`;
     repositorioProducto.existeIdProducto.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
@@ -142,7 +142,7 @@ describe('Pruebas al controlador de productos', () => {
 
   it('debería fallar al modificar un producto no existente', async () => {
     
-    const mensaje = `El id: "${producto.id}", no existe en la base de productos`;
+    const mensaje = `El id: '${producto.id}', no existe en la base de productos`;
     repositorioProducto.existeIdProducto.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())

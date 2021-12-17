@@ -1,4 +1,4 @@
-import { ProductoSolicitado } from "src/dominio/producto-solicitado/modelo/producto-solicitado";
+import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 import { ProductoSolicitadoEntidad } from './../../entidad/producto-solicitado.entidad';
 import { EntityManager } from 'typeorm';
 import { InjectEntityManager } from '@nestjs/typeorm';
@@ -14,7 +14,7 @@ export class DaoProductoSolicitadoPostgres implements DaoProductoSolicitado {
   ) {}
 
   async listar(): Promise<ProductoSolicitadoDto[]> {
-    return this.entityManager.find<ProductoSolicitadoDto>(ProductoSolicitadoEntidad, { relations: ["producto"] })
+    return this.entityManager.find<ProductoSolicitadoDto>(ProductoSolicitadoEntidad, { relations: ['producto'] })
     
     /* query(
       'SELECT * FROM PRODUCTO_SOLICITADO u',
@@ -22,6 +22,6 @@ export class DaoProductoSolicitadoPostgres implements DaoProductoSolicitado {
   }
   
   async obtenerPorId(id: number): Promise<ProductoSolicitadoDto> {
-    return this.entityManager.findOne<ProductoSolicitadoDto>(ProductoSolicitadoEntidad, { where: { id } , relations: ["producto"] });
+    return this.entityManager.findOne<ProductoSolicitadoDto>(ProductoSolicitadoEntidad, { where: { id } , relations: ['producto'] });
   }
 }

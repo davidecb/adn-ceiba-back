@@ -1,5 +1,5 @@
-import { daoProductoProvider } from "./../../producto/proveedor/dao/dao-producto.proveedor";
-import { ManejadorRegistrarProductoSolicitado } from "src/aplicacion/producto-solicitado/comando/registar-producto-solicitado.manejador";
+import { daoProductoProvider } from './../../producto/proveedor/dao/dao-producto.proveedor';
+import { ManejadorRegistrarProductoSolicitado } from 'src/aplicacion/producto-solicitado/comando/registar-producto-solicitado.manejador';
 import { Module } from '@nestjs/common';
 import { ServicioRegistrarPedido } from 'src/dominio/pedido/servicio/servicio-registrar-pedido';
 import { RepositorioPedido } from 'src/dominio/pedido/puerto/repositorio/repositorio-pedido';
@@ -22,9 +22,9 @@ import { ProductoSolicitadoModule } from 'src/infraestructura/producto-solicitad
 import { ProductosPorPedidoModule } from 'src/infraestructura/productos-por-pedido/productos-por-pedido.module';
 import { repositorioProductoSolicitadoProvider } from 'src/infraestructura/producto-solicitado/proveedor/repositorio/repositorio-producto-solicitado.proveedor';
 import { repositorioProductosPorPedidoProvider } from 'src/infraestructura/productos-por-pedido/proveedor/repositorio/repositorio-productos-por-pedido.proveedor';
-import { ManejadorRegistrarProductosPorPedido } from "src/aplicacion/productos-por-pedido/comando/registar-productos-por-pedido.manejador";
-import { ProductoModule } from "src/infraestructura/producto/producto.module";
-import { ManejadorObtenerProducto } from "src/aplicacion/producto/consulta/obtener-producto.manejador";
+import { ManejadorRegistrarProductosPorPedido } from 'src/aplicacion/productos-por-pedido/comando/registar-productos-por-pedido.manejador';
+import { ProductoModule } from 'src/infraestructura/producto/producto.module';
+import { ManejadorObtenerProducto } from 'src/aplicacion/producto/consulta/obtener-producto.manejador';
 
 @Module({
   imports: [TypeOrmModule.forFeature([PedidoEntidad]),

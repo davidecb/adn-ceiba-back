@@ -1,6 +1,6 @@
-import { PedidoEntidad } from "./../../pedido/entidad/pedido.entidad";
-import { ProductoSolicitadoEntidad } from "./../../producto-solicitado/entidad/producto-solicitado.entidad";
-import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, JoinColumn, OneToOne, ManyToOne } from "typeorm";
+import { PedidoEntidad } from './../../pedido/entidad/pedido.entidad';
+import { ProductoSolicitadoEntidad } from './../../producto-solicitado/entidad/producto-solicitado.entidad';
+import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, JoinColumn, OneToOne, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'productos_por_pedido' })
 export class ProductosPorPedidoEntidad {

@@ -4,7 +4,7 @@ import { ManejadorRegistrarProducto } from 'src/aplicacion/producto/comando/regi
 import { ManejadorListarProducto } from 'src/aplicacion/producto/consulta/listar-productos.manejador';
 import { ManejadorObtenerProducto } from 'src/aplicacion/producto/consulta/obtener-producto.manejador';
 import { ManejadorModificarProducto } from 'src/aplicacion/producto/comando/modificar-producto.manejador';
-import { ManejadorEliminarProducto } from "src/aplicacion/producto/comando/eliminar-producto.manejador";
+import { ManejadorEliminarProducto } from 'src/aplicacion/producto/comando/eliminar-producto.manejador';
 import { ProductoDto } from 'src/aplicacion/producto/consulta/dto/producto.dto';
 
 @Controller('productos')

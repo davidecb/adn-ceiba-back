@@ -9,7 +9,7 @@ import { UsuarioModule } from './usuario/usuario.module';
 import { ProductoModule } from './producto/producto.module';
 import { ProductoSolicitadoModule } from './producto-solicitado/producto-solicitado.module';
 import { PedidoModule } from './pedido/pedido.module';
-import { ProductosPorPedidoModule } from "./productos-por-pedido/productos-por-pedido.module";
+import { ProductosPorPedidoModule } from './productos-por-pedido/productos-por-pedido.module';
 
 @Module({
   providers: [AppLogger],

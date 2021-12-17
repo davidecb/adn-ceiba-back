@@ -1,5 +1,5 @@
-import { Pedido } from "src/dominio/pedido/modelo/pedido";
-import { ProductoSolicitado } from "src/dominio/producto-solicitado/modelo/producto-solicitado";
+import { Pedido } from 'src/dominio/pedido/modelo/pedido';
+import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 import { ProductosPorPedido } from 'src/dominio/productos-por-pedido/modelo/productos-por-pedido';
 import { Producto } from 'src/dominio/producto/modelo/producto';
 

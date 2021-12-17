@@ -4,7 +4,7 @@ import { ManejadorRegistrarProductoSolicitado } from 'src/aplicacion/producto-so
 import { ManejadorListarProductoSolicitado } from 'src/aplicacion/producto-solicitado/consulta/listar-productos-solicitados.manejador';
 import { ManejadorObtenerProductoSolicitado } from './../../../aplicacion/producto-solicitado/consulta/obtener-producto-solicitado.manejador';
 import { ManejadorModificarProductoSolicitado } from './../../../aplicacion/producto-solicitado/comando/modificar-producto-solicitado.manejador';
-import { ManejadorEliminarProductoSolicitado } from "./../../../aplicacion/producto-solicitado/comando/eliminar-producto-solicitado.manejador";
+import { ManejadorEliminarProductoSolicitado } from './../../../aplicacion/producto-solicitado/comando/eliminar-producto-solicitado.manejador';
 import { ProductoSolicitadoDto } from 'src/aplicacion/producto-solicitado/consulta/dto/producto-solicitado.dto';
 
 @Controller('productos-solicitados')

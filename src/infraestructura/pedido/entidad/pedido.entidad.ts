@@ -1,4 +1,4 @@
-import { ProductosPorPedidoEntidad } from "./../../productos-por-pedido/entidad/productos-por-pedido.entidad";
+import { ProductosPorPedidoEntidad } from './../../productos-por-pedido/entidad/productos-por-pedido.entidad';
 import { Column, Entity, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, OneToMany, JoinColumn } from 'typeorm';
 
 @Entity({ name: 'pedido' })

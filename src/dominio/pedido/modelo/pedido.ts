@@ -1,4 +1,4 @@
-import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
+import { ProductosPorPedido } from 'src/dominio/productos-por-pedido/modelo/productos-por-pedido';
 export class Pedido {
   readonly #id: number;
   readonly #numeroPedido: string;

@@ -1,5 +1,5 @@
-import { ProductoSolicitado } from "src/dominio/producto-solicitado/modelo/producto-solicitado";
-import { Pedido } from "src/dominio/pedido/modelo/pedido";
+import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
+import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 export class ProductosPorPedido {
   readonly #id: number;
   readonly #pedido: Pedido;

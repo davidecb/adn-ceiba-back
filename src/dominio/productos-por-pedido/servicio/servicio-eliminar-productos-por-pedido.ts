@@ -9,7 +9,7 @@ export class ServicioEliminarProductosPorPedido {
   async ejecutar(id: number) {
     if (!await this._repositorioProductosPorPedido.existeIdProductosPorPedido(id)) {
       throw new ErrorDeNegocio(
-        `El id: "${id}", no existe en la base de productos por pedido`,
+        `El id: '${id}', no existe en la base de productos por pedido`,
       );
     }
     await this._repositorioProductosPorPedido.eliminar(id);

@@ -1,9 +1,9 @@
-import { DaoProductoSolicitado } from "src/dominio/producto-solicitado/puerto/dao/dao-producto-solicitado";
+import { DaoProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/dao/dao-producto-solicitado';
 import { ServicioModificarProductoSolicitado } from 'src/dominio/producto-solicitado/servicio/servicio-modificar-producto-solicitado';
 import { RepositorioProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado';
 import { SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
-import { ProductoSolicitadoDto } from "src/aplicacion/producto-solicitado/consulta/dto/producto-solicitado.dto";
+import { ProductoSolicitadoDto } from 'src/aplicacion/producto-solicitado/consulta/dto/producto-solicitado.dto';
 
 
 describe('ServicioModificarProductoSolicitado', () => {
@@ -26,7 +26,7 @@ describe('ServicioModificarProductoSolicitado', () => {
 
     await expect(
       servicioModificarProductoSolicitado.ejecutar(100, { costo: 20000 }),
-    ).rejects.toThrow('El id: "100", no existe en la base de productos');
+    ).rejects.toThrow('El id: '100', no existe en la base de productos');
   });
 
   it('si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error', async () => {

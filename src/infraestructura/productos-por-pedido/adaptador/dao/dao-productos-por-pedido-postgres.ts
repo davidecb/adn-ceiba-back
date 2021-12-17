@@ -14,7 +14,7 @@ export class DaoProductosPorPedidoPostgres implements DaoProductosPorPedido {
   ) {}
 
   async listar(): Promise<ProductosPorPedidoDto[]> {
-    return this.entityManager.find<ProductosPorPedidoDto>(ProductosPorPedidoEntidad, { relations: ["productoSolicitado"] });
+    return this.entityManager.find<ProductosPorPedidoDto>(ProductosPorPedidoEntidad, { relations: ['productoSolicitado'] });
   }
 
   async obtenerPorId(id: number): Promise<ProductosPorPedidoDto> {

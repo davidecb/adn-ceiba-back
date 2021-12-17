@@ -1,4 +1,4 @@
-import { ErrorPropiedadesFaltantes } from "./../../../../src/dominio/errores/error-propiedades-faltantes";
+import { ErrorPropiedadesFaltantes } from './../../../../src/dominio/errores/error-propiedades-faltantes';
 import { ErrorImagenInvalida } from './../../../../src/dominio/errores/error-imagen-invalida';
 import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 import { Producto } from 'src/dominio/producto/modelo/producto';
@@ -26,7 +26,7 @@ describe('ProductoSolicitado', () => {
       new Date
       ))
       .rejects
-      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto "acabado" debe tener las propiedades pulido, pintado y barnizado'));
+      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto 'acabado' debe tener las propiedades pulido, pintado y barnizado'));
   });
 
   it('producto solicitado con objeto de acabado invalido 2', () => {
@@ -47,7 +47,7 @@ describe('ProductoSolicitado', () => {
       new Date
       ))
       .rejects
-      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto "acabado" debe tener las propiedades pulido, pintado y barnizado'));
+      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto 'acabado' debe tener las propiedades pulido, pintado y barnizado'));
   });
 
   it('producto solicitado con objeto de acabado invalido 3', () => {
@@ -69,7 +69,7 @@ describe('ProductoSolicitado', () => {
       new Date
       ))
       .rejects
-      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto "acabado" debe tener las propiedades pulido, pintado y barnizado'));
+      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto 'acabado' debe tener las propiedades pulido, pintado y barnizado'));
   });
 
   it('producto solicitado con todas las propiedades debe crearse correctamente', () => {

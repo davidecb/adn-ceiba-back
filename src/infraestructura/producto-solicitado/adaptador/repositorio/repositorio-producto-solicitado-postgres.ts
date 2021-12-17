@@ -1,4 +1,4 @@
-import { ManejadorObtenerProducto } from "src/aplicacion/producto/consulta/obtener-producto.manejador";
+import { ManejadorObtenerProducto } from 'src/aplicacion/producto/consulta/obtener-producto.manejador';
 import { RepositorioProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado';
 import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 import { InjectRepository } from '@nestjs/typeorm';

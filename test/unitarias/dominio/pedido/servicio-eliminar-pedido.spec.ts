@@ -21,7 +21,7 @@ describe('ServicioEliminarPedido', () => {
 
     await expect(
       servicioEliminarPedido.ejecutar(100),
-    ).rejects.toThrow('El id: "100", no existe en la base de pedidos');
+    ).rejects.toThrow('El id: '100', no existe en la base de pedidos');
   });
 
   it('si el id de pedido existe elimina el pedido en el repositorio', async () => {

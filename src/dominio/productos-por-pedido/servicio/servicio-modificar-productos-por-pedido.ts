@@ -9,7 +9,7 @@ export class ServicioModificarProductosPorPedido {
   async ejecutar(id: number, valoresAModificar: object) {
     if (!await this._repositorioProductosPorPedido.existeIdProductosPorPedido(id)) {
       throw new ErrorDeNegocio(
-        `El id: "${id}", no existe en la base de productos por pedido`,
+        `El id: '${id}', no existe en la base de productos por pedido`,
       );
     }
 

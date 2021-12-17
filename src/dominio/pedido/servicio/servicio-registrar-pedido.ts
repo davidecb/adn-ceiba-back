@@ -1,6 +1,6 @@
 import { RepositorioPedido } from '../puerto/repositorio/repositorio-pedido';
 import { Pedido } from '../modelo/pedido';
-import { ErrorDeNegocio } from "./../../errores/error-de-negocio";
+import { ErrorDeNegocio } from './../../errores/error-de-negocio';
 
 export class ServicioRegistrarPedido {
 

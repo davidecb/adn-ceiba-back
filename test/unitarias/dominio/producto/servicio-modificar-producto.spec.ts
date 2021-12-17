@@ -22,7 +22,7 @@ describe('ServicioModificarProducto', () => {
 
     await expect(
       servicioModificarProducto.ejecutar(100, { costo: 20000 }),
-    ).rejects.toThrow('El id: "100", no existe en la base de productos');
+    ).rejects.toThrow('El id: '100', no existe en la base de productos');
   });
 
   it('si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error', async () => {

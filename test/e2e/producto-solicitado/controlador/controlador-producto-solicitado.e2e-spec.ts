@@ -1,8 +1,8 @@
-import { ManejadorObtenerProductoSolicitado } from "src/aplicacion/producto-solicitado/consulta/obtener-producto-solicitado.manejador";
-import { ManejadorModificarProductoSolicitado } from "src/aplicacion/producto-solicitado/comando/modificar-producto-solicitado.manejador";
-import { ManejadorEliminarProductoSolicitado } from "src/aplicacion/producto-solicitado/comando/eliminar-producto-solicitado.manejador";
-import { ServicioModificarProductoSolicitado } from "src/dominio/producto-solicitado/servicio/servicio-modificar-producto-solicitado";
-import { ServicioEliminarProductoSolicitado } from "src/dominio/producto-solicitado/servicio/servicio-eliminar-producto-solicitado";
+import { ManejadorObtenerProductoSolicitado } from 'src/aplicacion/producto-solicitado/consulta/obtener-producto-solicitado.manejador';
+import { ManejadorModificarProductoSolicitado } from 'src/aplicacion/producto-solicitado/comando/modificar-producto-solicitado.manejador';
+import { ManejadorEliminarProductoSolicitado } from 'src/aplicacion/producto-solicitado/comando/eliminar-producto-solicitado.manejador';
+import { ServicioModificarProductoSolicitado } from 'src/dominio/producto-solicitado/servicio/servicio-modificar-producto-solicitado';
+import { ServicioEliminarProductoSolicitado } from 'src/dominio/producto-solicitado/servicio/servicio-eliminar-producto-solicitado';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { RepositorioProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado';
@@ -19,8 +19,8 @@ import { AppLogger } from 'src/infraestructura/configuracion/ceiba-logger.servic
 import { createSandbox, SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
 import { Producto } from 'src/dominio/producto/modelo/producto';
-import { servicioEliminarProductoSolicitadoProveedor } from "src/infraestructura/producto-solicitado/proveedor/servicio/servicio-eliminar-producto-solicitado.proveedor";
-import { servicioModificarProductoSolicitadoProveedor } from "src/infraestructura/producto-solicitado/proveedor/servicio/servicio-modificar-producto-solicitado.proveedor";
+import { servicioEliminarProductoSolicitadoProveedor } from 'src/infraestructura/producto-solicitado/proveedor/servicio/servicio-eliminar-producto-solicitado.proveedor';
+import { servicioModificarProductoSolicitadoProveedor } from 'src/infraestructura/producto-solicitado/proveedor/servicio/servicio-modificar-producto-solicitado.proveedor';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
@@ -140,7 +140,7 @@ describe('Pruebas al controlador de producto-solicitados', () => {
 
   it('debería fallar al eliminar un productoSolicitado no existente', async () => {
     
-    const mensaje = `El id: "${productoSolicitado.id}", no existe en la base de productos`;
+    const mensaje = `El id: '${productoSolicitado.id}', no existe en la base de productos`;
     repositorioProductoSolicitado.existeIdProducto.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
@@ -152,7 +152,7 @@ describe('Pruebas al controlador de producto-solicitados', () => {
 
   it('debería fallar al modificar un productoSolicitado no existente', async () => {
     
-    const mensaje = `El id: "${productoSolicitado.id}", no existe en la base de productos`;
+    const mensaje = `El id: '${productoSolicitado.id}', no existe en la base de productos`;
     repositorioProductoSolicitado.existeIdProducto.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())

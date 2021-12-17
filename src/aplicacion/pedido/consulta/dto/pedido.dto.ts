@@ -1,4 +1,4 @@
-import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
+import { ProductosPorPedido } from 'src/dominio/productos-por-pedido/modelo/productos-por-pedido';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PedidoDto {

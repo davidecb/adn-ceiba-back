@@ -1,5 +1,5 @@
-import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
-import { ProductoSolicitado } from "src/dominio/producto-solicitado/modelo/producto-solicitado";
+import { ProductosPorPedido } from 'src/dominio/productos-por-pedido/modelo/productos-por-pedido';
+import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 import { ServicioRegistrarPedido } from 'src/dominio/pedido/servicio/servicio-registrar-pedido';
 import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 import { RepositorioPedido } from 'src/dominio/pedido/puerto/repositorio/repositorio-pedido';

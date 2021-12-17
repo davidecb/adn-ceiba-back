@@ -1,7 +1,7 @@
-import { DaoProductoSolicitado } from "src/dominio/producto-solicitado/puerto/dao/dao-producto-solicitado";
+import { DaoProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/dao/dao-producto-solicitado';
 import { RepositorioProductoSolicitado } from '../puerto/repositorio/repositorio-producto-solicitado';
 import { ErrorDeNegocio } from 'src/dominio/errores/error-de-negocio';
-import { ProductoSolicitado } from "../modelo/producto-solicitado";
+import { ProductoSolicitado } from '../modelo/producto-solicitado';
 
 export class ServicioModificarProductoSolicitado {
 
@@ -13,7 +13,7 @@ export class ServicioModificarProductoSolicitado {
   async ejecutar(id: number, valoresAModificar: object) {
     if (!await this._repositorioProductoSolicitado.existeIdProducto(id)) {
       throw new ErrorDeNegocio(
-        `El id: "${id}", no existe en la base de productos`,
+        `El id: '${id}', no existe en la base de productos`,
       );
     }
 

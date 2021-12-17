@@ -13,13 +13,13 @@ import { ComandoRegistrarPedido } from 'src/aplicacion/pedido/comando/registrar-
 import { AppLogger } from 'src/infraestructura/configuracion/ceiba-logger.service';
 import { createSandbox, SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
-import { ServicioEliminarPedido } from "src/dominio/pedido/servicio/servicio-eliminar-pedido";
-import { servicioEliminarPedidoProveedor } from "src/infraestructura/pedido/proveedor/servicio/servicio-eliminar-pedido.proveedor";
-import { ServicioModificarPedido } from "src/dominio/pedido/servicio/servicio-modificar-pedido";
-import { servicioModificarPedidoProveedor } from "src/infraestructura/pedido/proveedor/servicio/servicio-modificar-pedido.proveedor";
-import { ManejadorEliminarPedido } from "src/aplicacion/pedido/comando/eliminar-pedido.manejador";
-import { ManejadorModificarPedido } from "src/aplicacion/pedido/comando/modificar-pedido.manejador";
-import { ManejadorObtenerPedido } from "src/aplicacion/pedido/consulta/obtener-pedido.manejador";
+import { ServicioEliminarPedido } from 'src/dominio/pedido/servicio/servicio-eliminar-pedido';
+import { servicioEliminarPedidoProveedor } from 'src/infraestructura/pedido/proveedor/servicio/servicio-eliminar-pedido.proveedor';
+import { ServicioModificarPedido } from 'src/dominio/pedido/servicio/servicio-modificar-pedido';
+import { servicioModificarPedidoProveedor } from 'src/infraestructura/pedido/proveedor/servicio/servicio-modificar-pedido.proveedor';
+import { ManejadorEliminarPedido } from 'src/aplicacion/pedido/comando/eliminar-pedido.manejador';
+import { ManejadorModificarPedido } from 'src/aplicacion/pedido/comando/modificar-pedido.manejador';
+import { ManejadorObtenerPedido } from 'src/aplicacion/pedido/consulta/obtener-pedido.manejador';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
@@ -151,7 +151,7 @@ describe('Pruebas al controlador de pedido', () => {
 
   it('debería fallar al eliminar un pedido no existente', async () => {
     
-    const mensaje = `El id: "${pedido.id}", no existe en la base de pedidos`;
+    const mensaje = `El id: '${pedido.id}', no existe en la base de pedidos`;
     repositorioPedido.existeIdPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
@@ -163,7 +163,7 @@ describe('Pruebas al controlador de pedido', () => {
 
   it('debería fallar al modificar un pedido no existente', async () => {
     
-    const mensaje = `El id: "${pedido.id}", no existe en la base de pedidos`;
+    const mensaje = `El id: '${pedido.id}', no existe en la base de pedidos`;
     repositorioPedido.existeIdPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
