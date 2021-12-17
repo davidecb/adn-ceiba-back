@@ -25,7 +25,7 @@ export class ServicioModificarProductoSolicitado {
 
     const productoSolicitadoDto = await this._daoProductoSolicitado.obtenerPorId(id);
     for (const key in valoresAModificar) {
-      productoSolicitadoDto[key] = valoresAModificar[key]      
+      productoSolicitadoDto[key] = valoresAModificar[key];      
     }
     const productoSolicitado = new ProductoSolicitado(
       productoSolicitadoDto.id,

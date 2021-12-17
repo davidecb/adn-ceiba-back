@@ -36,7 +36,7 @@ export class ProductoSolicitado {
     this.#tiempo = tiempo;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;
-  };
+  }
 
   private validarAcabadoProducto(acabado: object) {
     if (

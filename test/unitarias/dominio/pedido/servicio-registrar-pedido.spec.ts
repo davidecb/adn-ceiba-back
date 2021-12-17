@@ -68,7 +68,7 @@ describe('ServicioRegistrarPedido', () => {
   });
 
   it('si el numero de pedido no existe guarda el producto en el repositorio', async () => {
-    const producto = new Pedido(
+    const pedido = new Pedido(
       1,
       '1234abcd321',
       [productoPorPedido],
@@ -82,9 +82,9 @@ describe('ServicioRegistrarPedido', () => {
     );
     repositorioPedidoStub.existeNumeroPedido.returns(Promise.resolve(false));
 
-    await servicioRegistrarPedido.ejecutar(producto);
-
+    await servicioRegistrarPedido.ejecutar(pedido);
+    
     expect(repositorioPedidoStub.guardar.getCalls().length).toBe(1);
-    expect(repositorioPedidoStub.guardar.calledWith(producto)).toBeTruthy();
+    expect(repositorioPedidoStub.guardar.calledWith(pedido)).toBeTruthy();
   });
 });

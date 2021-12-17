@@ -33,7 +33,7 @@ export class Pedido {
     this.#tiempo = tiempo;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;   
-  };
+  }
   
   get id(): number {
     return this.#id;

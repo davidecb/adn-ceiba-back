@@ -22,7 +22,7 @@ export class ProductosPorPedido {
     this.#cantidad = cantidad;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;
-  };
+  }
 
   get id(): number {
     return this.#id;

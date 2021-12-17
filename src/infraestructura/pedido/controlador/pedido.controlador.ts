@@ -20,7 +20,7 @@ export class PedidoControlador {
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async crear(@Body() comandoRegistrarPedido: ComandoRegistrarPedido) {
-    return await this._manejadorRegistrarPedido.ejecutar(comandoRegistrarPedido);
+    return this._manejadorRegistrarPedido.ejecutar(comandoRegistrarPedido);
   }
 
   @Get()

@@ -6,6 +6,8 @@ import { Producto } from 'src/dominio/producto/modelo/producto';
 describe('ProductosPorPedido', () => {
 
   const _ProductosPorPedido = ProductosPorPedido as any;
+  const createdAt = new Date();
+  const updatedAt = new Date();
   const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
   const productoSolicitado = new ProductoSolicitado(
     1,
@@ -43,12 +45,15 @@ describe('ProductosPorPedido', () => {
       pedido,
       productoSolicitado,
       2,
-      new Date,
-      new Date
+      createdAt,
+      updatedAt
     );
 
+    expect(productosPorPedido.id).toEqual(1);
     expect(productosPorPedido.pedido).toEqual(pedido);
     expect(productosPorPedido.productoSolicitado).toEqual(productoSolicitado);
     expect(productosPorPedido.cantidad).toEqual(2);
+    expect(productosPorPedido.createdAt).toEqual(createdAt);
+    expect(productosPorPedido.updatedAt).toEqual(updatedAt);
   }); 
 });

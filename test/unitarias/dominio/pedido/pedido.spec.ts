@@ -6,6 +6,8 @@ import { Producto } from 'src/dominio/producto/modelo/producto';
 describe('Pedido', () => {
 
   const _Pedido = Pedido as any;
+  const createdAt = new Date();
+  const updatedAt = new Date();
   const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
   const productoSolicitado = new ProductoSolicitado(
     1,
@@ -42,10 +44,11 @@ describe('Pedido', () => {
       'inicializando',
       12000,
       40,
-      new Date,
-      new Date
+      createdAt,
+      updatedAt
     );
 
+    expect(pedido.id).toEqual(1);
     expect(pedido.numeroPedido).toEqual('1234abcd321');
     expect(pedido.productosSolicitados).toEqual([productoPorPedido]);
     expect(pedido.direccion).toEqual('Cra 43 16 - 64');
@@ -53,5 +56,7 @@ describe('Pedido', () => {
     expect(pedido.estado).toEqual('inicializando');
     expect(pedido.costo).toEqual(12000);
     expect(pedido.tiempo).toEqual(40);
+    expect(pedido.createdAt).toEqual(createdAt);
+    expect(pedido.updatedAt).toEqual(updatedAt);
   }); 
 });

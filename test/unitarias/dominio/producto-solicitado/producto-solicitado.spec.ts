@@ -6,6 +6,8 @@ describe('ProductoSolicitado', () => {
 
   const _ProductoSolicitado = ProductoSolicitado as any;
   const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
+  const createdAt = new Date();
+  const updatedAt = new Date();
 
   it('producto solicitado con objeto de acabado invalido 1', () => {
     return expect(async () => new _ProductoSolicitado(
@@ -85,10 +87,11 @@ describe('ProductoSolicitado', () => {
       false,
       15000,
       45,
-      new Date,
-      new Date
+      createdAt,
+      updatedAt
       );
 
+    expect(productoSolicitado.id).toEqual(1);
     expect(productoSolicitado.producto).toEqual(producto);
     expect(productoSolicitado.material).toEqual('PLA');
     expect(productoSolicitado.color).toEqual('negro');
@@ -100,6 +103,8 @@ describe('ProductoSolicitado', () => {
     expect(productoSolicitado.urgencia).toEqual(false);
     expect(productoSolicitado.costo).toEqual(15000);
     expect(productoSolicitado.tiempo).toEqual(45);
+    expect(productoSolicitado.createdAt).toEqual(createdAt);
+    expect(productoSolicitado.updatedAt).toEqual(updatedAt);
   });
   
   //validar costo y tiempo no sea cero?? no sea otro tipo de dato(str, bool, etc)

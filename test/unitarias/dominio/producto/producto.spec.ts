@@ -4,6 +4,8 @@ import { Producto } from 'src/dominio/producto/modelo/producto';
 describe('Producto', () => {
 
   const _Producto = Producto as any;
+  const createdAt = new Date();
+  const updatedAt = new Date();
 
   it('producto con imagen invalida(int) debe retornar error', () => {
     return expect(async () => new _Producto(1, 'producto testing', 10000, 45, 123, new Date, new Date))
@@ -33,12 +35,15 @@ describe('Producto', () => {
   });
 
   it('producto sin imagen debe tener imagen por defecto sin marcar error', () => {
-    const producto = new _Producto(1, 'producto testing', 10000, 45, undefined, new Date, new Date);
-
+    const producto = new _Producto(1, 'producto testing', 10000, 45, undefined, createdAt, updatedAt);
+    
+    expect(producto.id).toEqual(1);
     expect(producto.nombre).toEqual('producto testing');
     expect(producto.costo).toEqual(10000);
     expect(producto.tiempo).toEqual(45);
     expect(producto.imagen).toEqual('defaultImagen.jpg');
+    expect(producto.createdAt).toEqual(createdAt);
+    expect(producto.updatedAt).toEqual(updatedAt);
   });
   
   //validar costo y tiempo no sea cero?? no sea otro tipo de dato(str, bool, etc)
