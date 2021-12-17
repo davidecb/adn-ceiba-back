@@ -8,7 +8,7 @@ export class ManejadorRegistrarPedido {
   constructor(private _servicioRegistrarPedido: ServicioRegistrarPedido) {}
 
   async ejecutar(comandoRegistrarPedido: ComandoRegistrarPedido): Promise<number> {
-    return await this._servicioRegistrarPedido.ejecutar(
+    return this._servicioRegistrarPedido.ejecutar(
       new Pedido(
         comandoRegistrarPedido.id,
         comandoRegistrarPedido.numeroPedido,

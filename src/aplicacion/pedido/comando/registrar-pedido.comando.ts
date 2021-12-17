@@ -1,7 +1,6 @@
 import { ProductosPorPedido } from 'src/dominio/productos-por-pedido/modelo/productos-por-pedido';
 import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
-import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 
 export class ComandoRegistrarPedido {
   @ApiProperty()

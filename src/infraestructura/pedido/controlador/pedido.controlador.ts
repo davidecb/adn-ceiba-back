@@ -1,4 +1,3 @@
-import { ManejadorRegistrarProductoSolicitado } from 'src/aplicacion/producto-solicitado/comando/registar-producto-solicitado.manejador';
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ComandoRegistrarPedido } from 'src/aplicacion/pedido/comando/registrar-pedido.comando';
 import { ManejadorRegistrarPedido } from 'src/aplicacion/pedido/comando/registar-pedido.manejador';
@@ -16,15 +15,12 @@ export class PedidoControlador {
     private readonly _manejadorObtenerPedido: ManejadorObtenerPedido,
     private readonly _manejadorEliminarPedido: ManejadorEliminarPedido,
     private readonly _manejadorModificarPedido: ManejadorModificarPedido,
-    //private readonly _manejadorRegistrarProductoSolicitado: ManejadorRegistrarProductoSolicitado
   ) {}
 
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async crear(@Body() comandoRegistrarPedido: ComandoRegistrarPedido) {
-    return await this._manejadorRegistrarPedido.ejecutar(comandoRegistrarPedido);/* 
-    const productoSolicitado = comandoRegistrarPedido.productoSolicitado;
-    const idProductoSolicitado = await this._manejadorRegistrarProductoSolicitado.ejecutar(productoSolicitado) */
+    return await this._manejadorRegistrarPedido.ejecutar(comandoRegistrarPedido);
   }
 
   @Get()

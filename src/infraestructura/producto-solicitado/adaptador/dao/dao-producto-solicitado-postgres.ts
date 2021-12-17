@@ -1,4 +1,3 @@
-import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 import { ProductoSolicitadoEntidad } from './../../entidad/producto-solicitado.entidad';
 import { EntityManager } from 'typeorm';
 import { InjectEntityManager } from '@nestjs/typeorm';

@@ -1,5 +1,4 @@
 import { ErrorPropiedadesFaltantes } from './../../../../src/dominio/errores/error-propiedades-faltantes';
-import { ErrorImagenInvalida } from './../../../../src/dominio/errores/error-imagen-invalida';
 import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 import { Producto } from 'src/dominio/producto/modelo/producto';
 

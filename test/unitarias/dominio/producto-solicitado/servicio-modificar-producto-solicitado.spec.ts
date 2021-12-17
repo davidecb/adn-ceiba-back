@@ -3,7 +3,6 @@ import { ServicioModificarProductoSolicitado } from 'src/dominio/producto-solici
 import { RepositorioProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado';
 import { SinonStubbedInstance } from 'sinon';
 import { createStubObj } from '../../../util/create-object.stub';
-import { ProductoSolicitadoDto } from 'src/aplicacion/producto-solicitado/consulta/dto/producto-solicitado.dto';
 
 
 describe('ServicioModificarProductoSolicitado', () => {
