@@ -46,7 +46,7 @@ export class ProductoSolicitado {
       || !acabado.hasOwnProperty('barnizado')
     ) {
       throw new ErrorPropiedadesFaltantes(
-        'El objeto 'acabado' debe tener las propiedades pulido, pintado y barnizado',
+        `El objeto 'acabado' debe tener las propiedades pulido, pintado y barnizado`,
       );
     }
   }
