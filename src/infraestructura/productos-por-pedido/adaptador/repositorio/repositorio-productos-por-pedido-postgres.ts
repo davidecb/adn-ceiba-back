@@ -12,11 +12,30 @@ export class RepositorioProductosPorPedidoPostgres implements RepositorioProduct
     private readonly repositorio: Repository<ProductosPorPedidoEntidad>,
   ) {}
 
-  async guardar(productosPorPedido: ProductosPorPedido) {
+  async existeIdProductosPorPedido(id: number): Promise<boolean> {
+    return (await this.repositorio.count({ id })) > 0;      
+  }
+
+  async existenPropiedadesProductosPorPedido(valoresAModificar: object): Promise<boolean> {
+    const propiedadesProductosPorPedido = ['pedido', 'cantidad'];
+    return Object.keys(valoresAModificar).every(valor => {
+      return propiedadesProductosPorPedido.includes(valor);
+    });
+  }
+
+  async guardar(productosPorPedido: ProductosPorPedido): Promise<number> {
     const entidad = new ProductosPorPedidoEntidad();
     entidad.pedido = productosPorPedido.pedido;
     entidad.productoSolicitado = productosPorPedido.productoSolicitado;
     entidad.cantidad = productosPorPedido.cantidad;
-    await this.repositorio.save(entidad);
+    return await (await this.repositorio.save(entidad)).id;
+  }
+  
+  async modificar(id: number, valoresAModificar: object) {
+    await this.repositorio.update(id, valoresAModificar);
+  }
+
+  async eliminar(id: number) {
+      await this.repositorio.delete(id);
   }
 }

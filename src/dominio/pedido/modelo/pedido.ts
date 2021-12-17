@@ -5,6 +5,7 @@ export class Pedido {
   readonly #productosSolicitados: ProductosPorPedido[];
   readonly #direccion: string;
   readonly #cliente: string;
+  readonly #estado: string;
   readonly #costo: number;
   readonly #tiempo: number;
   readonly #createdAt: Date;
@@ -16,8 +17,9 @@ export class Pedido {
     productosSolicitados: ProductosPorPedido[],
     direccion: string,
     cliente: string,
-    costo: number,
-    tiempo: number,
+    estado: string,
+    costo: number | 1,
+    tiempo: number | 1,
     createdAt: Date,
     updatedAt: Date
   ) {
@@ -26,6 +28,7 @@ export class Pedido {
     this.#productosSolicitados = productosSolicitados;
     this.#direccion = direccion;
     this.#cliente = cliente;
+    this.#estado = estado;
     this.#costo = costo;
     this.#tiempo = tiempo;
     this.#createdAt = createdAt;
@@ -50,6 +53,10 @@ export class Pedido {
 
   get cliente(): string {
     return this.#cliente;
+  }
+
+  get estado(): string {
+    return this.#estado;
   }
 
   get costo(): number {

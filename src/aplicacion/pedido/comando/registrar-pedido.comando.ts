@@ -1,9 +1,9 @@
 import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
-import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
+import { ProductoSolicitado } from "src/dominio/producto-solicitado/modelo/producto-solicitado";
 
 export class ComandoRegistrarPedido {
-  @IsNumber()
   @ApiProperty()
   id: number;
   
@@ -22,19 +22,19 @@ export class ComandoRegistrarPedido {
   @ApiProperty({ example: 'david cortés' })
   cliente: string;
 
-  @IsNumber()
+  @IsString()
+  @ApiProperty({ example: 'inicializando' })
+  estado: string;
+
   @ApiProperty({ example: 2000 })
   costo: number;
 
-  @IsNumber()
   @ApiProperty({ example: 10 })
   tiempo: number;
-    
-  @IsDate()
+
   @ApiProperty()
   createdAt: Date;
-  
-  @IsDate()
+
   @ApiProperty()
   updatedAt: Date;
 }

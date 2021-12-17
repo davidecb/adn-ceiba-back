@@ -19,6 +19,6 @@ export class DaoProductoPostgres implements DaoProducto {
   }
   
   async obtenerPorId(id: number): Promise<ProductoDto> {
-    return this.entityManager.findOne<ProductoEntidad>(ProductoEntidad, {id});
+    return this.entityManager.findOne<ProductoDto>(ProductoEntidad, {id});
   }
 }

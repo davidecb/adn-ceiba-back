@@ -1,8 +1,8 @@
-import { IsDate, IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class ComandoRegistrarProducto {
-  @IsNumber()
+
   @ApiProperty({ example: 1})
   public id: number;
 
@@ -21,11 +21,9 @@ export class ComandoRegistrarProducto {
   @ApiProperty({ example: 2 })
   public tiempo: number;
 
-  @IsDate()
   @ApiProperty()
   public createdAt: Date;
 
-  @IsDate()
   @ApiProperty()
   public updatedAt: Date;
 }

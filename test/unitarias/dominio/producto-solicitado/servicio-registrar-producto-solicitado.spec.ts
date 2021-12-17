@@ -10,16 +10,17 @@ describe('ServicioRegistrarProductoSolicitado', () => {
 
   let servicioRegistrarProductoSolicitado: ServicioRegistrarProductoSolicitado;
   let repositorioProductoSolicitadoStub: SinonStubbedInstance<RepositorioProductoSolicitado>;
-  const producto = new Producto('producto-solicitado testing', 10000, 45, 'imagenTest.jpg');
+  const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
 
   beforeEach(() => {
 
-    repositorioProductoSolicitadoStub = createStubObj<RepositorioProductoSolicitado>(['guardar']);
+    repositorioProductoSolicitadoStub = createStubObj<RepositorioProductoSolicitado>(['calcularCostoTiempo', 'guardar']);
     servicioRegistrarProductoSolicitado = new ServicioRegistrarProductoSolicitado(repositorioProductoSolicitadoStub);
   });
 
-  it('si el nombre existe o no, guarda el producto en el repositorio', async () => {
+  it('guardar un producto en el repositorio', async () => {
     const productoSolicitado = new ProductoSolicitado(
+      1,
       producto,
       'PLA',
       'negro',
@@ -30,8 +31,12 @@ describe('ServicioRegistrarProductoSolicitado', () => {
       },
       false,
       15000,
-      45
+      45,
+      new Date,
+      new Date
       );
+
+    repositorioProductoSolicitadoStub.calcularCostoTiempo.returns(Promise.resolve({ costo: 22500, tiempo: 90 }));
 
     await servicioRegistrarProductoSolicitado.ejecutar(productoSolicitado);
 

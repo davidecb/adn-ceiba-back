@@ -22,8 +22,9 @@ export class RepositorioProductoPostgres implements RepositorioProducto {
 
   async existenPropiedadesProducto(valoresAModificar: object): Promise<boolean> {
     const propiedadesProducto = ['nombre', 'costo', 'tiempo', 'imagen'];
-    return Object.keys(valoresAModificar).every(valor => {
-      propiedadesProducto.includes(valor);
+    const valoresArray = Object.keys(valoresAModificar);
+    return valoresArray.every(valor => {
+      return propiedadesProducto.includes(valor);
     });
   }
 

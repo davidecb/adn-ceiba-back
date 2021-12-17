@@ -6,7 +6,10 @@ export class ServicioRegistrarProductoSolicitado {
   constructor(private readonly _repositorioProductoSolicitado: RepositorioProductoSolicitado) {
   }
 
-  async ejecutar(productoSolicitado: ProductoSolicitado) {
-    await this._repositorioProductoSolicitado.guardar(productoSolicitado);
+  async ejecutar(productoSolicitado: ProductoSolicitado): Promise<number> {
+    const { costo, tiempo } = await this._repositorioProductoSolicitado.calcularCostoTiempo(productoSolicitado);
+    productoSolicitado.costo = Math.trunc(costo);    
+    productoSolicitado.tiempo = tiempo;    
+    return await this._repositorioProductoSolicitado.guardar(productoSolicitado);
   }
 }

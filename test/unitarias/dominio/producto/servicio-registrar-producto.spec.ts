@@ -22,13 +22,13 @@ describe('ServicioRegistrarProducto', () => {
 
     await expect(
       servicioRegistrarProducto.ejecutar(
-        new Producto('llavero marvel', 12000, 40, 'llaveroMarvel.jpg'),
+        new Producto(1, 'llavero marvel', 12000, 40, 'llaveroMarvel.jpg', new Date, new Date),
       ),
     ).rejects.toThrow('El nombre de producto llavero marvel ya existe');
   });
 
   it('si el nombre no existe guarda el producto en el repositorio', async () => {
-    const producto = new Producto('llavero marvel', 12000, 40, 'llaveroMarvel.jpg');
+    const producto = new Producto(1, 'llavero marvel', 12000, 40, 'llaveroMarvel.jpg', new Date, new Date);
     repositorioProductoStub.existeNombreProducto.returns(Promise.resolve(false));
 
     await servicioRegistrarProducto.ejecutar(producto);

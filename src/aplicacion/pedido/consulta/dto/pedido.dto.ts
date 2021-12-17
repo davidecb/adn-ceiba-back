@@ -1,12 +1,12 @@
+import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
 import { ApiProperty } from '@nestjs/swagger';
-import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 
 export class PedidoDto {
   @ApiProperty({ example: '12ajs5sfv34' })
   numeroPedido: string;
 
   @ApiProperty()
-  productosSolicitados: ProductoSolicitado[];
+  productosSolicitados: ProductosPorPedido[];
   
   @ApiProperty({ example: 'Cra 43 nro 16 - 64' })
   direccion: string;

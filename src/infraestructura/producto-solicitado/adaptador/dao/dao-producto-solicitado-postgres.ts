@@ -14,12 +14,14 @@ export class DaoProductoSolicitadoPostgres implements DaoProductoSolicitado {
   ) {}
 
   async listar(): Promise<ProductoSolicitadoDto[]> {
-    return this.entityManager.query(
-      'SELECT * FROM PRODUCTO-SOLICITADO u',
-    );
+    return this.entityManager.find<ProductoSolicitadoDto>(ProductoSolicitadoEntidad, { relations: ["producto"] })
+    
+    /* query(
+      'SELECT * FROM PRODUCTO_SOLICITADO u',
+    ); */
   }
   
   async obtenerPorId(id: number): Promise<ProductoSolicitadoDto> {
-    return this.entityManager.findOne<ProductoSolicitado>(ProductoSolicitadoEntidad, { id });
+    return this.entityManager.findOne<ProductoSolicitadoDto>(ProductoSolicitadoEntidad, { where: { id } , relations: ["producto"] });
   }
 }

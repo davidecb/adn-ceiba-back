@@ -7,8 +7,8 @@ import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/produ
 export class ManejadorRegistrarProductoSolicitado {
   constructor(private _servicioRegistrarProductoSolicitado: ServicioRegistrarProductoSolicitado) {}
 
-  async ejecutar(comandoRegistrarProductoSolicitado: ComandoRegistrarProductoSolicitado) {
-    await this._servicioRegistrarProductoSolicitado.ejecutar(
+  async ejecutar(comandoRegistrarProductoSolicitado: ComandoRegistrarProductoSolicitado): Promise<number> {
+    return await this._servicioRegistrarProductoSolicitado.ejecutar(
       new ProductoSolicitado(
         comandoRegistrarProductoSolicitado.id,
         comandoRegistrarProductoSolicitado.producto,

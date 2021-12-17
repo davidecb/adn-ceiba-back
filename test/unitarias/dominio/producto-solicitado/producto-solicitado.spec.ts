@@ -6,10 +6,11 @@ import { Producto } from 'src/dominio/producto/modelo/producto';
 describe('ProductoSolicitado', () => {
 
   const _ProductoSolicitado = ProductoSolicitado as any;
-  const producto = new Producto('producto-solicitado testing', 10000, 45, 'imagenTest.jpg');
+  const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
 
   it('producto solicitado con objeto de acabado invalido 1', () => {
     return expect(async () => new _ProductoSolicitado(
+      1,
       producto,
       'PLA',
       'negro',
@@ -20,7 +21,9 @@ describe('ProductoSolicitado', () => {
       },
       false,
       15000,
-      45
+      45,
+      new Date,
+      new Date
       ))
       .rejects
       .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto "acabado" debe tener las propiedades pulido, pintado y barnizado'));
@@ -28,6 +31,7 @@ describe('ProductoSolicitado', () => {
 
   it('producto solicitado con objeto de acabado invalido 2', () => {
     return expect(async () => new _ProductoSolicitado(
+      1,
       producto,
       'PLA',
       'negro',
@@ -38,7 +42,9 @@ describe('ProductoSolicitado', () => {
       },
       false,
       15000,
-      45
+      45,
+      new Date,
+      new Date
       ))
       .rejects
       .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto "acabado" debe tener las propiedades pulido, pintado y barnizado'));
@@ -46,6 +52,7 @@ describe('ProductoSolicitado', () => {
 
   it('producto solicitado con objeto de acabado invalido 3', () => {
     return expect(async () => new _ProductoSolicitado(
+      1,
       producto,
       'PLA',
       'negro',
@@ -57,7 +64,9 @@ describe('ProductoSolicitado', () => {
       },
       false,
       15000,
-      45
+      45,
+      new Date,
+      new Date
       ))
       .rejects
       .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto "acabado" debe tener las propiedades pulido, pintado y barnizado'));
@@ -65,6 +74,7 @@ describe('ProductoSolicitado', () => {
 
   it('producto solicitado con todas las propiedades debe crearse correctamente', () => {
     const productoSolicitado = new _ProductoSolicitado(
+      1,
       producto,
       'PLA',
       'negro',
@@ -75,7 +85,9 @@ describe('ProductoSolicitado', () => {
       },
       false,
       15000,
-      45
+      45,
+      new Date,
+      new Date
       );
 
     expect(productoSolicitado.producto).toEqual(producto);

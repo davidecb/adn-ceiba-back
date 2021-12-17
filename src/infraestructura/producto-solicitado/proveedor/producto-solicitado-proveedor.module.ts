@@ -1,4 +1,8 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { daoProductoProvider } from "./../../producto/proveedor/dao/dao-producto.proveedor";
+import { ManejadorObtenerProducto } from "src/aplicacion/producto/consulta/obtener-producto.manejador";
 
 import { repositorioProductoSolicitadoProvider } from './repositorio/repositorio-producto-solicitado.proveedor';
 import { RepositorioProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado';
@@ -22,21 +26,23 @@ import { ManejadorModificarProductoSolicitado } from 'src/aplicacion/producto-so
 import { ManejadorObtenerProductoSolicitado } from 'src/aplicacion/producto-solicitado/consulta/obtener-producto-solicitado.manejador';
 import { ManejadorListarProductoSolicitado } from 'src/aplicacion/producto-solicitado/consulta/listar-productos-solicitados.manejador';
 
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { ProductoModule } from "src/infraestructura/producto/producto.module";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProductoSolicitadoEntidad])],
+  imports: [TypeOrmModule.forFeature([ProductoSolicitadoEntidad]), ProductoModule],
   providers: [
     { provide: ServicioRegistrarProductoSolicitado, inject: [RepositorioProductoSolicitado], useFactory: servicioRegistrarProductoSolicitadoProveedor },
-    { provide: ServicioModificarProductoSolicitado, inject: [RepositorioProductoSolicitado], useFactory: servicioModificarProductoSolicitadoProveedor },
+    { provide: ServicioModificarProductoSolicitado, inject: [RepositorioProductoSolicitado, DaoProductoSolicitado], useFactory: servicioModificarProductoSolicitadoProveedor },
     { provide: ServicioEliminarProductoSolicitado, inject: [RepositorioProductoSolicitado], useFactory: servicioEliminarProductoSolicitadoProveedor },
     repositorioProductoSolicitadoProvider,
     daoProductoSolicitadoProvider,
+    daoProductoProvider,
     ManejadorRegistrarProductoSolicitado,
     ManejadorListarProductoSolicitado,
     ManejadorObtenerProductoSolicitado,
     ManejadorModificarProductoSolicitado,
     ManejadorEliminarProductoSolicitado,
+    ManejadorObtenerProducto,
   ],
   exports: [
     ServicioRegistrarProductoSolicitado,

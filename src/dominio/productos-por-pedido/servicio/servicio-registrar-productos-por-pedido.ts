@@ -6,7 +6,7 @@ export class ServicioRegistrarProductosPorPedido {
   constructor(private readonly _repositorioProductosPorPedido: RepositorioProductosPorPedido) {
   }
 
-  async ejecutar(productosPorPedido: ProductosPorPedido) {
-    await this._repositorioProductosPorPedido.guardar(productosPorPedido);
+  async ejecutar(productosPorPedido: ProductosPorPedido): Promise<number> {
+    return await this._repositorioProductosPorPedido.guardar(productosPorPedido);
   }
 }

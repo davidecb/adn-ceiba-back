@@ -29,4 +29,10 @@ export class ProductoSolicitadoDto {
   
   @ApiProperty({ example: 35 })
   tiempo: number;
+  
+  @ApiProperty()
+  createdAt: Date;
+  
+  @ApiProperty()
+  updatedAt: Date;
 }

@@ -7,14 +7,15 @@ import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 export class ManejadorRegistrarPedido {
   constructor(private _servicioRegistrarPedido: ServicioRegistrarPedido) {}
 
-  async ejecutar(comandoRegistrarPedido: ComandoRegistrarPedido) {
-    await this._servicioRegistrarPedido.ejecutar(
+  async ejecutar(comandoRegistrarPedido: ComandoRegistrarPedido): Promise<number> {
+    return await this._servicioRegistrarPedido.ejecutar(
       new Pedido(
         comandoRegistrarPedido.id,
         comandoRegistrarPedido.numeroPedido,
         comandoRegistrarPedido.productosSolicitados,
         comandoRegistrarPedido.direccion,
         comandoRegistrarPedido.cliente,
+        comandoRegistrarPedido.estado,
         comandoRegistrarPedido.costo,
         comandoRegistrarPedido.tiempo,
         comandoRegistrarPedido.createdAt,

@@ -8,20 +8,20 @@ export class ProductoSolicitado {
   readonly #color: string;
   readonly #acabado: object;
   readonly #urgencia: boolean;
-  readonly #costo: number;
-  readonly #tiempo: number;
+  #costo: number;
+  #tiempo: number;
   readonly #createdAt: Date;
   readonly #updatedAt: Date;
 
   constructor(
     id: number,
-    producto: Producto,
+    producto: Producto ,
     material: string,
     color: string,
     acabado: object,
     urgencia: boolean,
-    costo: number,
-    tiempo: number,
+    costo: number | 0,
+    tiempo: number | 0,
     createdAt: Date,
     updatedAt: Date
   ) {
@@ -79,8 +79,16 @@ export class ProductoSolicitado {
     return this.#costo;
   }
 
+  set costo(nuevoCosto: number) {
+    this.#costo = nuevoCosto;
+  }
+
   get tiempo(): number {
     return this.#tiempo;
+  }
+  
+  set tiempo(nuevoTiempo: number) {
+    this.#tiempo = nuevoTiempo;
   }
 
   get createdAt(): Date {

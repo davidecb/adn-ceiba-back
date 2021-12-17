@@ -20,7 +20,7 @@ export class ProductoSolicitadoControlador {
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async crear(@Body() comandoRegistrarProductoSolicitado: ComandoRegistrarProductoSolicitado) {
-    await this._manejadorRegistrarProductoSolicitado.ejecutar(comandoRegistrarProductoSolicitado);
+    return await this._manejadorRegistrarProductoSolicitado.ejecutar(comandoRegistrarProductoSolicitado);
   }
 
   @Get()

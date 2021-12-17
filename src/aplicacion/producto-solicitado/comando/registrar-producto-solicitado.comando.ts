@@ -1,12 +1,13 @@
-import { IsBoolean, IsDate, IsNumber, IsObject, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsObject, IsString } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 import { Producto } from 'src/dominio/producto/modelo/producto';
 
 export class ComandoRegistrarProductoSolicitado {
-  @IsNumber()
+
   @ApiProperty()
   id: number;
 
+  @IsNumber()
   @ApiProperty()
   producto: Producto;
   
@@ -29,20 +30,16 @@ export class ComandoRegistrarProductoSolicitado {
   @IsBoolean()
   @ApiProperty({ example: false})
   urgencia: boolean;
-  
-  @IsNumber()
+
   @ApiProperty({ example: 15000 })
   costo: number;
-  
-  @IsNumber()
+
   @ApiProperty({ example: 35 })
   tiempo: number;
-  
-  @IsDate()
+
   @ApiProperty()
   createdAt: Date;
-  
-  @IsDate()
+
   @ApiProperty()
   updatedAt: Date;
 }
