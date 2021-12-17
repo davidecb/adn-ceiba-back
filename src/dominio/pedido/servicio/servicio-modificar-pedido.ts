@@ -9,7 +9,7 @@ export class ServicioModificarPedido {
   async ejecutar(id: number, valoresAModificar: object) {
     if (!await this._repositorioPedido.existeIdPedido(id)) {
       throw new ErrorDeNegocio(
-        `El id: '${id}', no existe en la base de pedidos`,
+        `El id: ${id}, no existe en la base de pedidos`,
       );
     }
 

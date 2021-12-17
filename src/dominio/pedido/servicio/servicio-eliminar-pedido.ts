@@ -9,7 +9,7 @@ export class ServicioEliminarPedido {
   async ejecutar(id: number) {
     if (!await this._repositorioPedido.existeIdPedido(id)) {
       throw new ErrorDeNegocio(
-        `El id: '${id}', no existe en la base de pedidos`,
+        `El id: ${id}, no existe en la base de pedidos`,
       );
     }
     await this._repositorioPedido.eliminar(id);

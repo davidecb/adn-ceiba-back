@@ -130,7 +130,7 @@ describe('Pruebas al controlador de productos', () => {
 
   it('debería fallar al eliminar un producto no existente', async () => {
     
-    const mensaje = `El id: '${producto.id}', no existe en la base de productos`;
+    const mensaje = `El id: ${producto.id}, no existe en la base de productos`;
     repositorioProducto.existeIdProducto.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
@@ -142,7 +142,7 @@ describe('Pruebas al controlador de productos', () => {
 
   it('debería fallar al modificar un producto no existente', async () => {
     
-    const mensaje = `El id: '${producto.id}', no existe en la base de productos`;
+    const mensaje = `El id: ${producto.id}, no existe en la base de productos`;
     repositorioProducto.existeIdProducto.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())

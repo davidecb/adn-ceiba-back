@@ -151,7 +151,7 @@ describe('Pruebas al controlador de pedido', () => {
 
   it('debería fallar al eliminar un pedido no existente', async () => {
     
-    const mensaje = `El id: '${pedido.id}', no existe en la base de pedidos`;
+    const mensaje = `El id: ${pedido.id}, no existe en la base de pedidos`;
     repositorioPedido.existeIdPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
@@ -163,7 +163,7 @@ describe('Pruebas al controlador de pedido', () => {
 
   it('debería fallar al modificar un pedido no existente', async () => {
     
-    const mensaje = `El id: '${pedido.id}', no existe en la base de pedidos`;
+    const mensaje = `El id: ${pedido.id}, no existe en la base de pedidos`;
     repositorioPedido.existeIdPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())

@@ -26,7 +26,7 @@ describe('ProductoSolicitado', () => {
       new Date
       ))
       .rejects
-      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto 'acabado' debe tener las propiedades pulido, pintado y barnizado'));
+      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto: acabado, debe tener las propiedades pulido, pintado y barnizado'));
   });
 
   it('producto solicitado con objeto de acabado invalido 2', () => {
@@ -47,7 +47,7 @@ describe('ProductoSolicitado', () => {
       new Date
       ))
       .rejects
-      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto 'acabado' debe tener las propiedades pulido, pintado y barnizado'));
+      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto: acabado, debe tener las propiedades pulido, pintado y barnizado'));
   });
 
   it('producto solicitado con objeto de acabado invalido 3', () => {
@@ -69,7 +69,7 @@ describe('ProductoSolicitado', () => {
       new Date
       ))
       .rejects
-      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto 'acabado' debe tener las propiedades pulido, pintado y barnizado'));
+      .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto: acabado, debe tener las propiedades pulido, pintado y barnizado'));
   });
 
   it('producto solicitado con todas las propiedades debe crearse correctamente', () => {

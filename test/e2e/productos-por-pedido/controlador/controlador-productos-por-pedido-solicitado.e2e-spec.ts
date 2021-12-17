@@ -150,7 +150,7 @@ describe('Pruebas al controlador de productos por pedido', () => {
 
   it('debería fallar al eliminar un productos Por Pedido no existente', async () => {
     
-    const mensaje = `El id: '${productosPorPedido.id}', no existe en la base de productos por pedido`;
+    const mensaje = `El id: ${productosPorPedido.id}, no existe en la base de productos por pedido`;
     repositorioProductosPorPedido.existeIdProductosPorPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
@@ -162,7 +162,7 @@ describe('Pruebas al controlador de productos por pedido', () => {
 
   it('debería fallar al modificar un productos Por Pedido no existente', async () => {
     
-    const mensaje = `El id: '${productosPorPedido.id}', no existe en la base de productos por pedido`;
+    const mensaje = `El id: ${productosPorPedido.id}, no existe en la base de productos por pedido`;
     repositorioProductosPorPedido.existeIdProductosPorPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
