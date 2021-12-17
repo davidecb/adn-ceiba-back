@@ -10,6 +10,6 @@ export class ServicioRegistrarProductoSolicitado {
     const { costo, tiempo } = await this._repositorioProductoSolicitado.calcularCostoTiempo(productoSolicitado);
     productoSolicitado.costo = Math.trunc(costo);    
     productoSolicitado.tiempo = tiempo;    
-    return await this._repositorioProductoSolicitado.guardar(productoSolicitado);
+    return this._repositorioProductoSolicitado.guardar(productoSolicitado);
   }
 }

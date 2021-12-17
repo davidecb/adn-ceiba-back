@@ -17,7 +17,7 @@ export class Producto {
     this.#tiempo = tiempo;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;
-  }
+  };
 
   private validarImagenValida(imagen: string) {
     if (

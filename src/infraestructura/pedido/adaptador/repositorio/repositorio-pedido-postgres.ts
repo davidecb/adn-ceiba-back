@@ -36,7 +36,7 @@ export class RepositorioPedidoPostgres implements RepositorioPedido {
     entidad.estado = pedido.estado;
     entidad.costo = pedido.costo;
     entidad.tiempo = pedido.tiempo;
-    return await (await this.repositorio.save(entidad)).id;
+    return (await this.repositorio.save(entidad)).id;
   }
   
   async modificar(id: number, valoresAModificar: object) {

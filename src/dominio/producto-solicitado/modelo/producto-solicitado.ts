@@ -34,9 +34,9 @@ export class ProductoSolicitado {
     this.#urgencia = urgencia;
     this.#costo = costo;
     this.#tiempo = tiempo;
-    this.#createdAt = createdAt
-    this.#updatedAt = updatedAt
-  }
+    this.#createdAt = createdAt;
+    this.#updatedAt = updatedAt;
+  };
 
   private validarAcabadoProducto(acabado: object) {
     if (

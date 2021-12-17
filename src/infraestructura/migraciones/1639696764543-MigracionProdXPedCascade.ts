@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from 'typeorm';
 
 export class MigracionProdXPedCascade1639696764543 implements MigrationInterface {
-    name = 'MigracionProdXPedCascade1639696764543'
+    name = 'MigracionProdXPedCascade1639696764543';
 
     public async up(queryRunner: QueryRunner): Promise<any> {
         await queryRunner.query(`ALTER TABLE 'productos_por_pedido' DROP CONSTRAINT 'FK_f60e1ef4a5c36192a514d5e2a5d'`, undefined);

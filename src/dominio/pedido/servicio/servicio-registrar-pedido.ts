@@ -13,6 +13,6 @@ export class ServicioRegistrarPedido {
         `El numero de pedido ${pedido.numeroPedido} ya existe`,
       );
     }
-    return await this._repositorioPedido.guardar(pedido);
+    return this._repositorioPedido.guardar(pedido);
   }
 }

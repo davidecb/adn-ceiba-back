@@ -7,6 +7,6 @@ export class ServicioRegistrarProductosPorPedido {
   }
 
   async ejecutar(productosPorPedido: ProductosPorPedido): Promise<number> {
-    return await this._repositorioProductosPorPedido.guardar(productosPorPedido);
+    return this._repositorioProductosPorPedido.guardar(productosPorPedido);
   }
 }

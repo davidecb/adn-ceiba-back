@@ -36,15 +36,11 @@ export class RepositorioProductoSolicitadoPostgres implements RepositorioProduct
       let multiplicadorCosto = 1.0;
       let multiplicadorTiempo = 1.0;
 
-      switch (productoSolicitado.material) {
-        case 'ABS':
+      if (productoSolicitado.material === 'ABS') {
           multiplicadorCosto += 0.2;
           multiplicadorTiempo += 0.2;
-          break;
-      
-        default:
-          break;
       }
+      
       switch (productoSolicitado.color) {
         case 'negro mate':
           multiplicadorCosto += 0.1;
@@ -76,11 +72,11 @@ export class RepositorioProductoSolicitadoPostgres implements RepositorioProduct
       if (productoSolicitado.urgencia) {
         multiplicadorCosto += 0.2;
       }
-      const costoTiempo = {
+      
+      return {
         costo: (costoBase * multiplicadorCosto),
         tiempo: (tiempoBase * multiplicadorTiempo)
-      }
-      return costoTiempo;
+      };
   }
 
 
@@ -93,7 +89,7 @@ export class RepositorioProductoSolicitadoPostgres implements RepositorioProduct
     entidad.urgencia = productoSolicitado.urgencia;
     entidad.costo = productoSolicitado.costo;
     entidad.tiempo = productoSolicitado.tiempo;
-    return await (await this.repositorio.save(entidad)).id;
+    return (await this.repositorio.save(entidad)).id;
   }
 
   async modificar(id: number, valoresAModificar: object) {

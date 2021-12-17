@@ -28,7 +28,7 @@ export class RepositorioProductosPorPedidoPostgres implements RepositorioProduct
     entidad.pedido = productosPorPedido.pedido;
     entidad.productoSolicitado = productosPorPedido.productoSolicitado;
     entidad.cantidad = productosPorPedido.cantidad;
-    return await (await this.repositorio.save(entidad)).id;
+    return (await this.repositorio.save(entidad)).id;
   }
   
   async modificar(id: number, valoresAModificar: object) {
