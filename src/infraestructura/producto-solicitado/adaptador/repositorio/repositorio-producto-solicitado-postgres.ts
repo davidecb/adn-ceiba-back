@@ -26,57 +26,70 @@ export class RepositorioProductoSolicitadoPostgres implements RepositorioProduct
   }
 
   async calcularCostoTiempo(productoSolicitado: ProductoSolicitado): Promise<object> {
-      const prod = productoSolicitado.producto.hasOwnProperty('id') ?
-          productoSolicitado.producto.id : 
-          productoSolicitado.producto as unknown;
-      const producto = await this._manejadorObtenerProducto.ejecutar(prod as number);
-      const valoresAcabado = Object.values(productoSolicitado.acabado); 
-      const costoBase = producto.costo;
-      const tiempoBase = producto.tiempo;
-      let multiplicadorCosto = 1.0;
-      let multiplicadorTiempo = 1.0;
+    
+    const prod = productoSolicitado.producto.hasOwnProperty('id') ?
+        productoSolicitado.producto.id : 
+        productoSolicitado.producto as unknown;
+    const producto = await this._manejadorObtenerProducto.ejecutar(prod as number);
+    const valoresAcabado = Object.values(productoSolicitado.acabado); 
+    const costoBase = producto.costo;
+    const tiempoBase = producto.tiempo;
+    let multiplicadorCosto = 1.0;
+    let multiplicadorTiempo = 1.0;
 
-      if (productoSolicitado.material === 'ABS') {
-          multiplicadorCosto += 0.2;
-          multiplicadorTiempo += 0.2;
-      }
-      
-      switch (productoSolicitado.color) {
-        case 'negro mate':
-          multiplicadorCosto += 0.1;
-          break;
+    const costoMaterialABS = 0.2;
+    const tiempoMaterialABS = 0.2;
+    const costoColorNegroMate = 0.1;
+    const costoColorMadera = 0.3;
+    const costoColorPlata = 0.4;
+    const costoAcabadoPulido = 0.2;
+    const tiempoAcabadoPulido = 0.4;
+    const costoAcabadoPintado = 0.3;
+    const tiempoAcabadoPintado = 0.5;
+    const costoAcabadoBarnizado = 0.3;
+    const tiempoAcabadoBarnizado = 0.6;
+    const costoUrgencia = 0.3;
 
-        case 'madera':
-          multiplicadorCosto += 0.3;
-          break;
+    if (productoSolicitado.material === 'ABS') {
+        multiplicadorCosto += costoMaterialABS;
+        multiplicadorTiempo += tiempoMaterialABS;
+    }    
+    switch (productoSolicitado.color) {
+      case 'negro mate':
+        multiplicadorCosto += costoColorNegroMate;
+        break;
 
-        case 'plata':
-          multiplicadorCosto += 0.4;
-          break;
-      
-        default:
-          break;
-      }
-      if (valoresAcabado[0]) {
-        multiplicadorCosto += 0.2;
-        multiplicadorTiempo += 0.4;
-      }
-      if (valoresAcabado[1]) {
-        multiplicadorCosto += 0.3;
-        multiplicadorTiempo += 0.5;
-      }
-      if (valoresAcabado[2]) {
-        multiplicadorCosto += 0.3;
-        multiplicadorTiempo += 0.6;
-      }
-      if (productoSolicitado.urgencia) {
-        multiplicadorCosto += 0.2;
-      }
-      
-      return {
-        costo: (costoBase * multiplicadorCosto),
-        tiempo: (tiempoBase * multiplicadorTiempo)
-      };
+      case 'madera':
+        multiplicadorCosto += costoColorMadera;
+        break;
+
+      case 'plata':
+        multiplicadorCosto += costoColorPlata;
+        break;
+    
+      default:
+        break;
+    }
+    if (valoresAcabado[0]) {
+      multiplicadorCosto += costoAcabadoPulido;
+      multiplicadorTiempo += tiempoAcabadoPulido;
+    }
+    if (valoresAcabado[1]) {
+      multiplicadorCosto += costoAcabadoPintado;
+      multiplicadorTiempo += tiempoAcabadoPintado;
+    }
+    if (valoresAcabado[2]) {
+      multiplicadorCosto += costoAcabadoBarnizado;
+      multiplicadorTiempo += tiempoAcabadoBarnizado;
+    }
+    if (productoSolicitado.urgencia) {
+      multiplicadorCosto += costoUrgencia;
+    }
+    
+    return {
+      costo: (costoBase * multiplicadorCosto),
+      tiempo: (tiempoBase * multiplicadorTiempo)
+    };
   }
 
 
