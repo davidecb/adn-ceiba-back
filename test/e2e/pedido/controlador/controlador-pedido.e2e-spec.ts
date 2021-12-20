@@ -21,6 +21,9 @@ import { ManejadorEliminarPedido } from 'src/aplicacion/pedido/comando/eliminar-
 import { ManejadorModificarPedido } from 'src/aplicacion/pedido/comando/modificar-pedido.manejador';
 import { ManejadorObtenerPedido } from 'src/aplicacion/pedido/consulta/obtener-pedido.manejador';
 import { ManejadorObtenerPedidosPorEstado } from 'src/aplicacion/pedido/consulta/obtener-pedidos-por-estado.manejador';
+import { ServicioRecalcularPedido } from 'src/dominio/pedido/servicio/servicio-recalcular-pedido';
+import { servicioRecalcularPedidoProveedor } from 'src/infraestructura/pedido/proveedor/servicio/servicio-recalcular-pedido.proveedor';
+import { ManejadorRecalcularPedido } from 'src/aplicacion/pedido/comando/recalcular-pedido.manejador';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
@@ -85,7 +88,7 @@ describe('Pruebas al controlador de pedido', () => {
    * No Inyectar los módulos completos (Se trae TypeORM y genera lentitud al levantar la prueba, traer una por una las dependencias)
    **/
   beforeAll(async () => {
-    repositorioPedido = createStubObj<RepositorioPedido>(['guardar', 'existeIdPedido', 'existenPropiedadesPedido'], sinonSandbox);
+    repositorioPedido = createStubObj<RepositorioPedido>(['guardar', 'existeIdPedido', 'existenPropiedadesPedido', 'calcularCostoTiempo', 'recalcular'], sinonSandbox);
     daoPedido = createStubObj<DaoPedido>(['listar', 'obtenerPorId', 'obtenerPedidosPorEstado'], sinonSandbox);
     const moduleRef = await Test.createTestingModule({
       controllers: [PedidoControlador],
@@ -106,11 +109,17 @@ describe('Pruebas al controlador de pedido', () => {
           inject: [RepositorioPedido],
           useFactory: servicioModificarPedidoProveedor,
         },
+        {
+          provide: ServicioRecalcularPedido,
+          inject: [RepositorioPedido],
+          useFactory: servicioRecalcularPedidoProveedor,
+        },
         { provide: RepositorioPedido, useValue: repositorioPedido },
         { provide: DaoPedido, useValue: daoPedido },
         ManejadorRegistrarPedido,
         ManejadorEliminarPedido,
         ManejadorModificarPedido,
+        ManejadorRecalcularPedido,
         ManejadorListarPedido,
         ManejadorObtenerPedido,
         ManejadorObtenerPedidosPorEstado,
