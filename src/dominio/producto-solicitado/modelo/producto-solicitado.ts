@@ -12,6 +12,7 @@ export class ProductoSolicitado {
   #tiempo: number;
   readonly #createdAt: Date;
   readonly #updatedAt: Date;
+  private readonly numeroPropiedadesAcabado = 3;
 
   constructor(
     id: number,
@@ -40,7 +41,7 @@ export class ProductoSolicitado {
 
   private validarAcabadoProducto(acabado: object) {
     if (
-      Object.keys(acabado).length !== 3
+      Object.keys(acabado).length !== this.numeroPropiedadesAcabado
       || !acabado.hasOwnProperty('pulido')
       || !acabado.hasOwnProperty('pintado')
       || !acabado.hasOwnProperty('barnizado')

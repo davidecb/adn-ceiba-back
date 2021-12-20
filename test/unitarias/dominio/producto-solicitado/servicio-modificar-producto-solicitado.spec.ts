@@ -13,7 +13,7 @@ describe('ServicioModificarProductoSolicitado', () => {
 
   beforeEach(() => {
 
-    repositorioProductoSolicitadoStub = createStubObj<RepositorioProductoSolicitado>(['existeIdProducto', 'existenPropiedadesProducto', 'modificar']);
+    repositorioProductoSolicitadoStub = createStubObj<RepositorioProductoSolicitado>(['existeIdProducto', 'existenPropiedadesProducto', 'modificar', 'calcularCostoTiempo']);
     daoProductoSolicitadoStub = createStubObj<DaoProductoSolicitado>(['obtenerPorId']);
     servicioModificarProductoSolicitado = new ServicioModificarProductoSolicitado(repositorioProductoSolicitadoStub, daoProductoSolicitadoStub);
   });

@@ -1,3 +1,4 @@
+import { ProductoSolicitadoEntidad } from './../../../producto-solicitado/entidad/producto-solicitado.entidad';
 import { RepositorioProducto } from 'src/dominio/producto/puerto/repositorio/repositorio-producto';
 import { Producto } from 'src/dominio/producto/modelo/producto';
 import { InjectRepository } from '@nestjs/typeorm';

@@ -6,8 +6,8 @@ export class Pedido {
   readonly #direccion: string;
   readonly #cliente: string;
   readonly #estado: string;
-  readonly #costo: number;
-  readonly #tiempo: number;
+  #costo: number;
+  #tiempo: number;
   readonly #createdAt: Date;
   readonly #updatedAt: Date;  
 
@@ -63,8 +63,16 @@ export class Pedido {
     return this.#costo;
   }
 
+  set costo(nuevoCosto: number) {
+    this.#costo = nuevoCosto;
+  }
+
   get tiempo(): number {
     return this.#tiempo;
+  }
+
+  set tiempo(nuevoTiempo: number) {
+    this.#tiempo = nuevoTiempo;
   }
 
   get createdAt(): Date {

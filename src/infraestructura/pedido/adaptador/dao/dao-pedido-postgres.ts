@@ -18,6 +18,10 @@ export class DaoPedidoPostgres implements DaoPedido {
   }
     
   async obtenerPorId(id: number): Promise<PedidoDto> {
-    return this.entityManager.findOne<Pedido>(PedidoEntidad, {id});
+    return this.entityManager.findOne<PedidoDto>(PedidoEntidad, { where: { id } });
+  }
+    
+  async obtenerPedidosPorEstado(estado: string): Promise<PedidoDto[]> {
+    return this.entityManager.find<PedidoDto>(PedidoEntidad, { where: { estado }, relations: ['productosSolicitados'] });
   }
 }

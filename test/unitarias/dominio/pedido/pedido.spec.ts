@@ -8,7 +8,7 @@ describe('Pedido', () => {
   const _Pedido = Pedido as any;
   const createdAt = new Date();
   const updatedAt = new Date();
-  const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
+  const producto = new Producto(1, 'producto testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
   const productoSolicitado = new ProductoSolicitado(
     1,
     producto,

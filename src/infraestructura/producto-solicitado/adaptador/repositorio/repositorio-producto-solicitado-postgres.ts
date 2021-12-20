@@ -25,8 +25,8 @@ export class RepositorioProductoSolicitadoPostgres implements RepositorioProduct
     });
   }
 
-  async calcularCostoTiempo(productoSolicitado: ProductoSolicitado): Promise<object> {
-    
+  async calcularCostoTiempo(productoSolicitado: ProductoSolicitado): Promise<{ costo: number, tiempo: number }> {
+
     const prod = productoSolicitado.producto.hasOwnProperty('id') ?
         productoSolicitado.producto.id : 
         productoSolicitado.producto as unknown;
@@ -49,6 +49,9 @@ export class RepositorioProductoSolicitadoPostgres implements RepositorioProduct
     const costoAcabadoBarnizado = 0.3;
     const tiempoAcabadoBarnizado = 0.6;
     const costoUrgencia = 0.3;
+    const indexAcabadoPulido = 0;
+    const indexAcabadoPintado = 1;
+    const indexAcabadoBarnizado = 2;
 
     if (productoSolicitado.material === 'ABS') {
         multiplicadorCosto += costoMaterialABS;
@@ -70,15 +73,15 @@ export class RepositorioProductoSolicitadoPostgres implements RepositorioProduct
       default:
         break;
     }
-    if (valoresAcabado[0]) {
+    if (valoresAcabado[indexAcabadoPulido]) {
       multiplicadorCosto += costoAcabadoPulido;
       multiplicadorTiempo += tiempoAcabadoPulido;
     }
-    if (valoresAcabado[1]) {
+    if (valoresAcabado[indexAcabadoPintado]) {
       multiplicadorCosto += costoAcabadoPintado;
       multiplicadorTiempo += tiempoAcabadoPintado;
     }
-    if (valoresAcabado[2]) {
+    if (valoresAcabado[indexAcabadoBarnizado]) {
       multiplicadorCosto += costoAcabadoBarnizado;
       multiplicadorTiempo += tiempoAcabadoBarnizado;
     }

@@ -20,6 +20,7 @@ import { servicioModificarPedidoProveedor } from 'src/infraestructura/pedido/pro
 import { ManejadorEliminarPedido } from 'src/aplicacion/pedido/comando/eliminar-pedido.manejador';
 import { ManejadorModificarPedido } from 'src/aplicacion/pedido/comando/modificar-pedido.manejador';
 import { ManejadorObtenerPedido } from 'src/aplicacion/pedido/consulta/obtener-pedido.manejador';
+import { ManejadorObtenerPedidosPorEstado } from 'src/aplicacion/pedido/consulta/obtener-pedidos-por-estado.manejador';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
@@ -85,7 +86,7 @@ describe('Pruebas al controlador de pedido', () => {
    **/
   beforeAll(async () => {
     repositorioPedido = createStubObj<RepositorioPedido>(['guardar', 'existeIdPedido', 'existenPropiedadesPedido'], sinonSandbox);
-    daoPedido = createStubObj<DaoPedido>(['listar'], sinonSandbox);
+    daoPedido = createStubObj<DaoPedido>(['listar', 'obtenerPorId', 'obtenerPedidosPorEstado'], sinonSandbox);
     const moduleRef = await Test.createTestingModule({
       controllers: [PedidoControlador],
       providers: [
@@ -112,6 +113,7 @@ describe('Pruebas al controlador de pedido', () => {
         ManejadorModificarPedido,
         ManejadorListarPedido,
         ManejadorObtenerPedido,
+        ManejadorObtenerPedidosPorEstado,
       ],
     }).compile();
 
@@ -145,6 +147,44 @@ describe('Pruebas al controlador de pedido', () => {
 
     return request(app.getHttpServer())
       .get('/pedidos')
+      .expect(HttpStatus.OK)
+      .expect(pedidos);
+  });
+
+  it('debería obtener un pedido por id', () => {
+
+    const pedido: any = {
+      numeroPedido: '123',
+      productosSolicitados: [],
+      direccion: 'cra 43 42 41',
+      cliente: 'david cortes',
+      estado: 'inicializando',
+      costo: 1000,
+      tiempo: 10
+    };
+    daoPedido.obtenerPorId.returns(Promise.resolve(pedido));
+
+    return request(app.getHttpServer())
+      .get('/pedidos/1')
+      .expect(HttpStatus.OK)
+      .expect(pedido);
+  });
+
+  it('debería obtener pedidos por estado', () => {
+
+    const pedidos: any[] = [{
+      numeroPedido: '123',
+      productosSolicitados: [],
+      direccion: 'cra 43 42 41',
+      cliente: 'david cortes',
+      estado: 'inicializando',
+      costo: 1000,
+      tiempo: 10
+    }];
+    daoPedido.obtenerPedidosPorEstado.returns(Promise.resolve(pedidos));
+
+    return request(app.getHttpServer())
+      .get('/pedidos/estado?estado=inicializando')
       .expect(HttpStatus.OK)
       .expect(pedidos);
   });

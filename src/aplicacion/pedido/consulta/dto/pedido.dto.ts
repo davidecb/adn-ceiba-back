@@ -14,6 +14,9 @@ export class PedidoDto {
   @ApiProperty({ example: 'david cortés' })
   cliente: string;
 
+  @ApiProperty({ example: 'inicializando' })
+  estado: string;
+
   @ApiProperty({ example: 2000 })
   costo: number;
 
