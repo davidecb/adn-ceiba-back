@@ -60,8 +60,8 @@ pipeline{
 				subject: "ERROR CI: ${env.JOB_NAME}")
 			}
 
-			success {
+		/* 	success {
 				junit 'build/test-results/test/*.xml'
-			}
+			} */
 		}			
 }
