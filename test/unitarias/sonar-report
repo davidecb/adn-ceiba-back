@@ -1,0 +1,75 @@
+<testExecutions version="1">
+<file path="test\unitarias\dominio\producto-solicitado\producto-solicitado.spec.ts">
+<testCase name="ProductoSolicitado producto solicitado con objeto de acabado invalido 1" duration="9" />
+<testCase name="ProductoSolicitado producto solicitado con objeto de acabado invalido 2" duration="1" />
+<testCase name="ProductoSolicitado producto solicitado con objeto de acabado invalido 3" duration="0" />
+<testCase name="ProductoSolicitado producto solicitado con todas las propiedades debe crearse correctamente" duration="3" />
+</file>
+<file path="test\unitarias\dominio\producto\producto.spec.ts">
+<testCase name="Producto producto con imagen invalida(int) debe retornar error" duration="5" />
+<testCase name="Producto producto con imagen invalida(bool) debe retornar error" duration="1" />
+<testCase name="Producto producto con imagen invalida(otro formato) debe retornar error" duration="0" />
+<testCase name="Producto producto con imagen valida debe crearse correctamente" duration="2" />
+<testCase name="Producto producto sin imagen debe tener imagen por defecto sin marcar error" duration="1" />
+</file>
+<file path="test\unitarias\dominio\productos-por-pedido\servicio-eliminar-productos-por-pedido.spec.ts">
+<testCase name="ServicioEliminarProductosPorPedido si el id del producto por pedido no existe no se puede eliminar y deberia retonar error" duration="11" />
+<testCase name="ServicioEliminarProductosPorPedido si el id del producto por pedido existe elimina el pedido en el repositorio" duration="3" />
+</file>
+<file path="test\unitarias\dominio\productos-por-pedido\servicio-modificar-productos-por-pedido.spec.ts">
+<testCase name="ServicioModificarProductosPorPedido si el id de pedido no existe no se puede modificar y deberia retonar error" duration="12" />
+<testCase name="ServicioModificarProductosPorPedido si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error" duration="2" />
+<testCase name="ServicioModificarProductosPorPedido si el id y las propiedades existen deberia modificar el pedido" duration="3" />
+</file>
+<file path="test\unitarias\dominio\producto-solicitado\servicio-registrar-producto-solicitado.spec.ts">
+<testCase name="ServicioRegistrarProductoSolicitado Al guardar un producto solicitado si el id no existe debe guardarlo y calcular costo y tiempo" duration="10" />
+<testCase name="ServicioRegistrarProductoSolicitado Al guardar un producto solicitado si el id existe debe modificarlo y recalcular costo y tiempo" duration="2" />
+</file>
+<file path="test\unitarias\dominio\producto\servicio-modificar-producto.spec.ts">
+<testCase name="ServicioModificarProducto si el id de producto no existe no se puede modificar y deberia retonar error" duration="11" />
+<testCase name="ServicioModificarProducto si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error" duration="1" />
+<testCase name="ServicioModificarProducto si el id y las propiedades existen deberia modificar el producto" duration="3" />
+</file>
+<file path="test\unitarias\dominio\productos-por-pedido\servicio-registrar-productos-por-pedido.spec.ts">
+<testCase name="ServicioRegistrarProductosPorPedido crear producto por pedido en el repositorio" duration="8" />
+</file>
+<file path="test\unitarias\dominio\producto-solicitado\servicio-eliminar-producto-solicitado.spec.ts">
+<testCase name="ServicioEliminarProductoSolicitado si el id de producto no existe no se puede eliminar y deberia retonar error" duration="8" />
+<testCase name="ServicioEliminarProductoSolicitado si el id de producto existe elimina el producto en el repositorio" duration="2" />
+</file>
+<file path="test\unitarias\dominio\pedido\servicio-eliminar-pedido.spec.ts">
+<testCase name="ServicioEliminarPedido si el id de pedido no existe no se puede eliminar y deberia retonar error" duration="7" />
+<testCase name="ServicioEliminarPedido si el id de pedido existe elimina el pedido en el repositorio" duration="2" />
+</file>
+<file path="test\unitarias\dominio\producto\servicio-eliminar-producto.spec.ts">
+<testCase name="ServicioEliminarProducto si el id de producto no existe no se puede eliminar y deberia retonar error" duration="7" />
+<testCase name="ServicioEliminarProducto si el id de producto existe elimina el producto en el repositorio" duration="2" />
+</file>
+<file path="test\unitarias\dominio\usuario\servicio-registrar-usuario.spec.ts">
+<testCase name="ServicioRegistrarUsuario si el nombre de usuario ya existe no se puede crear y deberia retonar error" duration="8" />
+<testCase name="ServicioRegistrarUsuario si el nombre no existe guarda el usuario en el repositorio" duration="2" />
+</file>
+<file path="test\unitarias\dominio\pedido\servicio-modificar-pedido.spec.ts">
+<testCase name="ServicioModificarPedido si el id de pedido no existe no se puede modificar y deberia retonar error" duration="7" />
+<testCase name="ServicioModificarPedido si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error" duration="24" />
+<testCase name="ServicioModificarPedido si el id y las propiedades existen deberia modificar el pedido" duration="3" />
+</file>
+<file path="test\unitarias\dominio\producto\servicio-registrar-producto.spec.ts">
+<testCase name="ServicioRegistrarProducto si el nombre de producto ya existe no se puede crear y deberia retonar error" duration="8" />
+<testCase name="ServicioRegistrarProducto si el nombre no existe guarda el producto en el repositorio" duration="3" />
+</file>
+<file path="test\unitarias\dominio\pedido\servicio-registrar-pedido.spec.ts">
+<testCase name="ServicioRegistrarPedido si el numero de pedido ya existe no se puede crear y deberia retonar error" duration="8" />
+<testCase name="ServicioRegistrarPedido si el numero de pedido no existe guarda el pedido en el repositorio" duration="2" />
+</file>
+<file path="test\unitarias\dominio\productos-por-pedido\productos-por-pedido.spec.ts">
+<testCase name="ProductosPorPedido pedido con todos los valores debe crearse correctamente" duration="4" />
+</file>
+<file path="test\unitarias\dominio\pedido\pedido.spec.ts">
+<testCase name="Pedido pedido con todos los valores debe crearse correctamente" duration="4" />
+</file>
+<file path="test\unitarias\dominio\usuario\usuario.spec.ts">
+<testCase name="Usuario usuario con clave menor que 4 deber&#xED;a retornar error" duration="2" />
+<testCase name="Usuario usuario con clave igual a 4 deber&#xED;a crear bien" duration="1" />
+</file>
+</testExecutions>

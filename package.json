@@ -60,6 +60,7 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-import": "^2.20.1",
     "jest": "^25.1.0",
+    "jest-sonar": "^0.2.12",
     "prettier": "^1.19.1",
     "supertest": "^4.0.2",
     "ts-jest": "25.2.1",
@@ -83,6 +84,11 @@
     "testEnvironment": "node",
     "modulePaths": [
       "<rootDir>"
-    ]
+    ],
+    "reporters": ["default", ["jest-sonar", {
+      "outputDirectory": "C:/Users/david.cortes/Downloads/Proyecto ADN/adn-ceiba-backend/test/unitarias",
+      "outputName": "sonar-report",
+      "reportedFilePath": "default"
+    }]]
   }
 }
