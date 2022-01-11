@@ -1,4 +1,4 @@
-import { UsuarioModule } from "./../../../../src/infraestructura/usuario/usuario.module";
+import { UsuarioModule } from './../../../../src/infraestructura/usuario/usuario.module';
 import { repositorioUsuarioProvider } from './../../../../src/infraestructura/usuario/proveedor/repositorio/repositorio-usuario.proveedor';
 import * as request from 'supertest';
 import connection from '../../configuracion/connections';
@@ -15,7 +15,7 @@ import { ManejadorRegistrarUsuario } from 'src/aplicacion/usuario/comando/regist
 import { ManejadorListarUsuario } from 'src/aplicacion/usuario/consulta/listar-usuarios.manejador';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioEntidad } from 'src/infraestructura/usuario/entidad/usuario.entidad';
-import { EntityManager } from "typeorm";
+import { EntityManager } from 'typeorm';
 
 describe('Pruebas al controlador de usuarios', () => {
   let app: INestApplication;

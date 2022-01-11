@@ -1,4 +1,3 @@
-import { daoProductosPorPedidoProvider } from "./../../productos-por-pedido/proveedor/dao/dao-productos-por-pedido.proveedor";
 import { Module } from '@nestjs/common';
 import { ServicioRegistrarPedido } from 'src/dominio/pedido/servicio/servicio-registrar-pedido';
 import { RepositorioPedido } from 'src/dominio/pedido/puerto/repositorio/repositorio-pedido';

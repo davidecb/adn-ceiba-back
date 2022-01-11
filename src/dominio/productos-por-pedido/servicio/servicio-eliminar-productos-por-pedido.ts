@@ -7,8 +7,7 @@ export class ServicioEliminarProductosPorPedido {
   constructor(
     private readonly _repositorioProductosPorPedido: RepositorioProductosPorPedido,
     private readonly _repositorioPedido: RepositorioPedido,
-  ) {
-  }
+  ) {}
 
   async ejecutar(id: number) {
     if (!await this._repositorioProductosPorPedido.existeIdProductosPorPedido(id)) {
@@ -25,7 +24,7 @@ export class ServicioEliminarProductosPorPedido {
     await this._repositorioPedido.modificar(productosPorPedido.pedido.id, {
       costo: productosPorPedido.pedido.costo,
       tiempo: productosPorPedido.pedido.tiempo
-    })
+    });
     return response;   
   }
 }

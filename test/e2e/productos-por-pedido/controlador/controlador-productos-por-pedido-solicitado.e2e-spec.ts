@@ -1,4 +1,4 @@
-import { RepositorioProductoSolicitado } from "src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado";
+import { RepositorioProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado';
 import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
@@ -24,8 +24,8 @@ import { servicioModificarProductosPorPedidoProveedor } from 'src/infraestructur
 import { ManejadorEliminarProductosPorPedido } from 'src/aplicacion/productos-por-pedido/comando/eliminar-productos-por-pedido.manejador';
 import { ManejadorModificarProductosPorPedido } from 'src/aplicacion/productos-por-pedido/comando/modificar-productos-por-pedido.manejador';
 import { ManejadorObtenerProductosPorPedido } from 'src/aplicacion/productos-por-pedido/consulta/obtener-producto-por-pedido.manejador';
-import { RepositorioPedido } from "src/dominio/pedido/puerto/repositorio/repositorio-pedido";
-import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
+import { RepositorioPedido } from 'src/dominio/pedido/puerto/repositorio/repositorio-pedido';
+import { ProductosPorPedido } from 'src/dominio/productos-por-pedido/modelo/productos-por-pedido';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas

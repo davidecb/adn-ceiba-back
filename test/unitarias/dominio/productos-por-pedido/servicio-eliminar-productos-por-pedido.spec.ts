@@ -1,4 +1,4 @@
-import { ProductoSolicitado } from "src/dominio/producto-solicitado/modelo/producto-solicitado";
+import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/producto-solicitado';
 import { ServicioEliminarProductosPorPedido } from 'src/dominio/productos-por-pedido/servicio/servicio-eliminar-productos-por-pedido';
 import { RepositorioProductosPorPedido } from 'src/dominio/productos-por-pedido/puerto/repositorio/repositorio-productos-por-pedido';
 import { SinonStubbedInstance } from 'sinon';
@@ -6,7 +6,7 @@ import { createStubObj } from '../../../util/create-object.stub';
 import { RepositorioPedido } from 'src/dominio/pedido/puerto/repositorio/repositorio-pedido';
 import { ProductosPorPedidoDto } from 'src/aplicacion/productos-por-pedido/consulta/dto/productos-por-pedido.dto';
 import { Pedido } from 'src/dominio/pedido/modelo/pedido';
-import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
+import { ProductosPorPedido } from 'src/dominio/productos-por-pedido/modelo/productos-por-pedido';
 
 
 describe('ServicioEliminarProductosPorPedido', () => {

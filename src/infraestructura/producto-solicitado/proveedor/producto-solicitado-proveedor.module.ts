@@ -1,4 +1,4 @@
-import { repositorioProductoProvider } from "./../../producto/proveedor/repositorio/repositorio-producto.proveedor";
+import { repositorioProductoProvider } from './../../producto/proveedor/repositorio/repositorio-producto.proveedor';
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -21,7 +21,7 @@ import { ManejadorObtenerProductoSolicitado } from 'src/aplicacion/producto-soli
 import { ManejadorListarProductoSolicitado } from 'src/aplicacion/producto-solicitado/consulta/listar-productos-solicitados.manejador';
 
 import { ProductoModule } from 'src/infraestructura/producto/producto.module';
-import { ProductoEntidad } from "src/infraestructura/producto/entidad/producto.entidad";
+import { ProductoEntidad } from 'src/infraestructura/producto/entidad/producto.entidad';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProductoSolicitadoEntidad, ProductoEntidad]), ProductoModule],

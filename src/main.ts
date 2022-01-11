@@ -1,6 +1,5 @@
 import { NestFactory } from '@nestjs/core';
 import * as helmet from 'helmet';
-import * as cors from 'cors'
 import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
@@ -14,7 +13,6 @@ async function bootstrap() {
   const logger = await app.resolve(AppLogger);
   const configService = app.get(ConfigService);
   app.use(helmet());
-  app.use(cors());
   app.useGlobalPipes(new ValidationPipe());
   app.useGlobalFilters(new FiltroExcepcionesDeNegocio(logger));
 

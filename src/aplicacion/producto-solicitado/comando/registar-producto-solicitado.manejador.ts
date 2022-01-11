@@ -1,4 +1,4 @@
-import { RepositorioProducto } from "src/dominio/producto/puerto/repositorio/repositorio-producto";
+import { RepositorioProducto } from 'src/dominio/producto/puerto/repositorio/repositorio-producto';
 import { Injectable } from '@nestjs/common';
 import { ServicioRegistrarProductoSolicitado } from 'src/dominio/producto-solicitado/servicio/servicio-registrar-producto-solicitado';
 import { ComandoRegistrarProductoSolicitado } from './registrar-producto-solicitado.comando';

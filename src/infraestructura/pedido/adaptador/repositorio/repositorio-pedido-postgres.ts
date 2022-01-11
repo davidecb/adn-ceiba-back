@@ -1,4 +1,4 @@
-import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
+import { ProductosPorPedido } from 'src/dominio/productos-por-pedido/modelo/productos-por-pedido';
 import { RepositorioPedido } from 'src/dominio/pedido/puerto/repositorio/repositorio-pedido';
 import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -40,7 +40,7 @@ export class RepositorioPedidoPostgres implements RepositorioPedido {
       entidad.tiempo,
       entidad.createdAt,
       entidad.updatedAt
-    )
+    );
   }
 
   async guardar(pedido: Pedido): Promise<number> {
@@ -60,6 +60,6 @@ export class RepositorioPedidoPostgres implements RepositorioPedido {
   }
 
   async eliminar(id: number) {
-      await this.repositorio.delete(id);
+    await this.repositorio.delete(id);
   }
 }
