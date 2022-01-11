@@ -1,7 +1,6 @@
 import { UsuarioModule } from './../../../../src/infraestructura/usuario/usuario.module';
 import { repositorioUsuarioProvider } from './../../../../src/infraestructura/usuario/proveedor/repositorio/repositorio-usuario.proveedor';
 import * as request from 'supertest';
-import connection from '../../configuracion/connections';
 import { HttpStatus, INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import { AppLogger } from 'src/infraestructura/configuracion/ceiba-logger.service';
@@ -21,7 +20,6 @@ describe('Pruebas al controlador de usuarios', () => {
   let app: INestApplication;
 
   beforeAll(async ()=>{
-    await connection.create();
     const moduleRef = await Test.createTestingModule({
       controllers: [UsuarioControlador],
       imports: [UsuarioModule],
@@ -43,14 +41,6 @@ describe('Pruebas al controlador de usuarios', () => {
     app = moduleRef.createNestApplication();    
     const logger = await app.resolve(AppLogger);
     await app.init();
-  });
-
-  afterAll(async ()=>{
-    await connection.close();
-  });
-
-  beforeEach(async () => {
-    await connection.clear();
   });
 
   it('creates a user', async () => {

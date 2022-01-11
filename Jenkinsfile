@@ -43,14 +43,14 @@ pipeline{
 					}
 				}
 			}
-/* 
+
 			stage('Static Code Analysis') {
 				steps{
 							sonarqubeMasQualityGatesP(sonarKey:'co.com.ceiba.adn:ADN-productos3D.david.cortes', 
 						sonarName:'ADN-Productos3D.david.cortes', 
 						sonarPathProperties:'./sonar-project.properties')
 				}
-			} */
+			}
 		}
 
 		post {
