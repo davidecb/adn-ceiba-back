@@ -13,32 +13,7 @@ describe('ServicioRegistrarPedido', () => {
   let servicioRegistrarPedido: ServicioRegistrarPedido;
   let repositorioPedidoStub: SinonStubbedInstance<RepositorioPedido>;
   const _Pedido = Pedido as any;
-  const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
-  const productoSolicitado = new ProductoSolicitado(
-    1,
-    producto,
-    'PLA',
-    'negro',
-    {
-      pulido: true,
-      pintado: false,
-      barnizado: false
-    },
-    false,
-    15000,
-    45,
-    new Date,
-    new Date
-  );
-  const productoPorPedido = new ProductosPorPedido(
-    1,
-    _Pedido,
-    productoSolicitado,
-    2,
-    new Date,
-    new Date
-  );
-
+ 
   beforeEach(() => {
 
     repositorioPedidoStub = createStubObj<RepositorioPedido>(['existeNumeroPedido', 'guardar']);
@@ -54,12 +29,12 @@ describe('ServicioRegistrarPedido', () => {
         new Pedido(
           1,
           '1234abcd321',
-          [productoPorPedido],
-          'Cra 43 16 - 64',
-          'david cortes',
+          [],
+          '',
+          '',
           'inicializando',
-          12000,
-          40,
+          0,
+          0,
           new Date,
           new Date
         ),
@@ -67,16 +42,16 @@ describe('ServicioRegistrarPedido', () => {
     ).rejects.toThrow('El numero de pedido 1234abcd321 ya existe');
   });
 
-  it('si el numero de pedido no existe guarda el producto en el repositorio', async () => {
+  it('si el numero de pedido no existe guarda el pedido en el repositorio', async () => {
     const pedido = new Pedido(
       1,
       '1234abcd321',
-      [productoPorPedido],
-      'Cra 43 16 - 64',
-      'david cortes',
+      [],
+      '',
+      '',
       'inicializando',
-      12000,
-      40,
+      0,
+      0,
       new Date,
       new Date
     );

@@ -17,40 +17,24 @@ import { servicioModificarPedidoProveedor } from './servicio/servicio-modificar-
 import { ManejadorObtenerPedido } from 'src/aplicacion/pedido/consulta/obtener-pedido.manejador';
 import { ManejadorModificarPedido } from 'src/aplicacion/pedido/comando/modificar-pedido.manejador';
 import { ManejadorEliminarPedido } from 'src/aplicacion/pedido/comando/eliminar-pedido.manejador';
-import { ProductoSolicitadoModule } from 'src/infraestructura/producto-solicitado/producto-solicitado.module';
-import { ProductosPorPedidoModule } from 'src/infraestructura/productos-por-pedido/productos-por-pedido.module';
-import { ProductoModule } from 'src/infraestructura/producto/producto.module';
 import { ManejadorObtenerPedidosPorEstado } from 'src/aplicacion/pedido/consulta/obtener-pedidos-por-estado.manejador';
-import { ManejadorObtenerProductosPorPedido } from 'src/aplicacion/productos-por-pedido/consulta/obtener-producto-por-pedido.manejador';
-import { ServicioRecalcularPedido } from 'src/dominio/pedido/servicio/servicio-recalcular-pedido';
-import { servicioRecalcularPedidoProveedor } from './servicio/servicio-recalcular-pedido.proveedor';
-import { ManejadorRecalcularPedido } from "src/aplicacion/pedido/comando/recalcular-pedido.manejador";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([PedidoEntidad]),
-    ProductoSolicitadoModule,
-    ProductosPorPedidoModule,
-    ProductoModule,    
-  ],
+  imports: [TypeOrmModule.forFeature([PedidoEntidad])],
   providers: [
     { provide: ServicioRegistrarPedido, inject: [RepositorioPedido], useFactory: servicioRegistrarPedidoProveedor },
     { provide: ServicioModificarPedido, inject: [RepositorioPedido], useFactory: servicioModificarPedidoProveedor },
     { provide: ServicioEliminarPedido, inject: [RepositorioPedido], useFactory: servicioEliminarPedidoProveedor },
-    { provide: ServicioRecalcularPedido, inject: [RepositorioPedido, DaoPedido], useFactory: servicioRecalcularPedidoProveedor },
     repositorioPedidoProvider,
     daoPedidoProvider,
-    daoProductosPorPedidoProvider,
     ManejadorRegistrarPedido,
     ManejadorListarPedido,
     ManejadorObtenerPedido,
     ManejadorObtenerPedidosPorEstado,
     ManejadorModificarPedido,
-    ManejadorRecalcularPedido,
     ManejadorEliminarPedido,
-    ManejadorObtenerProductosPorPedido
   ],
   exports: [
-    ServicioRegistrarPedido,
     ServicioRegistrarPedido,
     ServicioModificarPedido,
     ServicioEliminarPedido,
@@ -59,7 +43,6 @@ import { ManejadorRecalcularPedido } from "src/aplicacion/pedido/comando/recalcu
     ManejadorObtenerPedido,
     ManejadorObtenerPedidosPorEstado,
     ManejadorModificarPedido,
-    ManejadorRecalcularPedido,
     ManejadorEliminarPedido,
     RepositorioPedido,
     DaoPedido,

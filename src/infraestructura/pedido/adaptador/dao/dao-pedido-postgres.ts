@@ -1,4 +1,3 @@
-import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 import { EntityManager } from 'typeorm';
 import { InjectEntityManager } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';

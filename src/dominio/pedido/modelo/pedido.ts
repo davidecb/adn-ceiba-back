@@ -18,8 +18,8 @@ export class Pedido {
     direccion: string,
     cliente: string,
     estado: string,
-    costo: number | 1,
-    tiempo: number | 1,
+    costo: number,
+    tiempo: number,
     createdAt: Date,
     updatedAt: Date
   ) {
@@ -33,6 +33,22 @@ export class Pedido {
     this.#tiempo = tiempo;
     this.#createdAt = createdAt;
     this.#updatedAt = updatedAt;   
+  }
+
+  calcularCostoTiempo() {
+    const productosEnPedido = this.#productosSolicitados || [];
+    let costoTotal = 0;
+    let tiempoTotal = 0;
+
+    productosEnPedido.forEach((producto) => {
+      const costoProductos = producto.productoSolicitado.costo * producto.cantidad;
+      const tiempoProductos = producto.productoSolicitado.tiempo * producto.cantidad;
+      costoTotal += costoProductos;
+      tiempoTotal += tiempoProductos;
+    });
+
+      this.#costo = costoTotal;
+      this.#tiempo = tiempoTotal;
   }
   
   get id(): number {

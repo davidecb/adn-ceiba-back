@@ -8,7 +8,7 @@ describe('Pedido', () => {
   const _Pedido = Pedido as any;
   const createdAt = new Date();
   const updatedAt = new Date();
-  const producto = new Producto(1, 'producto testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
+  const producto = new Producto(1, 'producto testing', 10000, 45, 'imagenTest.jpg', createdAt, updatedAt);
   const productoSolicitado = new ProductoSolicitado(
     1,
     producto,
@@ -20,18 +20,18 @@ describe('Pedido', () => {
       barnizado: false
     },
     false,
-    15000,
-    45,
-    new Date,
-    new Date
+    0,
+    0,
+    createdAt,
+    updatedAt
   );
   const productoPorPedido = new ProductosPorPedido(
     1,
     _Pedido,
     productoSolicitado,
     2,
-    new Date,
-    new Date
+    createdAt,
+    updatedAt
   );
 
   it('pedido con todos los valores debe crearse correctamente', () => {

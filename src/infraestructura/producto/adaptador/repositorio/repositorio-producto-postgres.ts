@@ -29,6 +29,19 @@ export class RepositorioProductoPostgres implements RepositorioProducto {
     });
   }
 
+  async obtenerPorId(id: number): Promise<Producto> {
+    const entidad = await this.repositorio.findOne(id);
+    return new Producto(
+      entidad.id,
+      entidad.nombre,
+      entidad.costo,
+      entidad.tiempo,
+      entidad.imagen,
+      entidad.createdAt,
+      entidad.updatedAt
+    );
+  }
+
   async guardar(producto: Producto) {
     const entidad = new ProductoEntidad();
     entidad.costo = producto.costo;

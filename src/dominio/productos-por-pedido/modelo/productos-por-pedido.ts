@@ -2,7 +2,7 @@ import { ProductoSolicitado } from 'src/dominio/producto-solicitado/modelo/produ
 import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 export class ProductosPorPedido {
   readonly #id: number;
-  readonly #pedido: Pedido;
+  #pedido: Pedido;
   readonly #productoSolicitado: ProductoSolicitado;
   readonly #cantidad: number;
   readonly #createdAt: Date;
@@ -30,6 +30,10 @@ export class ProductosPorPedido {
 
   get pedido(): Pedido {
     return this.#pedido;
+  }
+
+  set pedido(nuevoPedido) {
+    this.#pedido = nuevoPedido;
   }
 
   get productoSolicitado(): ProductoSolicitado {

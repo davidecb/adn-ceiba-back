@@ -21,7 +21,7 @@ describe('ServicioModificarPedido', () => {
     repositorioPedidoStub.existenPropiedadesPedido.returns(Promise.resolve(true));
 
     await expect(
-      servicioModificarPedido.ejecutar(100, { costo: 20000 }),
+      servicioModificarPedido.ejecutar(100, { cliente: 'david' }),
     ).rejects.toThrow('El id: 100, no existe en la base de pedidos');
   });
 
@@ -38,9 +38,9 @@ describe('ServicioModificarPedido', () => {
     repositorioPedidoStub.existeIdPedido.returns(Promise.resolve(true));
     repositorioPedidoStub.existenPropiedadesPedido.returns(Promise.resolve(true));
 
-    await servicioModificarPedido.ejecutar(1, { material: 'PLA' });
+    await servicioModificarPedido.ejecutar(1, { cliente: 'david' });
 
     expect(repositorioPedidoStub.modificar.getCalls().length).toBe(1);
-    expect(repositorioPedidoStub.modificar.calledWith(1, { material: 'PLA' })).toBeTruthy();
+    expect(repositorioPedidoStub.modificar.calledWith(1, { cliente: 'david' })).toBeTruthy();
   });
 });

@@ -8,25 +8,25 @@ describe('Producto', () => {
   const updatedAt = new Date();
 
   it('producto con imagen invalida(int) debe retornar error', () => {
-    return expect(async () => new _Producto(1, 'producto testing', 10000, 45, 123, new Date, new Date))
+    return expect(async () => new _Producto(1, 'producto testing', 10000, 45, 123, createdAt, updatedAt))
       .rejects
       .toStrictEqual(new ErrorImagenInvalida('La imagen debe estar en formato jpg, jpeg o png'));
   });
 
   it('producto con imagen invalida(bool) debe retornar error', () => {
-    return expect(async () => new _Producto(1, 'producto testing', 10000, 45, true, new Date, new Date))
+    return expect(async () => new _Producto(1, 'producto testing', 10000, 45, true, createdAt, updatedAt))
       .rejects
       .toStrictEqual(new ErrorImagenInvalida('La imagen debe estar en formato jpg, jpeg o png'));
   });
 
   it('producto con imagen invalida(otro formato) debe retornar error', () => {
-    return expect(async () => new _Producto(1, 'producto testing', 10000, 45, 'imagenTest.svg', new Date, new Date))
+    return expect(async () => new _Producto(1, 'producto testing', 10000, 45, 'imagenTest.svg', createdAt, updatedAt))
       .rejects
       .toStrictEqual(new ErrorImagenInvalida('La imagen debe estar en formato jpg, jpeg o png'));
   });
 
   it('producto con imagen valida debe crearse correctamente', () => {
-    const producto = new _Producto(1, 'producto testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
+    const producto = new _Producto(1, 'producto testing', 10000, 45, 'imagenTest.jpg', createdAt, updatedAt);
 
     expect(producto.nombre).toEqual('producto testing');
     expect(producto.costo).toEqual(10000);
@@ -44,8 +44,5 @@ describe('Producto', () => {
     expect(producto.imagen).toEqual('defaultImagen.jpg');
     expect(producto.createdAt).toEqual(createdAt);
     expect(producto.updatedAt).toEqual(updatedAt);
-  });
-  
-  //validar costo y tiempo no sea cero?? no sea otro tipo de dato(str, bool, etc)
- 
+  });  
 });

@@ -10,37 +10,62 @@ describe('ServicioRegistrarProductoSolicitado', () => {
 
   let servicioRegistrarProductoSolicitado: ServicioRegistrarProductoSolicitado;
   let repositorioProductoSolicitadoStub: SinonStubbedInstance<RepositorioProductoSolicitado>;
-  const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
+  const producto = new Producto(1, 'producto-solicitado testing', 10000, 30, 'imagenTest.jpg', new Date, new Date);
 
   beforeEach(() => {
 
-    repositorioProductoSolicitadoStub = createStubObj<RepositorioProductoSolicitado>(['calcularCostoTiempo', 'guardar']);
+    repositorioProductoSolicitadoStub = createStubObj<RepositorioProductoSolicitado>(['guardar', 'existeIdProducto', 'modificar']);
     servicioRegistrarProductoSolicitado = new ServicioRegistrarProductoSolicitado(repositorioProductoSolicitadoStub);
   });
 
-  it('guardar un producto en el repositorio', async () => {
+  it('Al guardar un producto solicitado si el id no existe debe guardarlo y calcular costo y tiempo', async () => {
     const productoSolicitado = new ProductoSolicitado(
       1,
       producto,
-      'PLA',
-      'negro',
+      'ABS',
+      'madera',
       {
         pulido: true,
         pintado: false,
         barnizado: true
       },
       false,
-      15000,
-      45,
+      0,
+      0,
       new Date,
       new Date
-      );
-
-    repositorioProductoSolicitadoStub.calcularCostoTiempo.returns(Promise.resolve({ costo: 22500, tiempo: 90 }));
-
+    );
+    repositorioProductoSolicitadoStub.existeIdProducto.returns(Promise.resolve(false));
+    
     await servicioRegistrarProductoSolicitado.ejecutar(productoSolicitado);
-
+    expect(productoSolicitado.costo).toBe(20000);
+    expect(productoSolicitado.tiempo).toBe(66);
     expect(repositorioProductoSolicitadoStub.guardar.getCalls().length).toBe(1);
     expect(repositorioProductoSolicitadoStub.guardar.calledWith(productoSolicitado)).toBeTruthy();
+  });
+
+  it('Al guardar un producto solicitado si el id existe debe modificarlo y recalcular costo y tiempo', async () => {
+    const productoSolicitado = new ProductoSolicitado(
+      1,
+      producto,
+      'ABS',
+      'plata',
+      {
+        pulido: true,
+        pintado: false,
+        barnizado: false
+      },
+      false,
+      0,
+      0,
+      new Date,
+      new Date
+    );
+    repositorioProductoSolicitadoStub.existeIdProducto.returns(Promise.resolve(true));
+    await servicioRegistrarProductoSolicitado.ejecutar(productoSolicitado);
+    expect(productoSolicitado.costo).toBe(18000);
+    expect(productoSolicitado.tiempo).toBe(48);
+    expect(repositorioProductoSolicitadoStub.modificar.getCalls().length).toBe(1);
+    expect(repositorioProductoSolicitadoStub.modificar.calledWith(productoSolicitado)).toBeTruthy();
   });
 });

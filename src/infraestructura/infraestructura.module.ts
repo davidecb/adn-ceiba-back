@@ -28,9 +28,9 @@ import { ProductosPorPedidoModule } from './productos-por-pedido/productos-por-p
       }),
     }),
     UsuarioModule,
+    PedidoModule,
     ProductoModule,
     ProductoSolicitadoModule,
-    PedidoModule,
     ProductosPorPedidoModule,
   ],
 })

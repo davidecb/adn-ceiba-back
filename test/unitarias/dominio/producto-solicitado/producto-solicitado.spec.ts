@@ -5,9 +5,9 @@ import { Producto } from 'src/dominio/producto/modelo/producto';
 describe('ProductoSolicitado', () => {
 
   const _ProductoSolicitado = ProductoSolicitado as any;
-  const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', new Date, new Date);
   const createdAt = new Date();
   const updatedAt = new Date();
+  const producto = new Producto(1, 'producto-solicitado testing', 10000, 45, 'imagenTest.jpg', createdAt, updatedAt);
 
   it('producto solicitado con objeto de acabado invalido 1', () => {
     return expect(async () => new _ProductoSolicitado(
@@ -23,8 +23,8 @@ describe('ProductoSolicitado', () => {
       false,
       15000,
       45,
-      new Date,
-      new Date
+      createdAt,
+      updatedAt
       ))
       .rejects
       .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto: acabado, debe tener las propiedades pulido, pintado y barnizado'));
@@ -44,8 +44,8 @@ describe('ProductoSolicitado', () => {
       false,
       15000,
       45,
-      new Date,
-      new Date
+      createdAt,
+      updatedAt
       ))
       .rejects
       .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto: acabado, debe tener las propiedades pulido, pintado y barnizado'));
@@ -66,8 +66,8 @@ describe('ProductoSolicitado', () => {
       false,
       15000,
       45,
-      new Date,
-      new Date
+      createdAt,
+      updatedAt
       ))
       .rejects
       .toStrictEqual(new ErrorPropiedadesFaltantes('El objeto: acabado, debe tener las propiedades pulido, pintado y barnizado'));
@@ -77,36 +77,33 @@ describe('ProductoSolicitado', () => {
     const productoSolicitado = new _ProductoSolicitado(
       1,
       producto,
-      'PLA',
-      'negro',
+      'ABS',
+      'madera',
       {
         pulido: true,
         pintado: false,
-        barnizado: false
+        barnizado: true
       },
       false,
-      15000,
-      45,
+      0,
+      0,
       createdAt,
       updatedAt
       );
 
     expect(productoSolicitado.id).toEqual(1);
     expect(productoSolicitado.producto).toEqual(producto);
-    expect(productoSolicitado.material).toEqual('PLA');
-    expect(productoSolicitado.color).toEqual('negro');
+    expect(productoSolicitado.material).toEqual('ABS');
+    expect(productoSolicitado.color).toEqual('madera');
     expect(productoSolicitado.acabado).toEqual({
         pulido: true,
         pintado: false,
-        barnizado: false
+        barnizado: true
       });
     expect(productoSolicitado.urgencia).toEqual(false);
-    expect(productoSolicitado.costo).toEqual(15000);
-    expect(productoSolicitado.tiempo).toEqual(45);
+    expect(productoSolicitado.costo).toEqual(0);
+    expect(productoSolicitado.tiempo).toEqual(0);
     expect(productoSolicitado.createdAt).toEqual(createdAt);
     expect(productoSolicitado.updatedAt).toEqual(updatedAt);
-  });
-  
-  //validar costo y tiempo no sea cero?? no sea otro tipo de dato(str, bool, etc)
- 
+  });  
 });

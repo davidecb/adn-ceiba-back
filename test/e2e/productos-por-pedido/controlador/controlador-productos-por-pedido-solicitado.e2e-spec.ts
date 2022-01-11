@@ -1,3 +1,4 @@
+import { RepositorioProductoSolicitado } from "src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado";
 import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 import * as request from 'supertest';
 import { Test } from '@nestjs/testing';
@@ -23,6 +24,8 @@ import { servicioModificarProductosPorPedidoProveedor } from 'src/infraestructur
 import { ManejadorEliminarProductosPorPedido } from 'src/aplicacion/productos-por-pedido/comando/eliminar-productos-por-pedido.manejador';
 import { ManejadorModificarProductosPorPedido } from 'src/aplicacion/productos-por-pedido/comando/modificar-productos-por-pedido.manejador';
 import { ManejadorObtenerProductosPorPedido } from 'src/aplicacion/productos-por-pedido/consulta/obtener-producto-por-pedido.manejador';
+import { RepositorioPedido } from "src/dominio/pedido/puerto/repositorio/repositorio-pedido";
+import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
@@ -34,6 +37,11 @@ describe('Pruebas al controlador de productos por pedido', () => {
   let app: INestApplication;
   let repositorioProductosPorPedido: SinonStubbedInstance<RepositorioProductosPorPedido>;
   let daoProductosPorPedido: SinonStubbedInstance<DaoProductosPorPedido>;
+  let repositorioProductoSolicitado: SinonStubbedInstance<RepositorioProductoSolicitado>;
+  let repositorioPedido: SinonStubbedInstance<RepositorioPedido>;
+
+  const createdAt = new Date;
+  const updatedAt = new Date;
 
   const producto = new Producto(
     1,
@@ -41,8 +49,8 @@ describe('Pruebas al controlador de productos por pedido', () => {
     10000,
     30,
     'loremIpsum.jpg',
-    new Date(),
-    new Date()
+    createdAt,
+    updatedAt
   );
 
   const productoSolicitado = new ProductoSolicitado(
@@ -58,8 +66,8 @@ describe('Pruebas al controlador de productos por pedido', () => {
       false,
       100,
       10,
-      new Date,
-      new Date
+      createdAt,
+      updatedAt
   );
 
   const pedido = new Pedido(
@@ -71,8 +79,8 @@ describe('Pruebas al controlador de productos por pedido', () => {
     'inicializando',
     1000,
     15,
-    new Date,
-    new Date
+    createdAt,
+    updatedAt
   );
 
   const productosPorPedido : ComandoRegistrarProductosPorPedido = {
@@ -80,27 +88,29 @@ describe('Pruebas al controlador de productos por pedido', () => {
     pedido: pedido,
     productoSolicitado: productoSolicitado,
     cantidad: 2,
-    createdAt: new Date,
-    updatedAt: new Date
+    createdAt,
+    updatedAt
   }
   /**
    * No Inyectar los módulos completos (Se trae TypeORM y genera lentitud al levantar la prueba, traer una por una las dependencias)
    **/
   beforeAll(async () => {
-    repositorioProductosPorPedido = createStubObj<RepositorioProductosPorPedido>(['guardar', 'existeIdProductosPorPedido', 'existenPropiedadesProductosPorPedido'], sinonSandbox);
-    daoProductosPorPedido = createStubObj<DaoProductosPorPedido>(['listar'], sinonSandbox);
+    repositorioProductosPorPedido = createStubObj<RepositorioProductosPorPedido>(['guardar', 'modificar', 'eliminar', 'existeIdProductosPorPedido', 'existenPropiedadesProductosPorPedido', 'obtenerPorId'], sinonSandbox);
+    repositorioProductoSolicitado = createStubObj<RepositorioProductoSolicitado>(['obtenerPorId'], sinonSandbox);
+    repositorioPedido = createStubObj<RepositorioPedido>(['obtenerPorId', 'modificar'], sinonSandbox);
+    daoProductosPorPedido = createStubObj<DaoProductosPorPedido>(['listar', 'obtenerPorId'], sinonSandbox);
     const moduleRef = await Test.createTestingModule({
       controllers: [ProductosPorPedidoControlador],
       providers: [
         AppLogger,
         {
           provide: ServicioRegistrarProductosPorPedido,
-          inject: [RepositorioProductosPorPedido],
+          inject: [RepositorioProductosPorPedido, RepositorioPedido],
           useFactory: servicioRegistrarProductosPorPedidoProveedor,
         },
         {
           provide: ServicioEliminarProductosPorPedido,
-          inject: [RepositorioProductosPorPedido],
+          inject: [RepositorioProductosPorPedido, RepositorioPedido],
           useFactory: servicioEliminarProductosPorPedidoProveedor,
         },
         {
@@ -109,6 +119,8 @@ describe('Pruebas al controlador de productos por pedido', () => {
           useFactory: servicioModificarProductosPorPedidoProveedor,
         },
         { provide: RepositorioProductosPorPedido, useValue: repositorioProductosPorPedido },
+        { provide: RepositorioProductoSolicitado, useValue: repositorioProductoSolicitado },
+        { provide: RepositorioPedido, useValue: repositorioPedido },
         { provide: DaoProductosPorPedido, useValue: daoProductosPorPedido },
         ManejadorRegistrarProductosPorPedido,
         ManejadorEliminarProductosPorPedido,
@@ -132,6 +144,20 @@ describe('Pruebas al controlador de productos por pedido', () => {
   afterAll(async () => {
     await app.close();
   });
+  
+  it('debería crear un producto por pedido', () => {
+    repositorioPedido.obtenerPorId.returns(Promise.resolve(pedido));
+    repositorioProductosPorPedido.existeIdProductosPorPedido.returns(Promise.resolve(false));
+    repositorioProductoSolicitado.obtenerPorId.returns(Promise.resolve(productoSolicitado));
+    
+    return request(app.getHttpServer())
+      .post('/productos-por-pedido').send({
+        pedido: productosPorPedido.pedido.id,
+        productoSolicitado: productosPorPedido.productoSolicitado.id,
+        cantidad: productosPorPedido.cantidad,
+      })
+      .expect(HttpStatus.CREATED)
+  });
 
   it('debería listar los producto por pedido registrados', () => {
 
@@ -147,6 +173,31 @@ describe('Pruebas al controlador de productos por pedido', () => {
       .expect(HttpStatus.OK)
       .expect(productosPorPedidoArray);
   });
+  
+  it('debería obtener un producto por pedido por id', () => {
+    const productosPorPedido : any = {
+      id: 1,
+      pedido: {},
+      productoSolicitado: {},
+      cantidad: 2,
+      createdAt,
+      updatedAt
+    };
+
+    daoProductosPorPedido.obtenerPorId.returns(Promise.resolve(productosPorPedido));
+
+    return request(app.getHttpServer())
+      .get(`/productos-por-pedido/${productosPorPedido.id}`)
+      .expect(HttpStatus.OK)
+      .expect({
+        id: productosPorPedido.id,
+        pedido: productosPorPedido.pedido,
+        cantidad: productosPorPedido.cantidad,
+        productoSolicitado: productosPorPedido.productoSolicitado,
+        createdAt: productosPorPedido.createdAt.toISOString(),
+        updatedAt: productosPorPedido.updatedAt.toISOString()
+      });
+  });
 
   it('debería fallar al eliminar un productos Por Pedido no existente', async () => {
     
@@ -154,10 +205,20 @@ describe('Pruebas al controlador de productos por pedido', () => {
     repositorioProductosPorPedido.existeIdProductosPorPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
-      .delete(`/productos-por-pedido/${productosPorPedido.id}`).send(productosPorPedido)
+      .delete(`/productos-por-pedido/${productosPorPedido.id}`)
       .expect(HttpStatus.BAD_REQUEST);
     expect(response.body.message).toBe(mensaje);
     expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+  });
+  
+  it('debería eliminar un producto Por Pedido por id', () => {
+    repositorioPedido.obtenerPorId.returns(Promise.resolve(pedido));
+    repositorioProductosPorPedido.existeIdProductosPorPedido.returns(Promise.resolve(true));
+    repositorioProductosPorPedido.obtenerPorId.returns(Promise.resolve(productosPorPedido as ProductosPorPedido))
+
+    return request(app.getHttpServer())
+      .delete(`/productos-por-pedido/${productosPorPedido.id}`)
+      .expect(HttpStatus.OK);
   });
 
   it('debería fallar al modificar un productos Por Pedido no existente', async () => {
@@ -183,5 +244,15 @@ describe('Pruebas al controlador de productos por pedido', () => {
       .expect(HttpStatus.BAD_REQUEST);
     expect(response.body.message).toBe(mensaje);
     expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+  });
+    
+  it('debería modificar un producto Por Pedido por id', () => {
+
+    repositorioProductosPorPedido.existeIdProductosPorPedido.returns(Promise.resolve(true));
+    repositorioProductosPorPedido.existenPropiedadesProductosPorPedido.returns(Promise.resolve(true));
+
+    return request(app.getHttpServer())
+      .patch(`/productos-por-pedido/${productosPorPedido.id}`).send(productosPorPedido)
+      .expect(HttpStatus.OK);
   });
 });

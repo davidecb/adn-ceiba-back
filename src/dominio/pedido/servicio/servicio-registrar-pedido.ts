@@ -13,8 +13,7 @@ export class ServicioRegistrarPedido {
         `El numero de pedido ${pedido.numeroPedido} ya existe`,
       );
     }
-    pedido.costo = 0;    
-    pedido.tiempo = 0;
+    pedido.calcularCostoTiempo();
     return this._repositorioPedido.guardar(pedido);
   }
 }

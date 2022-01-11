@@ -7,7 +7,6 @@ import { ManejadorObtenerPedido } from 'src/aplicacion/pedido/consulta/obtener-p
 import { ManejadorEliminarPedido } from 'src/aplicacion/pedido/comando/eliminar-pedido.manejador';
 import { ManejadorModificarPedido } from 'src/aplicacion/pedido/comando/modificar-pedido.manejador';
 import { ManejadorObtenerPedidosPorEstado } from 'src/aplicacion/pedido/consulta/obtener-pedidos-por-estado.manejador';
-import { ManejadorRecalcularPedido } from 'src/aplicacion/pedido/comando/recalcular-pedido.manejador';
 
 @Controller('pedidos')
 export class PedidoControlador {
@@ -18,7 +17,6 @@ export class PedidoControlador {
     private readonly _manejadorObtenerPedidosPorEstado: ManejadorObtenerPedidosPorEstado,
     private readonly _manejadorEliminarPedido: ManejadorEliminarPedido,
     private readonly _manejadorModificarPedido: ManejadorModificarPedido,
-    private readonly _manejadorRecalcularPedido: ManejadorRecalcularPedido,
   ) {}
 
   @Post()
@@ -40,11 +38,6 @@ export class PedidoControlador {
   @Get(':id')
   async obtenerPorId(@Param('id', ParseIntPipe) id: number): Promise<PedidoDto> {
     return this._manejadorObtenerPedido.ejecutar(id);
-  }
-
-  @Patch('recalcular/:id')
-  async recalcularPedido(@Param('id', ParseIntPipe) id: number) {
-    return this._manejadorRecalcularPedido.ejecutar({ id });
   }
 
   @Patch(':id')

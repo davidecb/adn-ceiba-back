@@ -31,20 +31,22 @@ describe('Pruebas al controlador de productos', () => {
   let app: INestApplication;
   let repositorioProducto: SinonStubbedInstance<RepositorioProducto>;
   let daoProducto: SinonStubbedInstance<DaoProducto>;
-  const producto: ComandoRegistrarProducto = {
+  const createdAt = new Date;
+  const updatedAt = new Date;
+  const producto: any = {
     id: 1,
     nombre: 'Lorem ipsum',
     costo: 10000,
     tiempo: 30,
     imagen: 'loremIpsum.jpg',
-    createdAt: new Date,
-    updatedAt: new Date
+    createdAt: createdAt.toISOString(),
+    updatedAt: updatedAt.toISOString()
   };
   /**
    * No Inyectar los módulos completos (Se trae TypeORM y genera lentitud al levantar la prueba, traer una por una las dependencias)
    **/
   beforeAll(async () => {
-    repositorioProducto = createStubObj<RepositorioProducto>(['existeNombreProducto', 'existenPropiedadesProducto', 'existeIdProducto'], sinonSandbox);
+    repositorioProducto = createStubObj<RepositorioProducto>(['guardar', 'eliminar', 'modificar', 'existeNombreProducto', 'existenPropiedadesProducto', 'existeIdProducto'], sinonSandbox);
     daoProducto = createStubObj<DaoProducto>(['listar', 'obtenerPorId'], sinonSandbox);
     const moduleRef = await Test.createTestingModule({
       controllers: [ProductoControlador],
@@ -105,16 +107,16 @@ describe('Pruebas al controlador de productos', () => {
       .expect(HttpStatus.OK)
       .expect(productos);
   });
-/* 
-  it('debería obtener un producto por id', async () => {
 
+  it('debería obtener un producto por id', async () => {
+    
     daoProducto.obtenerPorId.returns(Promise.resolve(producto));
 
     const response = await request(app.getHttpServer())
       .get(`/productos/${producto.id}`)
       .expect(HttpStatus.OK)
-    expect(response.body).toMatchObject(JSON.stringify(producto));
-  }); */
+    expect(response.body).toMatchObject(producto);
+  });
 
   it('debería fallar al registar un producto ya existente', async () => {
     
@@ -127,6 +129,20 @@ describe('Pruebas al controlador de productos', () => {
     expect(response.body.message).toBe(mensaje);
     expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
   });
+  
+  it('debería registrar un producto no existente', async () => {
+    
+    repositorioProducto.existeNombreProducto.returns(Promise.resolve(false));
+
+    await request(app.getHttpServer())
+      .post('/productos').send({
+        nombre: producto.nombre,
+        costo: producto.costo,
+        tiempo: producto.tiempo,
+        imagen: producto.imagen
+      })
+      .expect(HttpStatus.CREATED)
+  });
 
   it('debería fallar al eliminar un producto no existente', async () => {
     
@@ -134,10 +150,19 @@ describe('Pruebas al controlador de productos', () => {
     repositorioProducto.existeIdProducto.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
-      .delete(`/productos/${producto.id}`).send(producto)
+      .delete(`/productos/${producto.id}`)
       .expect(HttpStatus.BAD_REQUEST);
     expect(response.body.message).toBe(mensaje);
     expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+  });
+  
+  it('debería eliminar un producto existente por id', async () => {
+    
+    repositorioProducto.existeIdProducto.returns(Promise.resolve(true));
+
+    await request(app.getHttpServer())
+      .delete(`/productos/${producto.id}`)
+      .expect(HttpStatus.OK)
   });
 
   it('debería fallar al modificar un producto no existente', async () => {
@@ -163,5 +188,15 @@ describe('Pruebas al controlador de productos', () => {
       .expect(HttpStatus.BAD_REQUEST);
     expect(response.body.message).toBe(mensaje);
     expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+  });
+    
+  it('debería modificar un producto existente por id', async () => {
+    
+    repositorioProducto.existeIdProducto.returns(Promise.resolve(true));
+    repositorioProducto.existenPropiedadesProducto.returns(Promise.resolve(true));
+
+    await request(app.getHttpServer())
+      .patch(`/productos/${producto.id}`).send(producto)
+      .expect(HttpStatus.OK)
   });
 });

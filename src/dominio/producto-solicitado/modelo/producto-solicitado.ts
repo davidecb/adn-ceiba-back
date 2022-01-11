@@ -1,6 +1,7 @@
 import { Producto } from 'src/dominio/producto/modelo/producto';
 import { ErrorPropiedadesFaltantes } from './../../errores/error-propiedades-faltantes';
 
+const numeroPropiedadesAcabado = 3;
 export class ProductoSolicitado {
   readonly #id: number;
   readonly #producto: Producto;
@@ -11,18 +12,17 @@ export class ProductoSolicitado {
   #costo: number;
   #tiempo: number;
   readonly #createdAt: Date;
-  readonly #updatedAt: Date;
-  private readonly numeroPropiedadesAcabado = 3;
+  readonly #updatedAt: Date;  
 
   constructor(
     id: number,
-    producto: Producto ,
+    producto: Producto,
     material: string,
     color: string,
     acabado: object,
     urgencia: boolean,
-    costo: number | 0,
-    tiempo: number | 0,
+    costo: number,
+    tiempo: number,
     createdAt: Date,
     updatedAt: Date
   ) {
@@ -41,7 +41,7 @@ export class ProductoSolicitado {
 
   private validarAcabadoProducto(acabado: object) {
     if (
-      Object.keys(acabado).length !== this.numeroPropiedadesAcabado
+      Object.keys(acabado).length !== numeroPropiedadesAcabado
       || !acabado.hasOwnProperty('pulido')
       || !acabado.hasOwnProperty('pintado')
       || !acabado.hasOwnProperty('barnizado')
@@ -51,6 +51,71 @@ export class ProductoSolicitado {
       );
     }
   }
+
+  calcularCostoTiempo() {
+
+    const valoresAcabado = Object.values(this.#acabado); 
+    const costoBase = this.#producto.costo;
+    const tiempoBase = this.#producto.tiempo;
+    let multiplicadorCosto = 1.0;
+    let multiplicadorTiempo = 1.0;
+
+    const costoMaterialABS = 0.2;
+    const tiempoMaterialABS = 0.2;
+    const costoColorNegroMate = 0.1;
+    const costoColorMadera = 0.3;
+    const costoColorPlata = 0.4;
+    const costoAcabadoPulido = 0.2;
+    const tiempoAcabadoPulido = 0.4;
+    const costoAcabadoPintado = 0.3;
+    const tiempoAcabadoPintado = 0.5;
+    const costoAcabadoBarnizado = 0.3;
+    const tiempoAcabadoBarnizado = 0.6;
+    const costoUrgencia = 0.3;
+    const indexAcabadoPulido = 0;
+    const indexAcabadoPintado = 1;
+    const indexAcabadoBarnizado = 2;
+
+    if (this.#material === 'ABS') {
+        multiplicadorCosto += costoMaterialABS;
+        multiplicadorTiempo += tiempoMaterialABS;
+    }    
+    switch (this.#color) {
+      case 'negro mate':
+        multiplicadorCosto += costoColorNegroMate;
+        break;
+
+      case 'madera':
+        multiplicadorCosto += costoColorMadera;
+        break;
+
+      case 'plata':
+        multiplicadorCosto += costoColorPlata;
+        break;
+    
+      default:
+        break;
+    }
+    if (valoresAcabado[indexAcabadoPulido]) {
+      multiplicadorCosto += costoAcabadoPulido;
+      multiplicadorTiempo += tiempoAcabadoPulido;
+    }
+    if (valoresAcabado[indexAcabadoPintado]) {
+      multiplicadorCosto += costoAcabadoPintado;
+      multiplicadorTiempo += tiempoAcabadoPintado;
+    }
+    if (valoresAcabado[indexAcabadoBarnizado]) {
+      multiplicadorCosto += costoAcabadoBarnizado;
+      multiplicadorTiempo += tiempoAcabadoBarnizado;
+    }
+    if (this.#urgencia) {
+      multiplicadorCosto += costoUrgencia;
+    }  
+    
+    this.#costo = Math.trunc(costoBase * multiplicadorCosto);
+    this.#tiempo = (tiempoBase * multiplicadorTiempo);
+  }
+  
 
   get id(): number {
     return this.#id;

@@ -22,6 +22,12 @@ export class RepositorioProductosPorPedidoPostgres implements RepositorioProduct
       return propiedadesProductosPorPedido.includes(valor);
     });
   }
+  
+  async obtenerPorId(id: number): Promise<ProductosPorPedido> {
+    return this.repositorio.query(
+      `SELECT * FROM productos_por_pedido WHERE id=${id}`,
+    );
+  }
 
   async guardar(productosPorPedido: ProductosPorPedido): Promise<number> {
     const entidad = new ProductosPorPedidoEntidad();

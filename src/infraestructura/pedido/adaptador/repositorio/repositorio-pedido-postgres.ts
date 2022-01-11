@@ -1,18 +1,16 @@
+import { ProductosPorPedido } from "src/dominio/productos-por-pedido/modelo/productos-por-pedido";
 import { RepositorioPedido } from 'src/dominio/pedido/puerto/repositorio/repositorio-pedido';
 import { Pedido } from 'src/dominio/pedido/modelo/pedido';
 import { InjectRepository } from '@nestjs/typeorm';
 import { PedidoEntidad } from '../../entidad/pedido.entidad';
 import { Repository } from 'typeorm';
 import { Injectable } from '@nestjs/common';
-import { ManejadorObtenerProductosPorPedido } from 'src/aplicacion/productos-por-pedido/consulta/obtener-producto-por-pedido.manejador';
 
 @Injectable()
 export class RepositorioPedidoPostgres implements RepositorioPedido {
   constructor(
     @InjectRepository(PedidoEntidad)
-    private readonly repositorio: Repository<PedidoEntidad>,
-    private readonly _manejadorObtenerProductosPorPedido: ManejadorObtenerProductosPorPedido,
-  ) {}
+    private readonly repositorio: Repository<PedidoEntidad>) {}
 
   async existeNumeroPedido(numeroPedido: string): Promise<boolean> {
     return (await this.repositorio.count({ numeroPedido })) > 0;
@@ -28,23 +26,21 @@ export class RepositorioPedidoPostgres implements RepositorioPedido {
       return propiedadesPedido.includes(valor);
     });
   }
-
-  async calcularCostoTiempo(pedido: Pedido): Promise<{ costo: number, tiempo: number }> {
-    const productosEnPedido = pedido.productosSolicitados;
-    let costoTotal = 0;
-    let tiempoTotal = 0;
-
-    productosEnPedido.forEach((producto) => {
-      const costoProductos = producto.productoSolicitado.costo * producto.cantidad;
-      const tiempoProductos = producto.productoSolicitado.tiempo * producto.cantidad;
-      costoTotal += costoProductos;
-      tiempoTotal += tiempoProductos;
-    });
-
-    return {
-      costo: costoTotal,
-      tiempo: tiempoTotal
-    }
+      
+  async obtenerPorId(id: number): Promise<Pedido> {
+    const entidad = await this.repositorio.findOne(id, { relations: ['productosSolicitados'] });
+    return new Pedido(
+      entidad.id,
+      entidad.numeroPedido,
+      entidad.productosSolicitados as ProductosPorPedido[],
+      entidad.direccion,
+      entidad.cliente,
+      entidad.estado,
+      entidad.costo,
+      entidad.tiempo,
+      entidad.createdAt,
+      entidad.updatedAt
+    )
   }
 
   async guardar(pedido: Pedido): Promise<number> {
@@ -60,10 +56,6 @@ export class RepositorioPedidoPostgres implements RepositorioPedido {
   }
   
   async modificar(id: number, valoresAModificar: object) {
-    await this.repositorio.update(id, valoresAModificar);
-  }
-  
-  async recalcular(id: number, valoresAModificar: object) {
     await this.repositorio.update(id, valoresAModificar);
   }
 

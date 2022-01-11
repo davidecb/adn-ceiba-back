@@ -1,8 +1,6 @@
+import { repositorioProductoProvider } from "./../../producto/proveedor/repositorio/repositorio-producto.proveedor";
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
-import { daoProductoProvider } from './../../producto/proveedor/dao/dao-producto.proveedor';
-import { ManejadorObtenerProducto } from 'src/aplicacion/producto/consulta/obtener-producto.manejador';
 
 import { repositorioProductoSolicitadoProvider } from './repositorio/repositorio-producto-solicitado.proveedor';
 import { RepositorioProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado';
@@ -19,39 +17,31 @@ import { servicioEliminarProductoSolicitadoProveedor } from './servicio/servicio
 import { ServicioEliminarProductoSolicitado } from 'src/dominio/producto-solicitado/servicio/servicio-eliminar-producto-solicitado';
 import { ManejadorEliminarProductoSolicitado } from 'src/aplicacion/producto-solicitado/comando/eliminar-producto-solicitado.manejador';
 
-import { servicioModificarProductoSolicitadoProveedor } from './servicio/servicio-modificar-producto-solicitado.proveedor';
-import { ServicioModificarProductoSolicitado } from 'src/dominio/producto-solicitado/servicio/servicio-modificar-producto-solicitado';
-import { ManejadorModificarProductoSolicitado } from 'src/aplicacion/producto-solicitado/comando/modificar-producto-solicitado.manejador';
-
 import { ManejadorObtenerProductoSolicitado } from 'src/aplicacion/producto-solicitado/consulta/obtener-producto-solicitado.manejador';
 import { ManejadorListarProductoSolicitado } from 'src/aplicacion/producto-solicitado/consulta/listar-productos-solicitados.manejador';
 
 import { ProductoModule } from 'src/infraestructura/producto/producto.module';
+import { ProductoEntidad } from "src/infraestructura/producto/entidad/producto.entidad";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProductoSolicitadoEntidad]), ProductoModule],
+  imports: [TypeOrmModule.forFeature([ProductoSolicitadoEntidad, ProductoEntidad]), ProductoModule],
   providers: [
     { provide: ServicioRegistrarProductoSolicitado, inject: [RepositorioProductoSolicitado], useFactory: servicioRegistrarProductoSolicitadoProveedor },
-    { provide: ServicioModificarProductoSolicitado, inject: [RepositorioProductoSolicitado, DaoProductoSolicitado], useFactory: servicioModificarProductoSolicitadoProveedor },
     { provide: ServicioEliminarProductoSolicitado, inject: [RepositorioProductoSolicitado], useFactory: servicioEliminarProductoSolicitadoProveedor },
     repositorioProductoSolicitadoProvider,
     daoProductoSolicitadoProvider,
-    daoProductoProvider,
+    repositorioProductoProvider,
     ManejadorRegistrarProductoSolicitado,
     ManejadorListarProductoSolicitado,
     ManejadorObtenerProductoSolicitado,
-    ManejadorModificarProductoSolicitado,
     ManejadorEliminarProductoSolicitado,
-    ManejadorObtenerProducto,
   ],
   exports: [
     ServicioRegistrarProductoSolicitado,
-    ServicioModificarProductoSolicitado,
     ServicioEliminarProductoSolicitado,
     ManejadorRegistrarProductoSolicitado,
     ManejadorListarProductoSolicitado,
     ManejadorObtenerProductoSolicitado,
-    ManejadorModificarProductoSolicitado,
     ManejadorEliminarProductoSolicitado,
     RepositorioProductoSolicitado,
     DaoProductoSolicitado,

@@ -21,9 +21,6 @@ import { ManejadorEliminarPedido } from 'src/aplicacion/pedido/comando/eliminar-
 import { ManejadorModificarPedido } from 'src/aplicacion/pedido/comando/modificar-pedido.manejador';
 import { ManejadorObtenerPedido } from 'src/aplicacion/pedido/consulta/obtener-pedido.manejador';
 import { ManejadorObtenerPedidosPorEstado } from 'src/aplicacion/pedido/consulta/obtener-pedidos-por-estado.manejador';
-import { ServicioRecalcularPedido } from 'src/dominio/pedido/servicio/servicio-recalcular-pedido';
-import { servicioRecalcularPedidoProveedor } from 'src/infraestructura/pedido/proveedor/servicio/servicio-recalcular-pedido.proveedor';
-import { ManejadorRecalcularPedido } from 'src/aplicacion/pedido/comando/recalcular-pedido.manejador';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
@@ -88,7 +85,7 @@ describe('Pruebas al controlador de pedido', () => {
    * No Inyectar los módulos completos (Se trae TypeORM y genera lentitud al levantar la prueba, traer una por una las dependencias)
    **/
   beforeAll(async () => {
-    repositorioPedido = createStubObj<RepositorioPedido>(['guardar', 'existeIdPedido', 'existenPropiedadesPedido', 'calcularCostoTiempo', 'recalcular'], sinonSandbox);
+    repositorioPedido = createStubObj<RepositorioPedido>(['guardar', 'eliminar', 'modificar', 'existeIdPedido', 'existenPropiedadesPedido', 'existeNumeroPedido'], sinonSandbox);
     daoPedido = createStubObj<DaoPedido>(['listar', 'obtenerPorId', 'obtenerPedidosPorEstado'], sinonSandbox);
     const moduleRef = await Test.createTestingModule({
       controllers: [PedidoControlador],
@@ -109,17 +106,11 @@ describe('Pruebas al controlador de pedido', () => {
           inject: [RepositorioPedido],
           useFactory: servicioModificarPedidoProveedor,
         },
-        {
-          provide: ServicioRecalcularPedido,
-          inject: [RepositorioPedido],
-          useFactory: servicioRecalcularPedidoProveedor,
-        },
         { provide: RepositorioPedido, useValue: repositorioPedido },
         { provide: DaoPedido, useValue: daoPedido },
         ManejadorRegistrarPedido,
         ManejadorEliminarPedido,
         ManejadorModificarPedido,
-        ManejadorRecalcularPedido,
         ManejadorListarPedido,
         ManejadorObtenerPedido,
         ManejadorObtenerPedidosPorEstado,
@@ -139,6 +130,20 @@ describe('Pruebas al controlador de pedido', () => {
 
   afterAll(async () => {
     await app.close();
+  });
+    
+  it('debería crear un pedido', () => {
+
+    repositorioPedido.existeNumeroPedido.returns(Promise.resolve(false));
+
+    return request(app.getHttpServer())
+      .post('/pedidos').send({
+        numeroPedido: '123456789',
+        direccion: '',
+        cliente: '',
+        estado: 'inicializando',
+      })
+      .expect(HttpStatus.CREATED)
   });
 
   it('debería listar los pedidos registrados', () => {
@@ -204,10 +209,19 @@ describe('Pruebas al controlador de pedido', () => {
     repositorioPedido.existeIdPedido.returns(Promise.resolve(false));
 
     const response = await request(app.getHttpServer())
-      .delete(`/pedidos/${pedido.id}`).send(pedido)
+      .delete(`/pedidos/${pedido.id}`)
       .expect(HttpStatus.BAD_REQUEST);
     expect(response.body.message).toBe(mensaje);
     expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+  });
+    
+  it('debería eliminar un pedido', () => {
+
+    repositorioPedido.existeIdPedido.returns(Promise.resolve(true));
+
+    return request(app.getHttpServer())
+    .delete(`/pedidos/${pedido.id}`)
+    .expect(HttpStatus.OK);
   });
 
   it('debería fallar al modificar un pedido no existente', async () => {
@@ -233,5 +247,19 @@ describe('Pruebas al controlador de pedido', () => {
       .expect(HttpStatus.BAD_REQUEST);
     expect(response.body.message).toBe(mensaje);
     expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+  });
+      
+  it('debería modificar un pedido', () => {
+
+    repositorioPedido.existeIdPedido.returns(Promise.resolve(true));
+    repositorioPedido.existenPropiedadesPedido.returns(Promise.resolve(true));
+
+    return request(app.getHttpServer())
+    .patch(`/pedidos/${pedido.id}`).send({
+      direccion: 'Av. Siempre viva',
+      cliente: 'Homer J. Simpson',
+      estado: 'Solicitado',
+    })
+    .expect(HttpStatus.OK);
   });
 });

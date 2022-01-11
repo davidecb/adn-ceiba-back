@@ -1,3 +1,4 @@
+import { repositorioProductoSolicitadoProvider } from "./../../producto-solicitado/proveedor/repositorio/repositorio-producto-solicitado.proveedor";
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
@@ -22,15 +23,22 @@ import { ManejadorEliminarProductosPorPedido } from 'src/aplicacion/productos-po
 
 import { ManejadorListarProductosPorPedido } from 'src/aplicacion/productos-por-pedido/consulta/listar-productos-por-pedido.manejador';
 import { ManejadorObtenerProductosPorPedido } from 'src/aplicacion/productos-por-pedido/consulta/obtener-producto-por-pedido.manejador';
+import { PedidoModule } from "src/infraestructura/pedido/pedido.module";
+import { repositorioPedidoProvider } from "./../../pedido/proveedor/repositorio/repositorio-pedido.proveedor";
+import { RepositorioPedido } from "src/dominio/pedido/puerto/repositorio/repositorio-pedido";
+import { PedidoEntidad } from 'src/infraestructura/pedido/entidad/pedido.entidad';
+import { ProductoSolicitadoEntidad } from "src/infraestructura/producto-solicitado/entidad/producto-solicitado.entidad";
 
 @Module({
-  imports: [TypeOrmModule.forFeature([ProductosPorPedidoEntidad])],
+  imports: [TypeOrmModule.forFeature([ProductosPorPedidoEntidad, PedidoEntidad, ProductoSolicitadoEntidad]), PedidoModule],
   providers: [
-    { provide: ServicioRegistrarProductosPorPedido, inject: [RepositorioProductosPorPedido], useFactory: servicioRegistrarProductosPorPedidoProveedor },
+    { provide: ServicioRegistrarProductosPorPedido, inject: [RepositorioProductosPorPedido, RepositorioPedido], useFactory: servicioRegistrarProductosPorPedidoProveedor },
     { provide: ServicioModificarProductosPorPedido, inject: [RepositorioProductosPorPedido], useFactory: servicioModificarProductosPorPedidoProveedor },
-    { provide: ServicioEliminarProductosPorPedido, inject: [RepositorioProductosPorPedido], useFactory: servicioEliminarProductosPorPedidoProveedor },
+    { provide: ServicioEliminarProductosPorPedido, inject: [RepositorioProductosPorPedido, RepositorioPedido], useFactory: servicioEliminarProductosPorPedidoProveedor },
     repositorioProductosPorPedidoProvider,
+    repositorioPedidoProvider,
     daoProductosPorPedidoProvider,
+    repositorioProductoSolicitadoProvider,
     ManejadorRegistrarProductosPorPedido,
     ManejadorModificarProductosPorPedido,
     ManejadorEliminarProductosPorPedido,
@@ -39,6 +47,8 @@ import { ManejadorObtenerProductosPorPedido } from 'src/aplicacion/productos-por
   ],
   exports: [
     ServicioRegistrarProductosPorPedido,
+    ServicioModificarProductosPorPedido,
+    ServicioEliminarProductosPorPedido,
     ManejadorRegistrarProductosPorPedido,
     ManejadorModificarProductosPorPedido,
     ManejadorEliminarProductosPorPedido,
