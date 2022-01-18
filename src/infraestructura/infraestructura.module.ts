@@ -23,7 +23,7 @@ import { ProductosPorPedidoModule } from './productos-por-pedido/productos-por-p
       envFilePath: `env/${process.env.NODE_ENV}.env`,
       validationSchema: Joi.object({
         NODE_ENV: Joi.string()
-          .valid(NodeEnv.DEVELOPMENT, NodeEnv.PRODUCTION)
+          .valid(NodeEnv.DEVELOPMENT, NodeEnv.PRODUCTION, NodeEnv.TEST)
           .required(),
       }),
     }),

@@ -1,51 +1,28 @@
-import { RepositorioProducto } from 'src/dominio/producto/puerto/repositorio/repositorio-producto';
-import { ManejadorObtenerProductoSolicitado } from 'src/aplicacion/producto-solicitado/consulta/obtener-producto-solicitado.manejador';
-import { ManejadorEliminarProductoSolicitado } from 'src/aplicacion/producto-solicitado/comando/eliminar-producto-solicitado.manejador';
-import { ServicioEliminarProductoSolicitado } from 'src/dominio/producto-solicitado/servicio/servicio-eliminar-producto-solicitado';
 import * as request from 'supertest';
-import { Test } from '@nestjs/testing';
-import { RepositorioProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/repositorio/repositorio-producto-solicitado';
-import { DaoProductoSolicitado } from 'src/dominio/producto-solicitado/puerto/dao/dao-producto-solicitado';
+import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
-import { FiltroExcepcionesDeNegocio } from 'src/infraestructura/excepciones/filtro-excepciones-negocio';
-import { ProductoSolicitadoControlador } from 'src/infraestructura/producto-solicitado/controlador/producto-solicitado.controlador';
-import { ServicioRegistrarProductoSolicitado } from 'src/dominio/producto-solicitado/servicio/servicio-registrar-producto-solicitado';
-import { servicioRegistrarProductoSolicitadoProveedor } from 'src/infraestructura/producto-solicitado/proveedor/servicio/servicio-registrar-producto-solicitado.proveedor';
-import { ManejadorRegistrarProductoSolicitado } from 'src/aplicacion/producto-solicitado/comando/registar-producto-solicitado.manejador';
-import { ManejadorListarProductoSolicitado } from 'src/aplicacion/producto-solicitado/consulta/listar-productos-solicitados.manejador';
-import { ComandoRegistrarProductoSolicitado } from 'src/aplicacion/producto-solicitado/comando/registrar-producto-solicitado.comando';
-import { AppLogger } from 'src/infraestructura/configuracion/ceiba-logger.service';
-import { createSandbox, SinonStubbedInstance } from 'sinon';
-import { createStubObj } from '../../../util/create-object.stub';
-import { Producto } from 'src/dominio/producto/modelo/producto';
-import { servicioEliminarProductoSolicitadoProveedor } from 'src/infraestructura/producto-solicitado/proveedor/servicio/servicio-eliminar-producto-solicitado.proveedor';
+import { AppModule } from 'src/app.module';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
  * */
-const sinonSandbox = createSandbox();
 
 describe('Pruebas al controlador de producto-solicitados', () => {
 
   let app: INestApplication;
-  let repositorioProductoSolicitado: SinonStubbedInstance<RepositorioProductoSolicitado>;
-  let daoProductoSolicitado: SinonStubbedInstance<DaoProductoSolicitado>;
-  let repositorioProducto: SinonStubbedInstance<RepositorioProducto>;
+  let moduleFixture: TestingModule;
 
-  const createdAt = new Date;
-  const updatedAt = new Date;
-  const producto = new Producto(
-    1,
-    'Lorem ipsum',
-    10000,
-    30,
-    'loremIpsum.jpg',
-    createdAt,
-    updatedAt
-  );
-  const productoSolicitado: ComandoRegistrarProductoSolicitado = { 
-    id: 1,
-    producto,
+  // ---- Arrange ----
+  const producto1 = {
+    nombre: 'producto test',
+    costo: 10000,
+    tiempo: 30,
+    imagen: 'testingImage.jpg',
+  };
+  let producto1Id = 0;
+
+  const productoSolicitado = { 
+    producto: producto1Id,
     material: 'PLA',
     color: 'blanco',
     acabado: {
@@ -53,150 +30,137 @@ describe('Pruebas al controlador de producto-solicitados', () => {
       pintado: false,
       barnizado: false
     },
-    urgencia: false,
-    costo: 100,
-    tiempo: 10,
-    createdAt,
-    updatedAt
+    urgencia: false
   };
+  let productoSolicitadoId = 0;
+  let productoSolicitadoId2 = 0;
+
   /**
    * No Inyectar los módulos completos (Se trae TypeORM y genera lentitud al levantar la prueba, traer una por una las dependencias)
    **/
+
   beforeAll(async () => {
-    repositorioProductoSolicitado = createStubObj<RepositorioProductoSolicitado>(['guardar', 'modificar', 'eliminar', 'existeIdProducto', 'existenPropiedadesProducto'], sinonSandbox);
-    daoProductoSolicitado = createStubObj<DaoProductoSolicitado>(['listar', 'obtenerPorId'], sinonSandbox);
-    repositorioProducto = createStubObj<RepositorioProducto>(['obtenerPorId'], sinonSandbox);
-    
-    const moduleRef = await Test.createTestingModule({
-      controllers: [ProductoSolicitadoControlador],
-      providers: [
-        AppLogger,
-        {
-          provide: ServicioRegistrarProductoSolicitado,
-          inject: [RepositorioProductoSolicitado],
-          useFactory: servicioRegistrarProductoSolicitadoProveedor,
-        },
-        {
-          provide: ServicioEliminarProductoSolicitado,
-          inject: [RepositorioProductoSolicitado],
-          useFactory: servicioEliminarProductoSolicitadoProveedor,
-        },        
-        { provide: RepositorioProductoSolicitado, useValue: repositorioProductoSolicitado },
-        { provide: RepositorioProducto, useValue: repositorioProducto },
-        { provide: DaoProductoSolicitado, useValue: daoProductoSolicitado },
-        ManejadorRegistrarProductoSolicitado,
-        ManejadorEliminarProductoSolicitado,
-        ManejadorListarProductoSolicitado,
-        ManejadorObtenerProductoSolicitado,
-      ],
+    moduleFixture = await Test.createTestingModule({
+      imports: [ AppModule ],
     }).compile();
-
-    app = moduleRef.createNestApplication();
-    const logger = await app.resolve(AppLogger);
-    logger.customError = sinonSandbox.stub();
-    app.useGlobalFilters(new FiltroExcepcionesDeNegocio(logger));
+    app = moduleFixture.createNestApplication();
     await app.init();
-  });
-
-  afterEach(() => {
-    sinonSandbox.restore();
+    
+    const response = await request(app.getHttpServer())
+      .post('/productos').send(producto1);
+    producto1Id = parseInt(response.text);   
   });
 
   afterAll(async () => {
+    await request(app.getHttpServer())
+      .delete(`/productos/${producto1Id}`);
+
     await app.close();
   });
 
-  it('debería crear un producto solicitado', () => {
-    repositorioProductoSolicitado.existeIdProducto.returns(Promise.resolve(false));
-    repositorioProducto.obtenerPorId.returns(Promise.resolve(producto));
+  it('debería crear un producto solicitado', async () => {
+    productoSolicitado.producto = producto1Id;
     
-    return request(app.getHttpServer())
-      .post('/productos-solicitados').send({
-        producto: productoSolicitado.producto.id,
-        material: productoSolicitado.material,
-        color: productoSolicitado.color,
-        acabado: productoSolicitado.acabado,
-        urgencia: productoSolicitado.urgencia
-      })
+    const response = await request(app.getHttpServer())
+      .post('/productos-solicitados').send(productoSolicitado)
+      .expect(HttpStatus.CREATED);
+
+    productoSolicitadoId = parseInt(response.text);
+  });
+
+  it('no debería fallar al crear un producto solicitado ya existente', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/productos-solicitados').send(productoSolicitado)
       .expect(HttpStatus.CREATED)
+
+    productoSolicitadoId2 = parseInt(response.text);
   });
  
-  it('debería listar los productos solicitados registrados', () => {
-
-    const productosSolicitados: any[] = [{
-      id: productoSolicitado.id,
-      producto: {},
-      material: productoSolicitado.material,
-      color: productoSolicitado.color,
-      acabado: productoSolicitado.acabado,
-      urgencia: productoSolicitado.urgencia,
-      costo: productoSolicitado.costo,
-      tiempo: productoSolicitado.tiempo,
-      createdAt: productoSolicitado.createdAt.toISOString(),
-      updatedAt: productoSolicitado.updatedAt.toISOString()
-    }]; 
-    daoProductoSolicitado.listar.returns(Promise.resolve(productosSolicitados));
-
-    return request(app.getHttpServer())
+  it('debería listar los productos solicitados registrados', async () => {
+    const response = await request(app.getHttpServer())
       .get('/productos-solicitados')
       .expect(HttpStatus.OK)
-      .expect(productosSolicitados);
-  });
 
-  it('debería obtener un productoSolicitado por id', () => {
+    expect(response.body.length).toBe(2);
 
-    daoProductoSolicitado.obtenerPorId.returns(Promise.resolve(productoSolicitado));
+    expect(response.body[0].id).toBe(productoSolicitadoId);
+    expect(response.body[0].material).toBe(productoSolicitado.material);
+    expect(response.body[0].color).toBe(productoSolicitado.color);
+    expect(response.body[0].acabado.pulido).toBe(productoSolicitado.acabado.pulido);
+    expect(response.body[0].acabado.pintado).toBe(productoSolicitado.acabado.pintado);
+    expect(response.body[0].acabado.barnizado).toBe(productoSolicitado.acabado.barnizado);
+    expect(response.body[0].urgencia).toBe(productoSolicitado.urgencia);
+    expect(response.body[0].costo).toBe(10000);
+    expect(response.body[0].tiempo).toBe(30);
 
-    return request(app.getHttpServer())
-      .get(`/productos-solicitados/${productoSolicitado.id}`)
-      .expect(HttpStatus.OK)
-      .expect({
-        id: productoSolicitado.id,
-        producto: {},
-        material: productoSolicitado.material,
-        color: productoSolicitado.color,
-        acabado: productoSolicitado.acabado,
-        urgencia: productoSolicitado.urgencia,
-        costo: productoSolicitado.costo,
-        tiempo: productoSolicitado.tiempo,
-        createdAt: productoSolicitado.createdAt.toISOString(),
-        updatedAt: productoSolicitado.updatedAt.toISOString()
-      });
-  }); 
-
-  it('debería fallar al eliminar un productoSolicitado no existente', async () => {
-    
-    const mensaje = `El id: ${productoSolicitado.id}, no existe en la base de productos`;
-    repositorioProductoSolicitado.existeIdProducto.returns(Promise.resolve(false));
-
-    const response = await request(app.getHttpServer())
-      .delete(`/productos-solicitados/${productoSolicitado.id}`)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(mensaje);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-
-  it('debería eliminar un producto solicitado', () => {
-    repositorioProductoSolicitado.existeIdProducto.returns(Promise.resolve(true));
-    
-    return request(app.getHttpServer())
-      .delete(`/productos-solicitados/${productoSolicitado.id}`)
-      .expect(HttpStatus.OK)
+    expect(response.body[1].id).toBe(productoSolicitadoId2);
+    expect(response.body[1].material).toBe(productoSolicitado.material);
+    expect(response.body[1].color).toBe(productoSolicitado.color);
+    expect(response.body[1].acabado.pulido).toBe(productoSolicitado.acabado.pulido);
+    expect(response.body[1].acabado.pintado).toBe(productoSolicitado.acabado.pintado);
+    expect(response.body[1].acabado.barnizado).toBe(productoSolicitado.acabado.barnizado);
+    expect(response.body[1].urgencia).toBe(productoSolicitado.urgencia);
+    expect(response.body[1].costo).toBe(10000);
+    expect(response.body[1].tiempo).toBe(30);
   });
   
   it('debería modificar un producto solicitado', () => {
-    repositorioProductoSolicitado.existeIdProducto.returns(Promise.resolve(true));
-    repositorioProducto.obtenerPorId.returns(Promise.resolve(producto));
-    
     return request(app.getHttpServer())
       .post('/productos-solicitados').send({
-        id: 1,
-        producto: productoSolicitado.producto.id,
-        material: productoSolicitado.material,
-        color: productoSolicitado.color,
-        acabado: productoSolicitado.acabado,
-        urgencia: productoSolicitado.urgencia
+        id: productoSolicitadoId,
+        producto: producto1Id,
+        material: 'ABS',
+        color: 'plata',
+        acabado: {
+          pulido: true,
+          pintado: true,
+          barnizado: true
+        },
+        urgencia: true
       })
       .expect(HttpStatus.CREATED)
+  });
+  
+  it('debería fallar al modificar un producto solicitado con propiedades no existentes', () => {
+    return request(app.getHttpServer())
+      .post('/productos-solicitados').send({
+        id: productoSolicitadoId,
+        propiedad: true
+      })
+      .expect(HttpStatus.BAD_REQUEST)
+  });
+  
+  it('debería obtener un productoSolicitado por id', async () => {
+    const response = await request(app.getHttpServer())
+      .get(`/productos-solicitados/${productoSolicitadoId}`)
+      .expect(HttpStatus.OK)
+    
+    expect(response.body.id).toBe(productoSolicitadoId);
+    expect(response.body.material).toBe('ABS');
+    expect(response.body.color).toBe('plata');
+    expect(response.body.acabado.pulido).toBe(true);
+    expect(response.body.acabado.pintado).toBe(true);
+    expect(response.body.acabado.barnizado).toBe(true);
+    expect(response.body.urgencia).toBe(true);
+    expect(response.body.costo).toBe(26999);
+    expect(response.body.tiempo).toBe(81);
+  });
+
+  it('debería fallar al eliminar un productoSolicitado no existente', async () => {
+    return request(app.getHttpServer())
+      .delete(`/productos-solicitados/${(productoSolicitadoId2 + 10)}`)
+      .expect(HttpStatus.INTERNAL_SERVER_ERROR);
+  });
+  
+  it('debería eliminar un productoSolicitado', async () => {
+    return request(app.getHttpServer())
+      .delete(`/productos-solicitados/${productoSolicitadoId}`)
+      .expect(HttpStatus.OK);
+  });
+  
+  it('debería eliminar un productoSolicitado', async () => {
+    return request(app.getHttpServer())
+      .delete(`/productos-solicitados/${productoSolicitadoId2}`)
+      .expect(HttpStatus.OK);
   });
 });

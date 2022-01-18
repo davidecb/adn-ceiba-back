@@ -1,265 +1,180 @@
 import * as request from 'supertest';
-import { Test } from '@nestjs/testing';
-import { RepositorioPedido } from 'src/dominio/pedido/puerto/repositorio/repositorio-pedido';
-import { DaoPedido } from 'src/dominio/pedido/puerto/dao/dao-pedido';
+import { Test, TestingModule } from '@nestjs/testing';
 import { HttpStatus, INestApplication } from '@nestjs/common';
-import { FiltroExcepcionesDeNegocio } from 'src/infraestructura/excepciones/filtro-excepciones-negocio';
-import { PedidoControlador } from 'src/infraestructura/pedido/controlador/pedido.controlador';
-import { ServicioRegistrarPedido } from 'src/dominio/pedido/servicio/servicio-registrar-pedido';
-import { servicioRegistrarPedidoProveedor } from 'src/infraestructura/pedido/proveedor/servicio/servicio-registrar-pedido.proveedor';
-import { ManejadorRegistrarPedido } from 'src/aplicacion/pedido/comando/registar-pedido.manejador';
-import { ManejadorListarPedido } from 'src/aplicacion/pedido/consulta/listar-pedidos.manejador';
-import { ComandoRegistrarPedido } from 'src/aplicacion/pedido/comando/registrar-pedido.comando';
-import { AppLogger } from 'src/infraestructura/configuracion/ceiba-logger.service';
-import { createSandbox, SinonStubbedInstance } from 'sinon';
-import { createStubObj } from '../../../util/create-object.stub';
-import { ServicioEliminarPedido } from 'src/dominio/pedido/servicio/servicio-eliminar-pedido';
-import { servicioEliminarPedidoProveedor } from 'src/infraestructura/pedido/proveedor/servicio/servicio-eliminar-pedido.proveedor';
-import { ServicioModificarPedido } from 'src/dominio/pedido/servicio/servicio-modificar-pedido';
-import { servicioModificarPedidoProveedor } from 'src/infraestructura/pedido/proveedor/servicio/servicio-modificar-pedido.proveedor';
-import { ManejadorEliminarPedido } from 'src/aplicacion/pedido/comando/eliminar-pedido.manejador';
-import { ManejadorModificarPedido } from 'src/aplicacion/pedido/comando/modificar-pedido.manejador';
-import { ManejadorObtenerPedido } from 'src/aplicacion/pedido/consulta/obtener-pedido.manejador';
-import { ManejadorObtenerPedidosPorEstado } from 'src/aplicacion/pedido/consulta/obtener-pedidos-por-estado.manejador';
+import { AppModule } from 'src/app.module';
 
 /**
  * Un sandbox es util cuando el módulo de nest se configura una sola vez durante el ciclo completo de pruebas
  * */
-const sinonSandbox = createSandbox();
 
 describe('Pruebas al controlador de pedido', () => {
 
   let app: INestApplication;
-  let repositorioPedido: SinonStubbedInstance<RepositorioPedido>;
-  let daoPedido: SinonStubbedInstance<DaoPedido>;
-/*
-  const producto = new Producto(
-    1,
-    'Lorem ipsum',
-    10000,
-    30,
-    'loremIpsum.jpg',
-    new Date(),
-    new Date()
-  );
+  let moduleFixture: TestingModule;
 
-  const productoSolicitado = new ProductoSolicitado(
-    1,
-    producto,
-    'PLA',
-    'blanco',
-      {
-        pulido: false,
-        pintado: false,
-        barnizado: false
-      },
-      false,
-      100,
-      10,
-      new Date,
-      new Date
-  );
-
-   const productosPorPedido = new ProductosPorPedido(
-    1,
-    new Pedido(),
-    productoSolicitado,
-    2,
-    new Date,
-    new Date
-  ); */
-
-  const pedido : ComandoRegistrarPedido = {
-    id: 1,
-    numeroPedido: '123',
+  // ---- Arrange ----
+  const pedido1 = {
+    numeroPedido: '123456789',
     productosSolicitados: [],
-    direccion: 'cra 43 42 41',
-    cliente: 'david cortes',
-    estado: 'inicializando',
-    costo: 1000,
-    tiempo: 10,
-    createdAt: new Date,
-    updatedAt: new Date
-  }
+    direccion: '',
+    cliente: '',
+    estado: 'inicializando'
+  };
+  let pedido1Id = 0;
+
+  const pedido2 = {
+    numeroPedido: '987654321',
+    productosSolicitados: [],
+    direccion: '',
+    cliente: '',
+    estado: 'inicializando'
+  };
+  let pedido2Id = 0;
+
   /**
    * No Inyectar los módulos completos (Se trae TypeORM y genera lentitud al levantar la prueba, traer una por una las dependencias)
    **/
+  
   beforeAll(async () => {
-    repositorioPedido = createStubObj<RepositorioPedido>(['guardar', 'eliminar', 'modificar', 'existeIdPedido', 'existenPropiedadesPedido', 'existeNumeroPedido'], sinonSandbox);
-    daoPedido = createStubObj<DaoPedido>(['listar', 'obtenerPorId', 'obtenerPedidosPorEstado'], sinonSandbox);
-    const moduleRef = await Test.createTestingModule({
-      controllers: [PedidoControlador],
-      providers: [
-        AppLogger,
-        {
-          provide: ServicioRegistrarPedido,
-          inject: [RepositorioPedido],
-          useFactory: servicioRegistrarPedidoProveedor,
-        },
-        {
-          provide: ServicioEliminarPedido,
-          inject: [RepositorioPedido],
-          useFactory: servicioEliminarPedidoProveedor,
-        },
-        {
-          provide: ServicioModificarPedido,
-          inject: [RepositorioPedido],
-          useFactory: servicioModificarPedidoProveedor,
-        },
-        { provide: RepositorioPedido, useValue: repositorioPedido },
-        { provide: DaoPedido, useValue: daoPedido },
-        ManejadorRegistrarPedido,
-        ManejadorEliminarPedido,
-        ManejadorModificarPedido,
-        ManejadorListarPedido,
-        ManejadorObtenerPedido,
-        ManejadorObtenerPedidosPorEstado,
-      ],
+    moduleFixture = await Test.createTestingModule({
+      imports: [ AppModule ],
     }).compile();
-
-    app = moduleRef.createNestApplication();
-    const logger = await app.resolve(AppLogger);
-    logger.customError = sinonSandbox.stub();
-    app.useGlobalFilters(new FiltroExcepcionesDeNegocio(logger));
+    app = moduleFixture.createNestApplication();
     await app.init();
-  });
-
-  afterEach(() => {
-    sinonSandbox.restore();
   });
 
   afterAll(async () => {
     await app.close();
   });
     
-  it('debería crear un pedido', () => {
+  it('debería crear un pedido no existente', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/pedidos').send(pedido1)
+      .expect(HttpStatus.CREATED);
 
-    repositorioPedido.existeNumeroPedido.returns(Promise.resolve(false));
+    expect(parseInt(response.text)).toBeGreaterThan(0);
+    pedido1Id = parseInt(response.text);
+  });
+    
+  it('debería fallar al crear un pedido ya existente', async () => {
+    await request(app.getHttpServer())
+      .post('/pedidos').send(pedido1)
+      .expect(HttpStatus.INTERNAL_SERVER_ERROR);
+  });
+      
+  it('debería crear un pedido no existente', async () => {
+    const response = await request(app.getHttpServer())
+      .post('/pedidos').send(pedido2)
+      .expect(HttpStatus.CREATED);
 
-    return request(app.getHttpServer())
-      .post('/pedidos').send({
-        numeroPedido: '123456789',
-        direccion: '',
-        cliente: '',
-        estado: 'inicializando',
-      })
-      .expect(HttpStatus.CREATED)
+    expect(parseInt(response.text)).toBeGreaterThan(0);
+    pedido2Id = parseInt(response.text);
   });
 
-  it('debería listar los pedidos registrados', () => {
-
-    const pedidos: any[] = [{
-      numeroPedido: '123',
-      productosSolicitados: [],
-      direccion: 'cra 43 42 41',
-      cliente: 'david cortes',
-      estado: 'inicializando',
-      costo: 1000,
-      tiempo: 10
-    }];
-    daoPedido.listar.returns(Promise.resolve(pedidos));
-
-    return request(app.getHttpServer())
+  it('debería listar los pedidos registrados', async () => {
+    const response = await request(app.getHttpServer())
       .get('/pedidos')
-      .expect(HttpStatus.OK)
-      .expect(pedidos);
+      .expect(HttpStatus.OK);
+
+    expect(response.body.length).toBe(2);
+
+    expect(response.body[0].id).toBe(pedido1Id);
+    expect(response.body[0].numeroPedido).toBe(pedido1.numeroPedido);
+    expect(response.body[0].productosSolicitados).toStrictEqual(pedido1.productosSolicitados);
+    expect(response.body[0].direccion).toBe(pedido1.direccion);
+    expect(response.body[0].cliente).toBe(pedido1.cliente);
+    expect(response.body[0].estado).toBe(pedido1.estado);
+    expect(response.body[0].costo).toBe(0);
+    expect(response.body[0].tiempo).toBe(0);
+
+    expect(response.body[1].id).toBe(pedido2Id);
+    expect(response.body[1].numeroPedido).toBe(pedido2.numeroPedido);
+    expect(response.body[1].productosSolicitados).toStrictEqual(pedido2.productosSolicitados);
+    expect(response.body[1].direccion).toBe(pedido2.direccion);
+    expect(response.body[1].cliente).toBe(pedido2.cliente);
+    expect(response.body[1].estado).toBe(pedido2.estado);
+    expect(response.body[1].costo).toBe(0);
+    expect(response.body[1].tiempo).toBe(0);
   });
 
-  it('debería obtener un pedido por id', () => {
-
-    const pedido: any = {
-      numeroPedido: '123',
-      productosSolicitados: [],
-      direccion: 'cra 43 42 41',
-      cliente: 'david cortes',
-      estado: 'inicializando',
-      costo: 1000,
-      tiempo: 10
-    };
-    daoPedido.obtenerPorId.returns(Promise.resolve(pedido));
-
-    return request(app.getHttpServer())
-      .get('/pedidos/1')
-      .expect(HttpStatus.OK)
-      .expect(pedido);
-  });
-
-  it('debería obtener pedidos por estado', () => {
-
-    const pedidos: any[] = [{
-      numeroPedido: '123',
-      productosSolicitados: [],
-      direccion: 'cra 43 42 41',
-      cliente: 'david cortes',
-      estado: 'inicializando',
-      costo: 1000,
-      tiempo: 10
-    }];
-    daoPedido.obtenerPedidosPorEstado.returns(Promise.resolve(pedidos));
-
-    return request(app.getHttpServer())
-      .get('/pedidos/estado?estado=inicializando')
-      .expect(HttpStatus.OK)
-      .expect(pedidos);
-  });
-
-  it('debería fallar al eliminar un pedido no existente', async () => {
-    
-    const mensaje = `El id: ${pedido.id}, no existe en la base de pedidos`;
-    repositorioPedido.existeIdPedido.returns(Promise.resolve(false));
-
-    const response = await request(app.getHttpServer())
-      .delete(`/pedidos/${pedido.id}`)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(mensaje);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
-  });
-    
-  it('debería eliminar un pedido', () => {
-
-    repositorioPedido.existeIdPedido.returns(Promise.resolve(true));
-
-    return request(app.getHttpServer())
-    .delete(`/pedidos/${pedido.id}`)
-    .expect(HttpStatus.OK);
-  });
-
+  
   it('debería fallar al modificar un pedido no existente', async () => {
-    
-    const mensaje = `El id: ${pedido.id}, no existe en la base de pedidos`;
-    repositorioPedido.existeIdPedido.returns(Promise.resolve(false));
-
-    const response = await request(app.getHttpServer())
-      .patch(`/pedidos/${pedido.id}`).send(pedido)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(mensaje);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+    await request(app.getHttpServer())
+      .patch(`/pedidos/${(pedido2Id + 10)}`).send({
+        direccion: 'Avenida Siempre Viva',
+        cliente: 'Homer J. Simpson',
+        estado: 'finalizado'
+      })
+      .expect(HttpStatus.INTERNAL_SERVER_ERROR);
   });
 
   it('debería fallar al modificar un pedido con propiedades no existentes', async () => {
-    
-    const mensaje = `Algunas propiedades enviadas no pertenecen a pedido`;
-    repositorioPedido.existeIdPedido.returns(Promise.resolve(true));
-    repositorioPedido.existenPropiedadesPedido.returns(Promise.resolve(false));
-
-    const response = await request(app.getHttpServer())
-      .patch(`/pedidos/${pedido.id}`).send(pedido)
-      .expect(HttpStatus.BAD_REQUEST);
-    expect(response.body.message).toBe(mensaje);
-    expect(response.body.statusCode).toBe(HttpStatus.BAD_REQUEST);
+    await request(app.getHttpServer())
+      .patch(`/pedidos/${pedido1Id}`).send({
+        direction: 'Avenida Siempre Viva',
+        cliente: 'Homer J. Simpson',
+        state: 'finalizado'
+      })
+      .expect(HttpStatus.INTERNAL_SERVER_ERROR);
   });
       
-  it('debería modificar un pedido', () => {
-
-    repositorioPedido.existeIdPedido.returns(Promise.resolve(true));
-    repositorioPedido.existenPropiedadesPedido.returns(Promise.resolve(true));
-
-    return request(app.getHttpServer())
-    .patch(`/pedidos/${pedido.id}`).send({
-      direccion: 'Av. Siempre viva',
-      cliente: 'Homer J. Simpson',
-      estado: 'Solicitado',
-    })
+  it('debería modificar un pedido', async () => {
+    const response = await request(app.getHttpServer())
+      .patch(`/pedidos/${pedido1Id}`).send({
+        direccion: 'Avenida Siempre Viva',
+        cliente: 'Homer J. Simpson',
+        estado: 'finalizado'
+      })
     .expect(HttpStatus.OK);
+  });
+
+  it('debería obtener un pedido por id', async () => {
+    const response = await request(app.getHttpServer())
+      .get(`/pedidos/${pedido1Id}`)
+      .expect(HttpStatus.OK);
+
+    expect(response.body.id).toBe(pedido1Id);
+    expect(response.body.numeroPedido).toBe(pedido1.numeroPedido);
+    expect(response.body.productosSolicitados).toStrictEqual(pedido1.productosSolicitados);
+    expect(response.body.direccion).toBe('Avenida Siempre Viva');
+    expect(response.body.cliente).toBe('Homer J. Simpson');
+    expect(response.body.estado).toBe('finalizado');
+    expect(response.body.costo).toBe(0);
+    expect(response.body.tiempo).toBe(0);
+  });
+
+  it('debería obtener pedidos por estado', async () => {
+    const response = await request(app.getHttpServer())
+      .get('/pedidos/estado?estado=inicializando')
+      .expect(HttpStatus.OK);
+
+    expect(response.body.length).toBe(1);
+      
+    expect(response.body[0].id).toBe(pedido2Id);
+    expect(response.body[0].numeroPedido).toBe(pedido2.numeroPedido);
+    expect(response.body[0].productosSolicitados).toStrictEqual(pedido2.productosSolicitados);
+    expect(response.body[0].direccion).toBe(pedido2.direccion);
+    expect(response.body[0].cliente).toBe(pedido2.cliente);
+    expect(response.body[0].estado).toBe('inicializando');
+    expect(response.body[0].costo).toBe(0);
+    expect(response.body[0].tiempo).toBe(0);
+  });
+
+  it('debería fallar al eliminar un pedido no existente', async () => {
+    await request(app.getHttpServer())
+      .delete(`/pedidos/${(pedido2Id + 10)}`)
+      .expect(HttpStatus.INTERNAL_SERVER_ERROR);
+  });
+    
+  it('debería eliminar un pedido', async () => {
+    await request(app.getHttpServer())
+      .delete(`/pedidos/${pedido1Id}`)
+      .expect(HttpStatus.OK);
+  });
+    
+  it('debería eliminar un pedido', async () => {
+    await request(app.getHttpServer())
+      .delete(`/pedidos/${pedido2Id}`)
+      .expect(HttpStatus.OK);
   });
 });

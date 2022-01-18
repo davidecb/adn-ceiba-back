@@ -16,10 +16,18 @@ export class RepositorioUsuarioMysql implements RepositorioUsuario {
     return (await this.repositorio.count({ nombre })) > 0;
   }
 
-  async guardar(usuario: Usuario) {
+  async existeIdUsuario(id: number): Promise<boolean> {
+    return (await this.repositorio.count({ id })) > 0;
+  }
+
+  async guardar(usuario: Usuario): Promise<number> {
     const entidad = new UsuarioEntidad();
     entidad.clave = usuario.clave;
     entidad.nombre = usuario.nombre;
-    await this.repositorio.save(entidad);
+    return (await this.repositorio.save(entidad)).id;
+  }
+  
+  async eliminar(id: number) {
+    await this.repositorio.delete(id);
   }
 }

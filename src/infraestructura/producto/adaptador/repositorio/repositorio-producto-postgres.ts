@@ -41,13 +41,13 @@ export class RepositorioProductoPostgres implements RepositorioProducto {
     );
   }
 
-  async guardar(producto: Producto) {
+  async guardar(producto: Producto): Promise<number> {
     const entidad = new ProductoEntidad();
     entidad.costo = producto.costo;
     entidad.tiempo = producto.tiempo;
     entidad.nombre = producto.nombre;
     entidad.imagen = producto.imagen;
-    await this.repositorio.save(entidad);
+    return (await this.repositorio.save(entidad)).id;
   }
 
   async modificar(id: number, valoresAModificar: object) {

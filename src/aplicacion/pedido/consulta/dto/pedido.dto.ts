@@ -2,6 +2,9 @@ import { ProductosPorPedido } from 'src/dominio/productos-por-pedido/modelo/prod
 import { ApiProperty } from '@nestjs/swagger';
 
 export class PedidoDto {
+  @ApiProperty({ example: 1 })
+  id: number;
+
   @ApiProperty({ example: '12ajs5sfv34' })
   numeroPedido: string;
 

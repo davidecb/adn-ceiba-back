@@ -9,19 +9,25 @@ import { ManejadorListarUsuario } from 'src/aplicacion/usuario/consulta/listar-u
 import { DaoUsuario } from 'src/dominio/usuario/puerto/dao/dao-usuario';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioEntidad } from '../entidad/usuario.entidad';
+import { ManejadorEliminarUsuario } from 'src/aplicacion/usuario/comando/eliminar-usuario.manejador';
+import { ServicioEliminarUsuario } from 'src/dominio/usuario/servicio/servicio-eliminar-usuario';
+import { servicioEliminarUsuarioProveedor } from './servicio/servicio-eliminar-usuario.proveedor';
 
 @Module({
   imports: [TypeOrmModule.forFeature([UsuarioEntidad])],
   providers: [
     { provide: ServicioRegistrarUsuario, inject: [RepositorioUsuario], useFactory: servicioRegistrarUsuarioProveedor },
+    { provide: ServicioEliminarUsuario, inject: [RepositorioUsuario], useFactory: servicioEliminarUsuarioProveedor },
     repositorioUsuarioProvider,
     daoUsuarioProvider,
     ManejadorRegistrarUsuario,
+    ManejadorEliminarUsuario,
     ManejadorListarUsuario,
   ],
   exports: [
     ServicioRegistrarUsuario,
     ManejadorRegistrarUsuario,
+    ManejadorEliminarUsuario,
     ManejadorListarUsuario,
     RepositorioUsuario,
     DaoUsuario,

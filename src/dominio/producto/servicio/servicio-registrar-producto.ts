@@ -7,12 +7,12 @@ export class ServicioRegistrarProducto {
   constructor(private readonly _repositorioProducto: RepositorioProducto) {
   }
 
-  async ejecutar(producto: Producto) {
+  async ejecutar(producto: Producto): Promise<number> {
     if (await this._repositorioProducto.existeNombreProducto(producto.nombre)) {
       throw new ErrorDeNegocio(
         `El nombre de producto ${producto.nombre} ya existe`,
       );
     }
-    await this._repositorioProducto.guardar(producto);
+    return this._repositorioProducto.guardar(producto);
   }
 }

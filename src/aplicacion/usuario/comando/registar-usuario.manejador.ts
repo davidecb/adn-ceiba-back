@@ -7,8 +7,8 @@ import { Usuario } from 'src/dominio/usuario/modelo/usuario';
 export class ManejadorRegistrarUsuario {
   constructor(private _servicioRegistrarUsuario: ServicioRegistrarUsuario) {}
 
-  async ejecutar(comandoRegistrarUsuario: ComandoRegistrarUsuario) {
-    await this._servicioRegistrarUsuario.ejecutar(
+  async ejecutar(comandoRegistrarUsuario: ComandoRegistrarUsuario): Promise<number> {
+    return this._servicioRegistrarUsuario.ejecutar(
       new Usuario(
         comandoRegistrarUsuario.nombre,
         comandoRegistrarUsuario.clave

@@ -7,6 +7,7 @@ export class ManejadorListarPedido {
   constructor(private _daoPedido: DaoPedido) {}
 
   async ejecutar(): Promise<PedidoDto[]> {
-    return this._daoPedido.listar();
+    const pedidos = await this._daoPedido.listar();
+    return pedidos.sort((a, b) => a.id - b.id);
   }
 }
