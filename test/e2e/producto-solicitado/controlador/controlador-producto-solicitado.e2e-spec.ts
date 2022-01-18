@@ -51,11 +51,12 @@ describe('Pruebas al controlador de producto-solicitados', () => {
     producto1Id = parseInt(response.text);   
   });
 
-  afterAll(async () => {
+  afterAll(async (done) => {
     await request(app.getHttpServer())
       .delete(`/productos/${producto1Id}`);
 
     await app.close();
+    done();
   });
 
   it('debería crear un producto solicitado', async () => {

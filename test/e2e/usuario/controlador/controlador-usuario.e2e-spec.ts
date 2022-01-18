@@ -34,8 +34,9 @@ describe('Pruebas al controlador de usuarios', () => {
     await app.init();
   });
 
-  afterAll( async () => {
+  afterAll( async (done) => {
     await app.close();
+    done();
   });
 
   it('Crear un usuario con clave corta debe marcar error', async () => {

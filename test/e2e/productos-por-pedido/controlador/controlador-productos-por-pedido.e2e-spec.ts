@@ -76,7 +76,7 @@ describe('Pruebas al controlador de productos por pedido', () => {
     productoSolicitadoId = parseInt(responseProductoSolicitado.text);
   });
 
-  afterAll(async () => {
+  afterAll(async (done) => {
     await request(app.getHttpServer())
       .delete(`/productos/${productoId}`);
     
@@ -84,6 +84,7 @@ describe('Pruebas al controlador de productos por pedido', () => {
       .delete(`/pedidos/${pedidoId}`);
 
     await app.close();
+    done();
   });
   
   it('debería crear un producto por pedido', async () => {

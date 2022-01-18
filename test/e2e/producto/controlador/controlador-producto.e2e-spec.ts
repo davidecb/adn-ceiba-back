@@ -54,8 +54,9 @@ describe('Pruebas al controlador de productos', () => {
     await app.init();
   });
 
-  afterAll(async () => {
+  afterAll(async (done) => {
     await app.close();
+    done();
   });
     
   it('debería registrar un producto no existente', async () => {

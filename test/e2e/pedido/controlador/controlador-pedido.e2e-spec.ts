@@ -43,8 +43,9 @@ describe('Pruebas al controlador de pedido', () => {
     await app.init();
   });
 
-  afterAll(async () => {
+  afterAll(async (done) => {
     await app.close();
+    done();
   });
     
   it('debería crear un pedido no existente', async () => {
