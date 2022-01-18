@@ -1,138 +1,138 @@
 <testExecutions version="1">
 <file path="test\e2e\productos-por-pedido\controlador\controlador-productos-por-pedido-solicitado.e2e-spec.ts">
-<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a crear un producto por pedido" duration="53" />
-<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a fallar al crear un producto por pedido con el mismo producto solicitado" duration="74" />
-<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a listar los producto por pedido registrados" duration="14" />
-<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a fallar al modificar un productos Por Pedido no existente" duration="11" />
-<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a fallar al modificar un productos Por Pedido con propiedades no existentes" duration="6" />
-<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a modificar un producto Por Pedido por id" duration="16" />
-<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a obtener un producto por pedido por id" duration="8" />
-<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a fallar al eliminar un productos Por Pedido no existente" duration="7" />
-<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a eliminar un producto Por Pedido por id" duration="36" />
-</file>
-<file path="test\e2e\producto-solicitado\controlador\controlador-producto-solicitado.e2e-spec.ts">
-<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a crear un producto solicitado" duration="23" />
-<testCase name="Pruebas al controlador de producto-solicitados no deber&#xED;a fallar al crear un producto solicitado ya existente" duration="17" />
-<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a listar los productos solicitados registrados" duration="10" />
-<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a modificar un producto solicitado" duration="20" />
-<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a fallar al modificar un producto solicitado con propiedades no existentes" duration="3" />
-<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a obtener un productoSolicitado por id" duration="10" />
-<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a fallar al eliminar un productoSolicitado no existente" duration="9" />
-<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a eliminar un productoSolicitado" duration="15" />
-<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a eliminar un productoSolicitado" duration="13" />
+<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a crear un producto por pedido" duration="79" />
+<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a fallar al crear un producto por pedido con el mismo producto solicitado" duration="81" />
+<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a listar los producto por pedido registrados" duration="18" />
+<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a fallar al modificar un productos Por Pedido no existente" duration="17" />
+<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a fallar al modificar un productos Por Pedido con propiedades no existentes" duration="10" />
+<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a modificar un producto Por Pedido por id" duration="21" />
+<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a obtener un producto por pedido por id" duration="15" />
+<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a fallar al eliminar un productos Por Pedido no existente" duration="15" />
+<testCase name="Pruebas al controlador de productos por pedido deber&#xED;a eliminar un producto Por Pedido por id" duration="70" />
 </file>
 <file path="test\e2e\producto\controlador\controlador-producto.e2e-spec.ts">
-<testCase name="Pruebas al controlador de productos deber&#xED;a registrar un producto no existente" duration="50" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a registrar otro producto no existente" duration="15" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a registrar un producto con imagen por defecto" duration="15" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al registar un producto ya existente" duration="9" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al registar un producto con imagen erronea" duration="11" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a listar los productos registrados" duration="6" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a obtener un producto por id" duration="7" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al modificar un producto no existente" duration="7" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al modificar un producto con propiedades no existentes" duration="7" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a modificar un producto existente por id" duration="12" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a obtener un producto por id" duration="5" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al eliminar un producto no existente" duration="7" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a eliminar un producto existente por id" duration="15" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a eliminar un producto existente por id" duration="13" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a eliminar un producto existente por id" duration="19" />
-<testCase name="Pruebas al controlador de productos deber&#xED;a listar los productos registrados" duration="7" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a registrar un producto no existente" duration="52" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a registrar otro producto no existente" duration="26" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a registrar un producto con imagen por defecto" duration="28" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al registar un producto ya existente" duration="15" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al registar un producto con imagen erronea" duration="16" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a listar los productos registrados" duration="17" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a obtener un producto por id" duration="13" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al modificar un producto no existente" duration="12" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al modificar un producto con propiedades no existentes" duration="14" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a modificar un producto existente por id" duration="22" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a obtener un producto por id" duration="20" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a fallar al eliminar un producto no existente" duration="13" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a eliminar un producto existente por id" duration="23" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a eliminar un producto existente por id" duration="22" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a eliminar un producto existente por id" duration="21" />
+<testCase name="Pruebas al controlador de productos deber&#xED;a listar los productos registrados" duration="10" />
+</file>
+<file path="test\e2e\producto-solicitado\controlador\controlador-producto-solicitado.e2e-spec.ts">
+<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a crear un producto solicitado" duration="30" />
+<testCase name="Pruebas al controlador de producto-solicitados no deber&#xED;a fallar al crear un producto solicitado ya existente" duration="34" />
+<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a listar los productos solicitados registrados" duration="23" />
+<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a modificar un producto solicitado" duration="25" />
+<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a fallar al modificar un producto solicitado con propiedades no existentes" duration="8" />
+<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a obtener un productoSolicitado por id" duration="17" />
+<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a fallar al eliminar un productoSolicitado no existente" duration="16" />
+<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a eliminar un productoSolicitado" duration="20" />
+<testCase name="Pruebas al controlador de producto-solicitados deber&#xED;a eliminar un productoSolicitado" duration="22" />
 </file>
 <file path="test\e2e\pedido\controlador\controlador-pedido.e2e-spec.ts">
-<testCase name="Pruebas al controlador de pedido deber&#xED;a crear un pedido no existente" duration="51" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a fallar al crear un pedido ya existente" duration="10" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a crear un pedido no existente" duration="17" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a listar los pedidos registrados" duration="19" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a fallar al modificar un pedido no existente" duration="8" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a fallar al modificar un pedido con propiedades no existentes" duration="6" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a modificar un pedido" duration="16" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a obtener un pedido por id" duration="12" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a obtener pedidos por estado" duration="11" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a fallar al eliminar un pedido no existente" duration="9" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a crear un pedido no existente" duration="61" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a fallar al crear un pedido ya existente" duration="16" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a crear un pedido no existente" duration="24" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a listar los pedidos registrados" duration="20" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a fallar al modificar un pedido no existente" duration="13" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a fallar al modificar un pedido con propiedades no existentes" duration="11" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a modificar un pedido" duration="21" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a obtener un pedido por id" duration="22" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a obtener pedidos por estado" duration="20" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a fallar al eliminar un pedido no existente" duration="16" />
+<testCase name="Pruebas al controlador de pedido deber&#xED;a eliminar un pedido" duration="22" />
 <testCase name="Pruebas al controlador de pedido deber&#xED;a eliminar un pedido" duration="21" />
-<testCase name="Pruebas al controlador de pedido deber&#xED;a eliminar un pedido" duration="15" />
 </file>
 <file path="test\e2e\usuario\controlador\controlador-usuario.e2e-spec.ts">
-<testCase name="Pruebas al controlador de usuarios Crear un usuario con clave corta debe marcar error" duration="28" />
-<testCase name="Pruebas al controlador de usuarios Creando un usuario con clave mayor a 4 digitos debe crear correctamente" duration="33" />
-<testCase name="Pruebas al controlador de usuarios Creando otro usuario con clave mayor a 4 digitos debe crear correctamente" duration="17" />
-<testCase name="Pruebas al controlador de usuarios creando un usuario con un nombre ya existente debe marcar error" duration="9" />
-<testCase name="Pruebas al controlador de usuarios Debe listar los usuarios correctamente" duration="6" />
-<testCase name="Pruebas al controlador de usuarios Debe eliminar un usuario por su id" duration="16" />
-<testCase name="Pruebas al controlador de usuarios Debe eliminar otro usuario por su id" duration="14" />
+<testCase name="Pruebas al controlador de usuarios Crear un usuario con clave corta debe marcar error" duration="45" />
+<testCase name="Pruebas al controlador de usuarios Creando un usuario con clave mayor a 4 digitos debe crear correctamente" duration="63" />
+<testCase name="Pruebas al controlador de usuarios Creando otro usuario con clave mayor a 4 digitos debe crear correctamente" duration="28" />
+<testCase name="Pruebas al controlador de usuarios creando un usuario con un nombre ya existente debe marcar error" duration="17" />
+<testCase name="Pruebas al controlador de usuarios Debe listar los usuarios correctamente" duration="14" />
+<testCase name="Pruebas al controlador de usuarios Debe eliminar un usuario por su id" duration="24" />
+<testCase name="Pruebas al controlador de usuarios Debe eliminar otro usuario por su id" duration="20" />
 </file>
 <file path="test\unitarias\dominio\productos-por-pedido\servicio-registrar-productos-por-pedido.spec.ts">
-<testCase name="ServicioRegistrarProductosPorPedido crear producto por pedido en el repositorio" duration="4" />
-</file>
-<file path="test\unitarias\dominio\producto-solicitado\servicio-registrar-producto-solicitado.spec.ts">
-<testCase name="ServicioRegistrarProductoSolicitado Al guardar un producto solicitado si el id no existe debe guardarlo y calcular costo y tiempo" duration="4" />
-<testCase name="ServicioRegistrarProductoSolicitado Al guardar un producto solicitado si el id existe debe modificarlo y recalcular costo y tiempo" duration="1" />
-</file>
-<file path="test\unitarias\dominio\productos-por-pedido\servicio-eliminar-productos-por-pedido.spec.ts">
-<testCase name="ServicioEliminarProductosPorPedido si el id del producto por pedido no existe no se puede eliminar y deberia retonar error" duration="6" />
-<testCase name="ServicioEliminarProductosPorPedido si el id del producto por pedido existe elimina el pedido en el repositorio" duration="2" />
-</file>
-<file path="test\unitarias\dominio\producto-solicitado\producto-solicitado.spec.ts">
-<testCase name="ProductoSolicitado producto solicitado con objeto de acabado invalido 1" duration="3" />
-<testCase name="ProductoSolicitado producto solicitado con objeto de acabado invalido 2" duration="0" />
-<testCase name="ProductoSolicitado producto solicitado con objeto de acabado invalido 3" duration="1" />
-<testCase name="ProductoSolicitado producto solicitado con todas las propiedades debe crearse correctamente" duration="6" />
-</file>
-<file path="test\unitarias\dominio\productos-por-pedido\servicio-modificar-productos-por-pedido.spec.ts">
-<testCase name="ServicioModificarProductosPorPedido si el id de pedido no existe no se puede modificar y deberia retonar error" duration="5" />
-<testCase name="ServicioModificarProductosPorPedido si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error" duration="1" />
-<testCase name="ServicioModificarProductosPorPedido si el id y las propiedades existen deberia modificar el pedido" duration="1" />
+<testCase name="ServicioRegistrarProductosPorPedido crear producto por pedido en el repositorio" duration="5" />
 </file>
 <file path="test\unitarias\dominio\producto\servicio-modificar-producto.spec.ts">
 <testCase name="ServicioModificarProducto si el id de producto no existe no se puede modificar y deberia retonar error" duration="5" />
 <testCase name="ServicioModificarProducto si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error" duration="1" />
 <testCase name="ServicioModificarProducto si el id y las propiedades existen deberia modificar el producto" duration="2" />
 </file>
-<file path="test\unitarias\dominio\usuario\servicio-registrar-usuario.spec.ts">
-<testCase name="ServicioRegistrarUsuario si el nombre de usuario ya existe no se puede crear y deberia retonar error" duration="5" />
-<testCase name="ServicioRegistrarUsuario si el nombre no existe guarda el usuario en el repositorio" duration="1" />
+<file path="test\unitarias\dominio\producto\servicio-eliminar-producto.spec.ts">
+<testCase name="ServicioEliminarProducto si el id de producto no existe no se puede eliminar y deberia retonar error" duration="5" />
+<testCase name="ServicioEliminarProducto si el id de producto existe elimina el producto en el repositorio" duration="2" />
+</file>
+<file path="test\unitarias\dominio\producto-solicitado\servicio-registrar-producto-solicitado.spec.ts">
+<testCase name="ServicioRegistrarProductoSolicitado Al guardar un producto solicitado si el id no existe debe guardarlo y calcular costo y tiempo" duration="5" />
+<testCase name="ServicioRegistrarProductoSolicitado Al guardar un producto solicitado si el id existe debe modificarlo y recalcular costo y tiempo" duration="1" />
 </file>
 <file path="test\unitarias\dominio\pedido\servicio-registrar-pedido.spec.ts">
-<testCase name="ServicioRegistrarPedido si el numero de pedido ya existe no se puede crear y deberia retonar error" duration="4" />
-<testCase name="ServicioRegistrarPedido si el numero de pedido no existe guarda el pedido en el repositorio" duration="2" />
+<testCase name="ServicioRegistrarPedido si el numero de pedido ya existe no se puede crear y deberia retonar error" duration="5" />
+<testCase name="ServicioRegistrarPedido si el numero de pedido no existe guarda el pedido en el repositorio" duration="1" />
 </file>
-<file path="test\unitarias\dominio\pedido\servicio-modificar-pedido.spec.ts">
-<testCase name="ServicioModificarPedido si el id de pedido no existe no se puede modificar y deberia retonar error" duration="5" />
-<testCase name="ServicioModificarPedido si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error" duration="1" />
-<testCase name="ServicioModificarPedido si el id y las propiedades existen deberia modificar el pedido" duration="2" />
+<file path="test\unitarias\dominio\pedido\servicio-eliminar-pedido.spec.ts">
+<testCase name="ServicioEliminarPedido si el id de pedido no existe no se puede eliminar y deberia retonar error" duration="5" />
+<testCase name="ServicioEliminarPedido si el id de pedido existe elimina el pedido en el repositorio" duration="1" />
+</file>
+<file path="test\unitarias\dominio\productos-por-pedido\servicio-modificar-productos-por-pedido.spec.ts">
+<testCase name="ServicioModificarProductosPorPedido si el id de pedido no existe no se puede modificar y deberia retonar error" duration="5" />
+<testCase name="ServicioModificarProductosPorPedido si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error" duration="1" />
+<testCase name="ServicioModificarProductosPorPedido si el id y las propiedades existen deberia modificar el pedido" duration="2" />
+</file>
+<file path="test\unitarias\dominio\productos-por-pedido\servicio-eliminar-productos-por-pedido.spec.ts">
+<testCase name="ServicioEliminarProductosPorPedido si el id del producto por pedido no existe no se puede eliminar y deberia retonar error" duration="6" />
+<testCase name="ServicioEliminarProductosPorPedido si el id del producto por pedido existe elimina el pedido en el repositorio" duration="2" />
+</file>
+<file path="test\unitarias\dominio\usuario\servicio-registrar-usuario.spec.ts">
+<testCase name="ServicioRegistrarUsuario si el nombre de usuario ya existe no se puede crear y deberia retonar error" duration="4" />
+<testCase name="ServicioRegistrarUsuario si el nombre no existe guarda el usuario en el repositorio" duration="1" />
+</file>
+<file path="test\unitarias\dominio\producto\servicio-registrar-producto.spec.ts">
+<testCase name="ServicioRegistrarProducto si el nombre de producto ya existe no se puede crear y deberia retonar error" duration="4" />
+<testCase name="ServicioRegistrarProducto si el nombre no existe guarda el producto en el repositorio" duration="2" />
 </file>
 <file path="test\unitarias\dominio\producto-solicitado\servicio-eliminar-producto-solicitado.spec.ts">
 <testCase name="ServicioEliminarProductoSolicitado si el id de producto no existe no se puede eliminar y deberia retonar error" duration="5" />
 <testCase name="ServicioEliminarProductoSolicitado si el id de producto existe elimina el producto en el repositorio" duration="1" />
 </file>
-<file path="test\unitarias\dominio\pedido\servicio-eliminar-pedido.spec.ts">
-<testCase name="ServicioEliminarPedido si el id de pedido no existe no se puede eliminar y deberia retonar error" duration="4" />
-<testCase name="ServicioEliminarPedido si el id de pedido existe elimina el pedido en el repositorio" duration="2" />
+<file path="test\unitarias\dominio\pedido\servicio-modificar-pedido.spec.ts">
+<testCase name="ServicioModificarPedido si el id de pedido no existe no se puede modificar y deberia retonar error" duration="4" />
+<testCase name="ServicioModificarPedido si el id existe pero alguna propiedad no existe no se puede modificar y deberia retonar error" duration="1" />
+<testCase name="ServicioModificarPedido si el id y las propiedades existen deberia modificar el pedido" duration="2" />
 </file>
-<file path="test\unitarias\dominio\producto\servicio-registrar-producto.spec.ts">
-<testCase name="ServicioRegistrarProducto si el nombre de producto ya existe no se puede crear y deberia retonar error" duration="5" />
-<testCase name="ServicioRegistrarProducto si el nombre no existe guarda el producto en el repositorio" duration="1" />
-</file>
-<file path="test\unitarias\dominio\producto\servicio-eliminar-producto.spec.ts">
-<testCase name="ServicioEliminarProducto si el id de producto no existe no se puede eliminar y deberia retonar error" duration="4" />
-<testCase name="ServicioEliminarProducto si el id de producto existe elimina el producto en el repositorio" duration="2" />
-</file>
-<file path="test\unitarias\dominio\producto\producto.spec.ts">
-<testCase name="Producto producto con imagen invalida(int) debe retornar error" duration="3" />
-<testCase name="Producto producto con imagen invalida(bool) debe retornar error" duration="0" />
-<testCase name="Producto producto con imagen invalida(otro formato) debe retornar error" duration="1" />
-<testCase name="Producto producto con imagen valida debe crearse correctamente" duration="0" />
-<testCase name="Producto producto sin imagen debe tener imagen por defecto sin marcar error" duration="1" />
-</file>
-<file path="test\unitarias\dominio\productos-por-pedido\productos-por-pedido.spec.ts">
-<testCase name="ProductosPorPedido pedido con todos los valores debe crearse correctamente" duration="3" />
-</file>
-<file path="test\unitarias\dominio\pedido\pedido.spec.ts">
-<testCase name="Pedido pedido con todos los valores debe crearse correctamente" duration="9" />
+<file path="test\unitarias\dominio\producto-solicitado\producto-solicitado.spec.ts">
+<testCase name="ProductoSolicitado producto solicitado con objeto de acabado invalido 1" duration="3" />
+<testCase name="ProductoSolicitado producto solicitado con objeto de acabado invalido 2" duration="0" />
+<testCase name="ProductoSolicitado producto solicitado con objeto de acabado invalido 3" duration="1" />
+<testCase name="ProductoSolicitado producto solicitado con todas las propiedades debe crearse correctamente" duration="2" />
 </file>
 <file path="test\unitarias\dominio\usuario\usuario.spec.ts">
-<testCase name="Usuario usuario con clave menor que 4 deber&#xED;a retornar error" duration="3" />
+<testCase name="Usuario usuario con clave menor que 4 deber&#xED;a retornar error" duration="2" />
 <testCase name="Usuario usuario con clave igual a 4 deber&#xED;a crear bien" duration="1" />
+</file>
+<file path="test\unitarias\dominio\productos-por-pedido\productos-por-pedido.spec.ts">
+<testCase name="ProductosPorPedido pedido con todos los valores debe crearse correctamente" duration="7" />
+</file>
+<file path="test\unitarias\dominio\producto\producto.spec.ts">
+<testCase name="Producto producto con imagen invalida(int) debe retornar error" duration="2" />
+<testCase name="Producto producto con imagen invalida(bool) debe retornar error" duration="1" />
+<testCase name="Producto producto con imagen invalida(otro formato) debe retornar error" duration="0" />
+<testCase name="Producto producto con imagen valida debe crearse correctamente" duration="1" />
+<testCase name="Producto producto sin imagen debe tener imagen por defecto sin marcar error" duration="1" />
+</file>
+<file path="test\unitarias\dominio\pedido\pedido.spec.ts">
+<testCase name="Pedido pedido con todos los valores debe crearse correctamente" duration="3" />
 </file>
 </testExecutions>
