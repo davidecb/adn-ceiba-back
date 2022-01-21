@@ -1,10 +1,10 @@
 {
   "type": "postgres",
-  "username": "david.cortes",
-  "password": "159875321",
+  "username": "testing",
+  "password": "123456",
   "host": "localhost",
-  "port": 5444,
-  "database": "adndb",
+  "port": 5445,
+  "database": "adn-testing",
   "entities": ["dist/**/*.entidad{.ts,.js}"],
   "migrations": ["dist/infraestructura/migraciones/*.js"],
   "cli": {
